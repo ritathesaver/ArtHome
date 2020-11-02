@@ -1,9 +1,9 @@
-import React, { FunctionComponent } from 'react';
-import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { Formik } from 'formik';
+import React, { FunctionComponent, useState } from 'react';
+import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import * as Yup from 'yup';
 import { styles } from './styles'
 import { useNavigation } from '@react-navigation/native';
+import { useFormik } from 'formik';
 
 
 const SignupSchema = Yup.object().shape({
@@ -23,58 +23,74 @@ const SignupSchema = Yup.object().shape({
     .required('Confirm password is required'),
 });
 
-export const RegisterScreen: FunctionComponent= () => {
+export const RegisterScreen: FunctionComponent = () => {
+
+  const [token, setToken] = useState(false)
+  
   const navigation = useNavigation()
+
+  if (token) {
+    navigation.navigate('HomeScreen')
+  }
+
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+      confirmedPassword: '',
+    },
+    onSubmit:
+      () => { setToken(true) },
+    validationSchema: SignupSchema
+  });
 
   return (
     <View style={styles.container}>
       <Image
         style={styles.logo}
         source={require('../../assets/logo.png')} />
-      <Formik
-        initialValues={{ email: '', password: '', confirmedPassword: ' ' }}
-        validationSchema={SignupSchema}
-        onSubmit={values => console.log(values)}>
-
-        {({ handleChange, handleBlur, handleSubmit, values, errors,
-          touched }) => (
+      
           <View style={styles.formContainer}>
             <Text style={styles.labelText}>Username</Text>
             <TextInput
-              onChangeText={handleChange('email')}
-              onBlur={handleBlur('email')}
-              value={values.email}
+            
+              onChangeText={formik.handleChange('email')}
+              onBlur={formik.handleBlur('email')}
+              value={formik.values.email}
               style={styles.input}
               placeholder="Enter email"
               keyboardType="email-address"
+    
             />
-              {(errors.email && touched.email) &&
-              <Text style={{ fontSize: 10, color: 'red' }}>{errors.email}</Text>
+              {(formik.errors.email && formik.touched.email) &&
+              <Text style={{ fontSize: 10, color: 'red' }}>{formik.errors.email}</Text>
             }
             <Text style={styles.labelText}>Password</Text>
             <TextInput
-              onChangeText={handleChange('password')}
-              onBlur={handleBlur('password')}
-              value={values.password}
+              onChangeText={formik.handleChange('password')}
+              onBlur={formik.handleBlur('password')}
+              value={formik.values.password}
               style={styles.input}
               secureTextEntry={true}
               placeholder="Enter password"
+        
               />
-              {(errors.password && touched.password) &&
-                <Text style={{ fontSize: 10, color: 'red' }}>{errors.password}</Text>
+              {(formik.errors.password && formik.touched.password) &&
+                <Text style={{ fontSize: 10, color: 'red' }}>{formik.errors.password}</Text>
               }
             <Text style={styles.labelText}>Confirm password</Text>
             <TextInput
-              onChangeText={handleChange('confirmedPassword')}
-              onBlur={handleBlur('confirmedPassword')}
-              value={values.password}
+              onChangeText={formik.handleChange('confirmedPassword')}
+              onBlur={formik.handleBlur('confirmedPassword')}
+              value={formik.values.confirmedPassword}
               style={styles.input}
               secureTextEntry={true}
               placeholder="Confirm password"
+ 
             />
             <TouchableOpacity
               style={styles.submitButton}
-              onPress={handleSubmit}
+              onPress={formik.handleSubmit}
             >
               <Text style={styles.submitButtonText}>Sign Up</Text>
             </TouchableOpacity>
@@ -89,8 +105,7 @@ export const RegisterScreen: FunctionComponent= () => {
             </View>
 
           </View>
-        )}
-      </Formik>
+        
     </View>
   )
 }

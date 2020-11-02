@@ -3,42 +3,48 @@ import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { Formik } from 'formik';
 import { styles } from './styles'
 import { useNavigation } from '@react-navigation/native';
+import { useFormik } from 'formik';
 
 export const LoginScreen: FunctionComponent = () => {
 
   const navigation = useNavigation()
+
+   const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: ''
+    },
+    onSubmit:
+      values => console.log(values),
+  });
 
   return (
     <View style={styles.container}>
       <Image
         style={styles.logo}
         source={require('../../assets/logo.png')} />
-      <Formik
-        initialValues={{ email: '', password: ''}}
-        onSubmit={values => console.log(values)}>
-
-        {({ handleChange, handleBlur, handleSubmit, values }) => (
+     
           <View style={styles.formContainer}>
             <Text style={styles.labelText}>Username</Text>
             <TextInput
-              onChangeText={handleChange('email')}
-              onBlur={handleBlur('email')}
-              value={values.email}
+              onChangeText={formik.handleChange('email')}
+              onBlur={formik.handleBlur('email')}
+              value={formik.values.email}
               style={styles.input}
               placeholder="Enter email"
             />
             <Text style={styles.labelText}>Password</Text>
             <TextInput
-              onChangeText={handleChange('password')}
-              onBlur={handleBlur('password')}
-              value={values.password}
+              onChangeText={formik.handleChange('password')}
+              onBlur={formik.handleBlur('password')}
+              value={formik.values.password}
               style={styles.input}
               secureTextEntry={true}
               placeholder="Enter password"
             />
             <TouchableOpacity
               style={styles.submitButton}
-              onPress={handleSubmit}
+              onPress={formik.handleSubmit}
             >
               <Text style={styles.submitButtonText}>Sign In</Text>
             </TouchableOpacity>
@@ -51,8 +57,7 @@ export const LoginScreen: FunctionComponent = () => {
             </View>
 
           </View>
-        )}
-      </Formik>
+       
     </View>
   )
 }
