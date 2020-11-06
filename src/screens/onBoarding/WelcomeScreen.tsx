@@ -2,7 +2,7 @@ import React, {FunctionComponent, useState} from 'react';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import { View, Button, Text, Image } from 'react-native';
 import { RegisterScreen } from '../auth/RegisterScreen';
-import { slides } from '../../assets/slides'
+import { slides } from '../../assets/onBoarding/slides'
 import { styles } from './styles'
 
 

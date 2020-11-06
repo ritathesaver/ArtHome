@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import { styles } from './styles'
 import { useNavigation } from '@react-navigation/native';
 import { useFormik } from 'formik';
+import AsyncStorage from '@react-native-community/async-storage';
 
 
 const SignupSchema = Yup.object().shape({
@@ -25,13 +26,18 @@ const SignupSchema = Yup.object().shape({
 
 export const RegisterScreen: FunctionComponent = () => {
 
-  const [token, setToken] = useState(false)
+  const [token, setToken] = useState('')
   
   const navigation = useNavigation()
 
-  if (token) {
-    navigation.navigate('HomeScreen')
+  const storeData = async (token: string) => {
+    setToken('rrrr')
+  try {
+    await AsyncStorage.setItem('@storage_Key', token)
+  } catch (e) {
+    console.log(e)
   }
+}
 
   const formik = useFormik({
     initialValues: {
@@ -40,7 +46,7 @@ export const RegisterScreen: FunctionComponent = () => {
       confirmedPassword: '',
     },
     onSubmit:
-      () => { setToken(true) },
+      () => { storeData(token) },
     validationSchema: SignupSchema
   });
 
@@ -48,7 +54,7 @@ export const RegisterScreen: FunctionComponent = () => {
     <View style={styles.container}>
       <Image
         style={styles.logo}
-        source={require('../../assets/logo.png')} />
+        source={require('../../assets/logos/logo.png')} />
       
           <View style={styles.formContainer}>
             <Text style={styles.labelText}>Username</Text>

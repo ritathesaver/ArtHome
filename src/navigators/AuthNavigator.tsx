@@ -1,5 +1,4 @@
 import React from 'react'
-import { TouchableOpacity, StyleSheet } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { RegisterScreen } from '../screens/auth/RegisterScreen'
 import { LoginScreen } from '../screens/auth/LoginScreen'

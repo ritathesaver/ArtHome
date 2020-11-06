@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react';
 import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { Formik } from 'formik';
 import { styles } from './styles'
 import { useNavigation } from '@react-navigation/native';
 import { useFormik } from 'formik';
@@ -22,7 +21,7 @@ export const LoginScreen: FunctionComponent = () => {
     <View style={styles.container}>
       <Image
         style={styles.logo}
-        source={require('../../assets/logo.png')} />
+        source={require('../../assets/logos/logo.png')} />
      
           <View style={styles.formContainer}>
             <Text style={styles.labelText}>Username</Text>
