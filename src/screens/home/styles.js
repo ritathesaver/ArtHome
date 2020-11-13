@@ -3,9 +3,7 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    marginTop: 15,
-  
+    justifyContent: 'center'
   },
    box: {
     width: 180,
@@ -14,13 +12,9 @@ export const styles = StyleSheet.create({
   },
   overlayBoxWhite: {
      ...StyleSheet.absoluteFillObject,
-            opacity: 0.5
+            opacity: 0.6
   },
-   overlayBoxBlack: {
-     ...StyleSheet.absoluteFillObject,
-            backgroundColor: 'black',
-            opacity: 0.5
-   },
+
   image: {
     width: '100%',
     height: '100%',
@@ -34,22 +28,11 @@ export const styles = StyleSheet.create({
   },
   title: {
     position: 'absolute',
+    top: 75,
     color: "white",
     textAlign: "center",
     fontSize: 20,
     margin: 20,
-    textDecorationLine: "underline",
-    textDecorationStyle: "solid",
-    fontWeight: '600'
-  },
-  titleDark: {
-    position: 'absolute',
-    color: "black",
-    textAlign: "center",
-    fontSize: 20,
-    margin: 20,
-    textDecorationLine: "underline",
-    textDecorationStyle: "solid",
     fontWeight: '600'
   }
 })

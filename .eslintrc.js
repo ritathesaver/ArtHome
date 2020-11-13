@@ -7,5 +7,8 @@ module.exports = {
         'paths': ["src"]
       }
     }
+  },
+  rules: {
+    'semi' : 0
   }
 };

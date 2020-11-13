@@ -43,7 +43,7 @@ export const styles = StyleSheet.create({
   },
   buttonNextContainer: {
     marginVertical: 20,
-    backgroundColor: '#888888',
+    backgroundColor: '#af6b58',
     paddingHorizontal: 18,
     paddingVertical: 12,
     alignItems: 'flex-end'
