@@ -29,11 +29,13 @@ const columnWidth: number = Dimensions.get('window').width / 2
 export const CreatorDetails: FunctionComponent<IDetailsProps> = ({route}) => {
   const [columns, setColumns] = useState<Array<Array<IImageWithSize>>>([[], []])
 
+  console.log(route.params)
+
   useEffect(() => {
     // eslint-disable-next-line prettier/prettier
     (async () => {
       const imagesWithSize: IImageWithSize[] = await Promise.all(
-       route.params.map(
+       route?.params.pictures.map(
         async (item: IImage) => {
            const result: IImageSize = await new Promise((resolve) => {
             Image.getSize(item.url, (width, height) =>
@@ -64,7 +66,7 @@ export const CreatorDetails: FunctionComponent<IDetailsProps> = ({route}) => {
       setColumns(res)
   
     })()
-  }, [route.params])
+  }, [route.params.pictures])
  
 
   const imagesColumns = columns.map((column, index) => (
@@ -94,7 +96,6 @@ export const CreatorDetails: FunctionComponent<IDetailsProps> = ({route}) => {
 
   return (
     <SafeAreaView style={detailStyles.container}>
-      <SearchBox />
       <ScrollView >
         <View style={{flex: 1,
          flexDirection: 'row',

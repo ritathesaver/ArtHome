@@ -38,3 +38,23 @@ export const styles = StyleSheet.create({
     fontWeight: '500'
   }
 })
+
+export const pageStyles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
+   infoWrapper: {
+    flexDirection: 'row',
+    margin: 10,
+  },
+   imageContainer: {
+    width: 150,
+    height: 150
+  },
+   	line: {
+		borderBottomWidth: 2,
+		borderBottomColor: '#af6b58',
+		marginTop: 20,
+		width: '100%'
+	},
+})

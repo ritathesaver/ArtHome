@@ -18,6 +18,7 @@ import ProfileActiveSvg from './assets/icons/user (2).svg'
 import {AppContext} from './services/AppContext.js'
 
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import { SellStackScreen } from './navigators/SellNavigator'
 
 Icon.loadFont()
 
@@ -38,7 +39,7 @@ const App: FunctionComponent = () => {
             inactiveTintColor: '#cccccc',
             style: {
               backgroundColor: '#202122',
-              paddingTop: 10
+              paddingVertical: 10
             },
           }}>
           <Tab.Screen
@@ -71,7 +72,7 @@ const App: FunctionComponent = () => {
           />
           <Tab.Screen
             name="Sell"
-            component={AuthStackScreen}
+            component={SellStackScreen}
             options={{
               tabBarLabel: 'Sell',
               tabBarIcon: ({focused}) =>

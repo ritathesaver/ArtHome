@@ -7,6 +7,9 @@ import { CreatorDetails } from '../screens/creators/CreatorDetails'
 import { ArtworksScreen } from '../screens/artworks/ArtworksScreen'
 import { HireCreatorScreen } from '../screens/hireCreator/HireCreatorScreen'
 import { ArtworksDetails } from '../screens/artworks/ArtWorksDetails'
+import { CartScreen } from '../screens/cart/CartScreen'
+import { CreatorPageScreen } from './CreatorPageNavigator'
+import { AboutCreatorScreen } from '../screens/hirecreator/AboutCreatorScreen'
 
 
 const screenStyle = {
@@ -55,6 +58,15 @@ export const HomeStackScreen = () => {
 			<HomeStack.Screen
 				options={{
 					...screenStyle,
+					headerBackTitleVisible: false
+		
+				}}
+					name="CreatorPage"
+				component={CreatorPageScreen}
+			/>
+			<HomeStack.Screen
+				options={{
+					...screenStyle,
 					title: 'Artworks',
 					headerBackTitleVisible: false
 				}}
@@ -73,12 +85,22 @@ export const HomeStackScreen = () => {
 			<HomeStack.Screen
 				options={{
 					...screenStyle,
+					title: 'Artworks',
+					headerBackTitleVisible: false
+				}}
+				name="Cart"
+				component={CartScreen}
+			/>
+			<HomeStack.Screen
+				options={{
+					...screenStyle,
 					title: 'Hire creator?',
 					headerBackTitleVisible: false
 				}}
 				name="HireCreator"
 				component={HireCreatorScreen}
-				/>
+			/>
+		
 		</HomeStack.Navigator>
     )
 }

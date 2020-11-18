@@ -49,7 +49,7 @@ export const WelcomeScreen: FunctionComponent = () => {
           flex: 1,
           backgroundColor: item.backgroundColor,
           paddingBottom: 200,
-          paddingTop: 60,
+          paddingTop: 30,
           height: '100%',
         }}>
         <View
@@ -85,8 +85,8 @@ export const WelcomeScreen: FunctionComponent = () => {
           bottomButton={true}
           renderNextButton={_renderNextButton}
           renderDoneButton={_renderDoneButton}
-          activeDotStyle={{ backgroundColor: '#af6b58' }}
-          dotStyle={{ backgroundColor: 'white' }}
+          activeDotStyle={{ backgroundColor: '#af6b58', marginTop: 10 }}
+          dotStyle={{ backgroundColor: 'white', marginTop: 10 }}
         
         />
       )}

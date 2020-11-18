@@ -10,21 +10,19 @@ import {styles} from './styles'
 
 import {authors} from '../../assets/authors/authors'
 import {useNavigation} from '@react-navigation/native'
-import SearchBox from '../../components/SearchBox/SearchBox'
 
 export const CreatorsScreen: FunctionComponent = () => {
   const navigation = useNavigation()
 
   return (
     <SafeAreaView style={styles.container}>
-      <SearchBox />
 
       <FlatList
         data={authors}
         renderItem={({item}) => (
           <TouchableOpacity
-            onPress={() => navigation.navigate('Details', item.pictures)}
-            // eslint-disable-next-line react-native/no-inline-styles
+            onPress={() => navigation.navigate('Details', item)}
+
             style={{
               flex: 1,
               flexDirection: 'column',

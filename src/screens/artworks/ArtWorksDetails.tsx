@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import React, {FunctionComponent, useEffect, useState} from 'react'
 import {
   Dimensions,
@@ -9,12 +8,12 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native'
-import {artworks} from '../../assets/artworks/artworks'
 import SearchBox from '../../components/SearchBox/SearchBox'
 import { detailStyles } from './styles'
 import { IImageWithSize, IImageSize } from '../creators/CreatorDetails'
 import LikeActiveSvg from '../../assets/icons/heart (2).svg'
 import FastImage from 'react-native-fast-image'
+import { useNavigation } from '@react-navigation/native'
 
 interface IDetailsProps {
   route: any
@@ -22,6 +21,7 @@ interface IDetailsProps {
 const columnWidth: number = Dimensions.get('window').width * 0.75
 
 export const ArtworksDetails: FunctionComponent<IDetailsProps> = ({ route }) => {
+  const navigation = useNavigation()
 
   const [column, setColumn] = useState<Array<IImageWithSize>>([])
 
@@ -55,9 +55,10 @@ export const ArtworksDetails: FunctionComponent<IDetailsProps> = ({ route }) => 
     <SafeAreaView style={detailStyles.container}>
       <SearchBox />
       <FlatList
+        keyExtractor={(column, index) => index.toString()}
         data={column}
         renderItem={({item}) => (
-          <TouchableOpacity>
+          <TouchableOpacity  onPress={() => navigation.navigate('Cart', item)}>
             <View
               style={{
                 flex: 1,

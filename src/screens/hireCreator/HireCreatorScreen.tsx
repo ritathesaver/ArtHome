@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import React, {FunctionComponent} from 'react'
 import {
   Dimensions,
@@ -45,7 +44,7 @@ export const HireCreatorScreen: FunctionComponent = () => {
               </View>
             </View>
             <TouchableOpacity
-              onPress={() => navigation.navigate('Details', item.pictures)}>
+              onPress={() => navigation.navigate('CreatorPage', item)}>
               <View style={{height: '100%', justifyContent: 'center'}}>
                 <NextIcon />
               </View>

@@ -1,9 +1,9 @@
 export const authors = [
   {
     key: 'a1',
-    name: 'Bethany Hinton',
+    name: 'Peter Hinton',
     avatar: {
-        uri: 'https://images.pexels.com/photos/3778355/pexels-photo-3778355.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+        uri: 'https://images.pexels.com/photos/2887774/pexels-photo-2887774.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
     },
     pictures: 
       [
@@ -43,7 +43,7 @@ export const authors = [
     key: 'a2',
     name: 'Erika Rawlings',
     avatar: {
-        uri: 'https://images.pexels.com/photos/3778355/pexels-photo-3778355.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+        uri: 'https://images.pexels.com/photos/4429565/pexels-photo-4429565.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260',
     },
      pictures: [
          {
@@ -61,6 +61,31 @@ export const authors = [
   {
     "id": 12,
     "url": "https://images.pexels.com/photos/5840778/pexels-photo-5840778.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+  },
+     ]
+  },
+  {
+    key: 'a3',
+    name: 'Liv Sanero',
+    avatar: {
+        uri: 'https://images.pexels.com/photos/3778355/pexels-photo-3778355.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+    },
+     pictures: [
+         {
+    "id": 13,
+    "url": "https://images.pexels.com/photos/3657429/pexels-photo-3657429.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+  },
+  {
+    "id": 14,
+    "url": "https://images.pexels.com/photos/4424108/pexels-photo-4424108.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
+  },
+  {
+    "id": 15,
+    "url": "https://images.pexels.com/photos/2618782/pexels-photo-2618782.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
+  },
+  {
+    "id": 16,
+    "url": "https://images.pexels.com/photos/4558702/pexels-photo-4558702.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
   },
      ]
   },
