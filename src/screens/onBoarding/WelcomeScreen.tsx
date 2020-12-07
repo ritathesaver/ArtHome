@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {FunctionComponent, useState} from 'react'
 import AppIntroSlider from 'react-native-app-intro-slider'
-import {View, Button, Text, Image} from 'react-native'
+import {View, Text, Image, TouchableOpacity} from 'react-native'
 import {RegisterScreen} from '../auth/RegisterScreen'
 import {slides} from '../../assets/onBoarding/slides'
 import {styles} from './styles'
@@ -51,22 +51,21 @@ export const WelcomeScreen: FunctionComponent = () => {
           paddingBottom: 200,
           paddingTop: 30,
           height: '100%',
+          justifyContent: 'center',
         }}>
         <View
           style={{
             alignItems: 'flex-end',
             marginBottom: 25,
             marginHorizontal: 16,
-          }}>
-          <Button color="#af6b58" title="Skip" onPress={onSkip} />
-        </View>
+          }}
+        />
         <View
           style={{
             alignItems: 'center',
           }}>
           <Image style={styles.introImageStyle} source={item.image} />
         </View>
-
         <Text style={styles.introTitleStyle}>{item.title}</Text>
         <Text style={styles.introTextStyle}>{item.text}</Text>
       </View>
@@ -78,17 +77,23 @@ export const WelcomeScreen: FunctionComponent = () => {
       {showRealApp ? (
         <RegisterScreen />
       ) : (
-        <AppIntroSlider
-          data={slides}
-          renderItem={RenderItem}
-          onDone={onDone}
-          bottomButton={true}
-          renderNextButton={_renderNextButton}
-          renderDoneButton={_renderDoneButton}
-          activeDotStyle={{ backgroundColor: '#af6b58', marginTop: 10 }}
-          dotStyle={{ backgroundColor: 'white', marginTop: 10 }}
-        
-        />
+        <View style={{flex: 1, marginTop: 15}}>
+          <AppIntroSlider
+            data={slides}
+            renderItem={RenderItem}
+            onDone={onDone}
+            bottomButton={true}
+            renderNextButton={_renderNextButton}
+            renderDoneButton={_renderDoneButton}
+            activeDotStyle={{backgroundColor: '#af6b58'}}
+            dotStyle={{backgroundColor: 'white'}}
+          />
+          <TouchableOpacity
+            style={{position: 'absolute', top: 40, right: 25}}
+            onPress={onSkip}>
+            <Text style={{color: '#af6b58', fontSize: 18}}>Skip</Text>
+          </TouchableOpacity>
+        </View>
       )}
     </>
   )

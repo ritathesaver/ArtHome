@@ -35,7 +35,7 @@ export const HomeScreen: FunctionComponent = () => {
               alignItems: 'center',
             }}
             onPress={() => navigation.navigate(`${item.screen}`)}>
-            <Image  style={styles.image} source={{uri: item.image.uri}} />
+            <Image style={styles.image} source={{uri: item.image.uri}} />
             <View
               style={{
                 ...styles.overlayBoxWhite,

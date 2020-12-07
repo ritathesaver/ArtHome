@@ -1,33 +1,61 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {FunctionComponent} from 'react'
-import {
-  Image,
-  Text,
-  View,
-} from 'react-native'
-import {pageStyles, styles} from './styles'
+import {Image, Text, View} from 'react-native'
+import {pageStyles} from './styles'
+import LocSvg from '../../assets/icons/location.svg'
+import PhoneSvg from '../../assets/icons/phone-call (1).svg'
+import MailSvg from '../../assets/icons/email.svg'
 
-
-interface ICreatorPageProps{
+interface ICreatorPageProps {
   route: any
 }
 
-
-export const AboutCreatorScreen: FunctionComponent<ICreatorPageProps> = ({route}) => {
-  //console.log(route, 'ff')
-
+export const AboutCreatorScreen: FunctionComponent<ICreatorPageProps> = ({
+  route,
+}) => {
   return (
     <View style={pageStyles.container}>
-      <View style={pageStyles.infoWrapper}>
-              <View style={pageStyles.imageContainer}>
-                <Image style={styles.image} source={{uri: route.avatar.uri}} />
-              </View>
-              <View style={{flexDirection: 'column', marginLeft: 5, justifyContent: 'center'}}>
-                <Text style={styles.title}>{route.name}</Text>
-                <Text style={styles.title}>Painter</Text>
-              </View>
+      <View style={pageStyles.imageContainer}>
+        <Image style={pageStyles.image} source={{uri: route.avatarUri}} />
       </View>
-      <View style={pageStyles.line}></View>
+      <Text style={pageStyles.title}> {route.name}</Text>
+
+      <View style={{justifyContent: 'center', marginLeft: 15}}>
+        <View style={pageStyles.box}>
+          <LocSvg />
+          <Text style={pageStyles.aboutText}>{route.address}</Text>
+        </View>
+        <View style={pageStyles.box}>
+          <MailSvg />
+          <Text style={pageStyles.aboutText}>{route.email}</Text>
+        </View>
+        <View style={pageStyles.box}>
+          <PhoneSvg />
+          <Text style={pageStyles.aboutText}>{route.phone}</Text>
+        </View>
+      </View>
+      <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+        {route.specialization.map((item: any) => (
+          <View
+            style={{
+              borderRadius: 10,
+              borderWidth: 1,
+              margin: 15,
+              padding: 10,
+              borderColor: '#af6b58',
+            }}>
+            <Text>{item}</Text>
+          </View>
+        ))}
+      </View>
+
+      <View style={pageStyles.aboutWrapper}>
+        <View>
+          <View style={pageStyles.line} />
+          <Text style={pageStyles.title}>ABOUT ME</Text>
+          <Text style={pageStyles.aboutText}>{route.about}</Text>
+        </View>
+      </View>
     </View>
-      
   )
 }

@@ -5,11 +5,19 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#202122',
-    padding: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
   },
   searchBox: {
     flexDirection: 'row',
+    justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#fff',
+    borderWidth: 0.5,
+    borderColor: '#ccc',
+    height: 45,
+    borderRadius: 25,
+    padding: 10,
   },
   inputForm: {
     flex: 1,
@@ -20,8 +28,5 @@ export const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding: 15,
     width: '80%',
-  },
-  searchIcon: {
-    padding: 10,
   },
 })

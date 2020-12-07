@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {FunctionComponent, useContext} from 'react'
+import React, {FunctionComponent, useEffect} from 'react'
 import {
   ImageBackground,
   KeyboardAvoidingView,
@@ -12,7 +12,14 @@ import * as Yup from 'yup'
 import {styles} from './styles'
 import {useNavigation} from '@react-navigation/native'
 import {useFormik} from 'formik'
-import {AppContext} from '../../services/AppContext'
+const {v4: uuidv4} = require('uuid')
+import 'react-native-get-random-values'
+import axios from 'axios'
+import AsyncStorage from '@react-native-community/async-storage'
+import {useDispatch, useSelector} from 'react-redux'
+import {AppDispatch} from '../../App'
+import {createUser, restoreToken, signIn, signUp} from '../../redux/actions/authActions'
+import { RootState } from '../../redux/rootReducer'
 
 const SignupSchema = Yup.object().shape({
   email: Yup.string().email('Please enter valid email').required('Required'),
@@ -30,14 +37,9 @@ const SignupSchema = Yup.object().shape({
 })
 
 export const RegisterScreen: FunctionComponent = () => {
-  const {setToken} = useContext(AppContext)
-  const navigation = useNavigation()
 
-  const storeData = async (token: string) => {
-    console.log('stores2')
-    setToken(token)
-    console.log(typeof token)
-  }
+  const navigation = useNavigation()
+  const dispatch: AppDispatch = useDispatch()
 
   const formik = useFormik({
     initialValues: {
@@ -45,9 +47,11 @@ export const RegisterScreen: FunctionComponent = () => {
       password: '',
       confirmedPassword: '',
     },
-    onSubmit: () => {
-      console.log('stores')
-      storeData('rrr')
+    onSubmit: async () => {
+      //const token = await axios.post('http://localhost:3000/register', body)
+      dispatch(signUp(formik.values.email, formik.values.password))
+      dispatch(createUser(formik.values.email))
+      //await AsyncStorage.setItem('token', token.data.accessToken)
     },
     validationSchema: SignupSchema,
   })
@@ -68,6 +72,7 @@ export const RegisterScreen: FunctionComponent = () => {
           <View style={styles.inputWrapper}>
             <Text style={styles.labelText}>Username</Text>
             <TextInput
+              placeholderTextColor="#cfcfcf"
               onChangeText={formik.handleChange('email')}
               onBlur={formik.handleBlur('email')}
               value={formik.values.email}
@@ -84,12 +89,15 @@ export const RegisterScreen: FunctionComponent = () => {
           <View style={styles.inputWrapper}>
             <Text style={styles.labelText}>Password</Text>
             <TextInput
+              placeholderTextColor="#cfcfcf"
               onChangeText={formik.handleChange('password')}
               onBlur={formik.handleBlur('password')}
               value={formik.values.password}
               style={styles.input}
               secureTextEntry={true}
               placeholder="Enter password"
+              autoCorrect={false}
+              textContentType={'oneTimeCode'}
             />
             {formik.errors.password && formik.touched.password && (
               <Text style={{fontSize: 10, color: 'red', marginBottom: 10}}>
@@ -100,12 +108,15 @@ export const RegisterScreen: FunctionComponent = () => {
           <View style={styles.inputWrapper}>
             <Text style={styles.labelText}>Confirm password</Text>
             <TextInput
+              placeholderTextColor="#cfcfcf"
               onChangeText={formik.handleChange('confirmedPassword')}
               onBlur={formik.handleBlur('confirmedPassword')}
               value={formik.values.confirmedPassword}
               style={styles.input}
               secureTextEntry={true}
               placeholder="Confirm password"
+              autoCorrect={false}
+              textContentType={'oneTimeCode'}
             />
           </View>
           <TouchableOpacity
@@ -122,7 +133,7 @@ export const RegisterScreen: FunctionComponent = () => {
                   screen: 'LoginScreen',
                 })
               }>
-              <Text style={{color: 'white'}}> Sign in</Text>
+              <Text style={styles.signText}> Sign in</Text>
             </TouchableOpacity>
           </View>
         </View>

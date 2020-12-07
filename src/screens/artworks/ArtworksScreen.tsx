@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
-import {useNavigation} from '@react-navigation/native';
-import invert from 'invert-color';
-import React, {FunctionComponent} from 'react';
+import {useNavigation} from '@react-navigation/native'
+import invert from 'invert-color'
+import React, {FunctionComponent} from 'react'
 import {
   Dimensions,
   FlatList,
@@ -10,14 +10,14 @@ import {
   Text,
   TouchableOpacity,
   View,
-} from 'react-native';
-import {artworks} from '../../assets/artworks/artworks';
-import SearchBox from '../../components/SearchBox/SearchBox';
-import { styles } from './styles';
+} from 'react-native'
+import {artworks} from '../../assets/artworks/artworks'
+import SearchBox from '../../components/SearchBox/SearchBox'
+import {styles} from './styles'
 import {authors} from '../../assets/authors/authors'
 
 export const ArtworksScreen: FunctionComponent = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation()
 
   return (
     <SafeAreaView style={styles.container}>
@@ -34,8 +34,14 @@ export const ArtworksScreen: FunctionComponent = () => {
               width: Dimensions.get('window').width / 2,
               height: 140,
             }}
-            onPress={() => navigation.navigate('ArtworksDetails', authors.map(item => item.pictures))}>
-            <Image style={styles.image} source={{uri: item.image.uri}} />
+            onPress={() =>
+              navigation.navigate(
+                'ArtworksDetails',
+                // eslint-disable-next-line no-shadow
+                authors.map((item) => item.pictures),
+              )
+            }>
+            <Image style={styles.image} source={{uri: item.cover.uri}} />
             <View
               style={{
                 backgroundColor: item.overlayColor,
@@ -54,5 +60,5 @@ export const ArtworksScreen: FunctionComponent = () => {
         numColumns={2}
       />
     </SafeAreaView>
-  );
-};
+  )
+}

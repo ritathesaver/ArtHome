@@ -1,9 +1,14 @@
-
+/* eslint-disable react-native/no-inline-styles */
 import React, {FunctionComponent, useEffect, useState} from 'react'
-import {Image, SafeAreaView, ScrollView, Text, TouchableOpacity, View} from 'react-native'
+import {
+  Image,
+  SafeAreaView,
+  ScrollView,
+  TouchableOpacity,
+  View,
+} from 'react-native'
 import {detailStyles} from './styles'
 import {Dimensions} from 'react-native'
-import SearchBox from '../../components/SearchBox/SearchBox'
 import FastImage from 'react-native-fast-image'
 import LikeActiveSvg from '../../assets/icons/heart (2).svg'
 
@@ -35,9 +40,8 @@ export const CreatorDetails: FunctionComponent<IDetailsProps> = ({route}) => {
     // eslint-disable-next-line prettier/prettier
     (async () => {
       const imagesWithSize: IImageWithSize[] = await Promise.all(
-       route?.params.pictures.map(
-        async (item: IImage) => {
-           const result: IImageSize = await new Promise((resolve) => {
+        route?.params.pictures.map(async (item: IImage) => {
+          const result: IImageSize = await new Promise((resolve) => {
             Image.getSize(item.url, (width, height) =>
               resolve({
                 height,
@@ -47,9 +51,9 @@ export const CreatorDetails: FunctionComponent<IDetailsProps> = ({route}) => {
             )
           })
           return {...result, ...item}
-        },
-        ))
-      
+        }),
+      )
+
       const sum = [0, 0]
 
       const res: Array<Array<IImageWithSize>> = [[], []]
@@ -64,13 +68,11 @@ export const CreatorDetails: FunctionComponent<IDetailsProps> = ({route}) => {
       })
 
       setColumns(res)
-  
     })()
-  }, [route.params.pictures])
- 
+  }, [route, route.params.pictures])
 
   const imagesColumns = columns.map((column, index) => (
-    <View key={index} style={{width: '49%', marginRight:5}}>
+    <View key={index} style={{width: '49%', marginRight: 5}}>
       {column.map((item: IImageWithSize) => {
         return (
           <FastImage
@@ -78,32 +80,35 @@ export const CreatorDetails: FunctionComponent<IDetailsProps> = ({route}) => {
             style={{
               width: columnWidth,
               height: item.ratio * columnWidth,
-              margin: 1
+              margin: 1,
             }}
             source={{
               uri: `${item.url}`,
             }}>
             <TouchableOpacity>
-              <LikeActiveSvg style={{ position: 'absolute', top: 10, right: 10 }} />
+              <LikeActiveSvg
+                style={{position: 'absolute', top: 10, right: 10}}
+              />
             </TouchableOpacity>
           </FastImage>
-            
         )
       })}
     </View>
   ))
 
-
   return (
     <SafeAreaView style={detailStyles.container}>
-      <ScrollView >
-        <View style={{flex: 1,
-         flexDirection: 'row',
-         flexWrap: 'wrap',
-         alignItems: 'flex-start'}}>
-      <View style={{width: '49%', marginRight:5}}>{imagesColumns[0]}</View>
-      <View style={{width: '49%'}}>{imagesColumns[1]}</View>
-      </View>
+      <ScrollView>
+        <View
+          style={{
+            flex: 1,
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            alignItems: 'flex-start',
+          }}>
+          <View style={{width: '49%', marginRight: 5}}>{imagesColumns[0]}</View>
+          <View style={{width: '49%'}}>{imagesColumns[1]}</View>
+        </View>
       </ScrollView>
     </SafeAreaView>
   )

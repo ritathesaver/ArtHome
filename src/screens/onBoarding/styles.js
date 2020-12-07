@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native'
 
 export const styles = StyleSheet.create({
   container: {
@@ -14,7 +14,6 @@ export const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: 'bold',
     marginTop: 20,
-
   },
   paragraphStyle: {
     padding: 20,
@@ -24,13 +23,13 @@ export const styles = StyleSheet.create({
   introImageStyle: {
     width: Dimensions.get('window').width * 0.8,
     height: Dimensions.get('window').width * 0.8,
-    borderRadius: 200
+    borderRadius: 200,
   },
   introTextStyle: {
     fontSize: 18,
     color: '#2b2b28',
     textAlign: 'center',
-    marginHorizontal: 10
+    marginHorizontal: 10,
   },
   introTitleStyle: {
     marginTop: 30,
@@ -39,20 +38,20 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: '800',
     textTransform: 'uppercase',
-    paddingBottom: 20
+    paddingBottom: 20,
   },
   buttonNextContainer: {
     marginVertical: 20,
     backgroundColor: '#af6b58',
     paddingHorizontal: 18,
     paddingVertical: 12,
-    alignItems: 'flex-end'
+    alignItems: 'flex-end',
   },
   buttonNextText: {
     fontSize: 18,
     color: 'white',
   },
   buttonSkipContainer: {
-    color: '#2b2b28'
-  }
-});
+    color: '#2b2b28',
+  },
+})

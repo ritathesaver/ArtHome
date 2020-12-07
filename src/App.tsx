@@ -1,4 +1,4 @@
-import React, {FunctionComponent, useContext} from 'react'
+import React, {FunctionComponent, useEffect} from 'react'
 import {WelcomeScreen} from './screens/onBoarding/WelcomeScreen'
 import {NavigationContainer} from '@react-navigation/native'
 import {createStackNavigator} from '@react-navigation/stack'
@@ -15,10 +15,16 @@ import CameraSvg from './assets/icons/camera (1).svg'
 import CameraActiveSvg from './assets/icons/camera.svg'
 import ProfileSvg from './assets/icons/user (3).svg'
 import ProfileActiveSvg from './assets/icons/user (2).svg'
-import {AppContext} from './services/AppContext.js'
+import {useSelector} from 'react-redux'
+import {store} from './redux'
 
 import Icon from 'react-native-vector-icons/MaterialIcons'
-import { SellStackScreen } from './navigators/SellNavigator'
+import {SellStackScreen} from './navigators/SellNavigator'
+import {ProfileScreen} from './screens/profile/ProfileScreen'
+import { RootState } from './redux/rootReducer'
+import AsyncStorage from '@react-native-community/async-storage'
+import { useState } from 'react'
+
 
 Icon.loadFont()
 
@@ -26,7 +32,17 @@ const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
 
 const App: FunctionComponent = () => {
-  const {token} = useContext(AppContext)
+  const authToken = useSelector((state: RootState)=> state.auth.userToken)
+  const [token, setToken] = useState<null | string>('')
+
+  useEffect(() => {
+    (async () => {
+      authToken ?  await AsyncStorage.setItem('userToken', authToken) : await AsyncStorage.removeItem('userToken')
+      const userToken = await AsyncStorage.getItem('userToken')
+      setToken(userToken)
+    }
+    )()
+  }, [authToken])
 
   console.log(token)
 
@@ -39,7 +55,6 @@ const App: FunctionComponent = () => {
             inactiveTintColor: '#cccccc',
             style: {
               backgroundColor: '#202122',
-              paddingVertical: 10
             },
           }}>
           <Tab.Screen
@@ -74,6 +89,7 @@ const App: FunctionComponent = () => {
             name="Sell"
             component={SellStackScreen}
             options={{
+              tabBarVisible: false,
               tabBarLabel: 'Sell',
               tabBarIcon: ({focused}) =>
                 focused ? <CameraActiveSvg /> : <CameraSvg />,
@@ -81,7 +97,7 @@ const App: FunctionComponent = () => {
           />
           <Tab.Screen
             name="Profile"
-            component={AuthStackScreen}
+            component={ProfileScreen}
             options={{
               tabBarLabel: 'Profile',
               tabBarIcon: ({focused}) =>
@@ -100,3 +116,4 @@ const App: FunctionComponent = () => {
 }
 
 export default App
+export type AppDispatch = typeof store.dispatch

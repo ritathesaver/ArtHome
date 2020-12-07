@@ -1,0 +1,285 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "pmckinnon@gmail.com",
+      "password": "Qwe12345"
+    },
+    {
+      "id": 2,
+      "email": "livsanero@gmail.com",
+      "password": "Qwe12345"
+    },
+    {
+      "email": "fsffef@gmail.com",
+      "password": "$2a$10$LPektgMTJ.Q7NzncigjmIuEDq78FLP1mmXuN/MbJuFOxWv7eJ0Eg2",
+      "id": 3
+    },
+    {
+      "email": "Vccvc@gmail.com",
+      "password": "$2a$10$3W88agENgBewhpmxVgmdCOUXe9EIA09WWt9VPKsy7k7R8Rl/u2JXy",
+      "id": "e6a1a937-39be-4af4-8498-e65cbabab1e5"
+    },
+    {
+      "email": "Csdsd@gmail.com",
+      "password": "$2a$10$6MEnQH1dD..lxxv0Np407edljJuTrFnrzJ/qFxmhNjFgPzrIBSxK6",
+      "id": "bbd62161-e480-43c3-96ec-9e312c4f50ba"
+    },
+    {
+      "email": "Vdvdv@gmail.com",
+      "password": "$2a$10$wviY/djvm8HgVjewODE5euWN3EtCxMiPyOYs5qMplkn8VG2noUVrW",
+      "id": "fa147bd1-dcdb-4fd0-bff2-cf63905f34db"
+    },
+    {
+      "email": "Fdfdf@gmail.com",
+      "password": "$2a$10$vxWFE42sc.OXdvX96ZGWNemmm7pe2DGU8erJsTjT7SJKbvcjlr8BK",
+      "id": "3a1ed6e5-3f27-4ac5-a3fc-08c3edda3a0a"
+    },
+    {
+      "email": "Vffvffv@gmail.com",
+      "password": "$2a$10$eoKYqb5nTqI6mU3LKsfNy.pkjh8vW86nVA0VfbFpFb8.4zwpoRA7q",
+      "id": "17caa021-e8c5-48ad-a436-9e23e133603f"
+    },
+    {
+      "email": "Dfdffdf@gmail.com",
+      "password": "$2a$10$8ZPiGck1fVcrpGumAwoSk.t1kgnucR3O/MgTouW.L7bpCXE11NjXK",
+      "id": "3fb7d059-5ef7-4de6-9902-d31087d07d4a"
+    },
+    {
+      "email": "Rita@gmail.com",
+      "password": "$2a$10$U3jHYNpaN1HTe6MbsSIf8u546MaSNGXj1Gmg/zNlJskPJU8xfPofG",
+      "id": "387dfe40-c0c0-434d-a05b-e13ccf155999"
+    },
+    {
+      "email": "dwdwdw@gmail.com",
+      "password": "$2a$10$o76tnxSa9llqJKlofCqGVOZr0feuf8bWOIPflalCrtZaYbaLJMSru",
+      "id": "db08ba0a-c733-4abe-87c1-ed80e75edb42"
+    },
+    {
+      "email": "Sasasas@gmail.com",
+      "password": "$2a$10$bArfDzBP.H1zrOoEMX.AauigYVZ9MYlZYyYLcRUBAtpgjUdqZu6ka",
+      "id": "36958024-1085-4b16-b009-3c702e92ffb3"
+    },
+    {
+      "email": "dfdfdfd@gmail.com",
+      "password": "$2a$10$bV/Xx8BrtgcZKslkK5O8ku9gSOO4BDGOcKUkh/FO3DcqYYrqzCD3a",
+      "id": "7ee83bf2-5724-4c40-a167-c27b677cda46"
+    }
+  ],
+  "creators": [
+    {
+      "id": 1,
+      "userId": 1,
+      "name": "Peter McKinnon",
+      "email": "pmckinnon@gmail.com",
+      "about": "Photographer & Filmmaker. Lover of coffee and good stories. Currently residing in Toronto, Canada running self-titled channel on YouTube. ",
+      "address": "Toronto, Canada",
+      "phone": "+14378861456",
+      "avatarUri": "https://images.pexels.com/photos/2887774/pexels-photo-2887774.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+      "specialization": [
+        "Photographer",
+        "Filmmaker"
+      ]
+    },
+    {
+      "id": 2,
+      "userId": 2,
+      "name": "Liv Sanero",
+      "email": "livsanero@gmail.com",
+      "about": "Digital artist and sculptor, whose work addresses technology’s failure to capture the unstable human body.",
+      "address": "Minsk, Belarus",
+      "phone": "+375295645683",
+      "avatarUri": "https://images.pexels.com/photos/3778360/pexels-photo-3778360.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+      "specialization": [
+        "Artist",
+        "Sculptor"
+      ]
+    },
+    {
+      "id": "e6a1a937-39be-4af4-8498-e65cbabab1e5"
+    },
+    {
+      "id": "bbd62161-e480-43c3-96ec-9e312c4f50ba"
+    },
+    {
+      "id": "fa147bd1-dcdb-4fd0-bff2-cf63905f34db"
+    },
+    {
+      "id": "3a1ed6e5-3f27-4ac5-a3fc-08c3edda3a0a"
+    },
+    {
+      "id": "17caa021-e8c5-48ad-a436-9e23e133603f",
+      "userId": "17caa021-e8c5-48ad-a436-9e23e133603f",
+      "email": "Vffvffv@gmail.com",
+      "name": "Your name",
+      "about": "About you",
+      "location": "Your location"
+    },
+    {
+      "id": "3fb7d059-5ef7-4de6-9902-d31087d07d4a",
+      "userId": "3fb7d059-5ef7-4de6-9902-d31087d07d4a",
+      "email": "Dfdffdf@gmail.com",
+      "name": "Your name",
+      "about": "About you",
+      "location": "Your location",
+      "avatarUri": "https://us.123rf.com/450wm/2nix/2nix1408/2nix140800099/30818272-anonymous-avatar-profile-icon-vector-.jpg?ver=6",
+      "phone": null
+    },
+    {
+      "id": "387dfe40-c0c0-434d-a05b-e13ccf155999",
+      "userId": "387dfe40-c0c0-434d-a05b-e13ccf155999",
+      "email": "Rita@gmail.com",
+      "name": "Your name",
+      "about": "About you",
+      "address": "Your location",
+      "avatarUri": "https://us.123rf.com/450wm/2nix/2nix1408/2nix140800099/30818272-anonymous-avatar-profile-icon-vector-.jpg?ver=6",
+      "phone": null
+    },
+    {
+      "id": "db08ba0a-c733-4abe-87c1-ed80e75edb42",
+      "userId": "db08ba0a-c733-4abe-87c1-ed80e75edb42",
+      "email": "dwdwdw@gmail.com",
+      "name": "Your name",
+      "about": "About you",
+      "address": "Your location",
+      "avatarUri": "https://us.123rf.com/450wm/2nix/2nix1408/2nix140800099/30818272-anonymous-avatar-profile-icon-vector-.jpg?ver=6",
+      "phone": null,
+      "specialization": [
+        "Your specialization"
+      ]
+    },
+    {
+      "id": "36958024-1085-4b16-b009-3c702e92ffb3",
+      "userId": "36958024-1085-4b16-b009-3c702e92ffb3",
+      "email": "Sasasas@gmail.com",
+      "name": "Your name",
+      "about": "About you",
+      "address": "Your location",
+      "avatarUri": "https://us.123rf.com/450wm/2nix/2nix1408/2nix140800099/30818272-anonymous-avatar-profile-icon-vector-.jpg?ver=6",
+      "phone": null,
+      "specialization": [
+        "Your specialization"
+      ]
+    },
+    {
+      "id": "7ee83bf2-5724-4c40-a167-c27b677cda46",
+      "userId": "7ee83bf2-5724-4c40-a167-c27b677cda46",
+      "email": "dfdfdfd@gmail.com",
+      "name": "Your name",
+      "about": "About you",
+      "address": "Your location",
+      "avatarUri": "https://us.123rf.com/450wm/2nix/2nix1408/2nix140800099/30818272-anonymous-avatar-profile-icon-vector-.jpg?ver=6",
+      "phone": null,
+      "specialization": [
+        "Your specialization"
+      ]
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "title": "Graphic design",
+      "coverUri": "https://images.pexels.com/photos/4046710/pexels-photo-4046710.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+      "overlayColor": "#ffffff"
+    },
+    {
+      "id": 2,
+      "title": "Architecture",
+      "coverUri": "https://images.pexels.com/photos/3569263/pexels-photo-3569263.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+      "overlayColor": "#282b35"
+    },
+    {
+      "id": 3,
+      "title": "Travel",
+      "coverUri": "https://images.pexels.com/photos/3214692/pexels-photo-3214692.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+      "overlayColor": "#282b35"
+    },
+    {
+      "id": 4,
+      "title": "Painting",
+      "coverUri": "https://images.pexels.com/photos/139764/pexels-photo-139764.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+      "overlayColor": "#ffffff"
+    },
+    {
+      "id": 5,
+      "title": "Illustration",
+      "coverUri": "https://images.pexels.com/photos/4906326/pexels-photo-4906326.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+      "overlayColor": "#ffffff"
+    },
+    {
+      "id": 6,
+      "title": "Typography",
+      "coverUri": "https://images.pexels.com/photos/616849/pexels-photo-616849.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+      "overlayColor": "#282b35"
+    },
+    {
+      "id": 7,
+      "title": "Portrait photography",
+      "coverUri": "https://images.pexels.com/photos/1250426/pexels-photo-1250426.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+      "overlayColor": "#282b35"
+    },
+    {
+      "id": 8,
+      "title": "Street photography",
+      "coverUri": "https://images.pexels.com/photos/1655304/pexels-photo-1655304.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+      "overlayColor": "#ffffff"
+    }
+  ],
+  "pictures": [
+    {
+      "creatorId": 1,
+      "categoryId": 1,
+      "id": 1,
+      "title": "Lorem ipsum dolor sit amet",
+      "description": "Maecenas orci nisl, facilisis vel dictum in, accumsan at odio. Proin pretium elementum.",
+      "uri": "https://images.pexels.com/photos/5014213/pexels-photo-5014213.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
+      "price": 20,
+      "likes": 12,
+      "location": "Toronto, Canada"
+    },
+    {
+      "creatorId": 1,
+      "categoryId": 1,
+      "id": 2,
+      "title": "Phasellus tristique sem",
+      "description": "Maecenas orci nisl, facilisis vel dictum in, accumsan at odio. Proin pretium elementum.",
+      "uri": "https://images.pexels.com/photos/4954715/pexels-photo-4954715.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+      "price": 10,
+      "likes": 6,
+      "location": "Montreal, Canada"
+    },
+    {
+      "creatorId": 2,
+      "categoryId": 2,
+      "id": 3,
+      "title": "Lorem ipsum dolor sit amet",
+      "description": "Etiam nec lectus est. Mauris feugiat vel libero ac venenatis. Ut faucibus et ex.",
+      "uri": "https://images.pexels.com/photos/5056754/pexels-photo-5056754.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+      "price": 20,
+      "likes": 21,
+      "location": "Minsk, Belarus"
+    },
+    {
+      "creatorId": 2,
+      "categoryId": 2,
+      "id": 4,
+      "title": "Lorem ipsum dolor sit amet",
+      "description": "Etiam nec lectus est. Mauris feugiat vel libero ac venenatis. Ut faucibus et ex.",
+      "uri": "https://images.pexels.com/photos/5821470/pexels-photo-5821470.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+      "price": 20,
+      "likes": 21,
+      "location": "Minsk, Belarus"
+    },
+    {
+      "creatorId": 2,
+      "categoryId": 3,
+      "id": 5,
+      "title": "Lorem ipsum dolor sit amet",
+      "description": "Etiam nec lectus est. Mauris feugiat vel libero ac venenatis. Ut faucibus et ex.",
+      "uri": "https://images.pexels.com/photos/4558702/pexels-photo-4558702.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+      "price": 20,
+      "likes": 21,
+      "location": "Minsk, Belarus"
+    }
+  ]
+}

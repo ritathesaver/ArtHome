@@ -1,13 +1,14 @@
-import React, {useState} from 'react'
-import {AppContext} from './src/services/AppContext.js'
+import React from 'react'
+import {Provider} from 'react-redux'
+import {store} from './src/redux'
 import App from './src/App'
 
-export const AppProvider = () => {
-  const [token, setToken] = useState(null)
-
+const AppProvider = () => {
   return (
-    <AppContext.Provider value={{token, setToken}}>
+    <Provider store={store}>
       <App />
-    </AppContext.Provider>
+    </Provider>
   )
 }
+
+export default AppProvider

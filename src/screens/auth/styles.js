@@ -29,7 +29,8 @@ export const styles = StyleSheet.create({
     padding: 3,
     borderColor: '#f1f1f1',
     borderBottomWidth: 1,
-    color: 'white'
+    color: 'white',
+    
   },
   submitButton: {
     width: '85%',
@@ -54,5 +55,10 @@ export const styles = StyleSheet.create({
   },
   subTitleText: {
     color: '#f1f1f1'
+  },
+  signText: {
+    color: 'white',
+    textDecorationLine: 'underline',
+    textDecorationColor: 'white'
   }
 })
