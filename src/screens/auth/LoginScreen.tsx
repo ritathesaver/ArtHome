@@ -1,40 +1,63 @@
-import React, { FunctionComponent } from 'react';
-import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { Formik } from 'formik';
-import { styles } from './styles'
-import { useNavigation } from '@react-navigation/native';
-import { useFormik } from 'formik';
+/* eslint-disable react-native/no-inline-styles */
+import React, {FunctionComponent, useEffect} from 'react'
+import {
+  ImageBackground,
+  KeyboardAvoidingView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native'
+import {styles} from './styles'
+import {useNavigation} from '@react-navigation/native'
+import {useFormik} from 'formik'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch } from '../../App'
+import { signIn } from '../../redux/actions/authActions'
+import { RootState } from '../../redux/rootReducer'
 
 export const LoginScreen: FunctionComponent = () => {
-
   const navigation = useNavigation()
+  const dispatch: AppDispatch = useDispatch()
 
-   const formik = useFormik({
+  const formik = useFormik({
     initialValues: {
       email: '',
-      password: ''
+      password: '',
     },
-    onSubmit:
-      values => console.log(values),
-  });
+    onSubmit: async () => {
+      dispatch(signIn(formik.values.email, formik.values.password))
+    },
+  })
 
   return (
-    <View style={styles.container}>
-      <Image
-        style={styles.logo}
-        source={require('../../assets/logo.png')} />
-     
-          <View style={styles.formContainer}>
+    <ImageBackground
+      blurRadius={15}
+      source={{
+        uri:
+          'https://images.pexels.com/photos/2776892/pexels-photo-2776892.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+      }}
+      style={{
+        flex: 1,
+        width: '100%',
+      }}>
+      <KeyboardAvoidingView behavior="padding" style={styles.container}>
+        <View style={styles.formContainer}>
+          <View style={styles.inputWrapper}>
             <Text style={styles.labelText}>Username</Text>
             <TextInput
+              placeholderTextColor="#cfcfcf"
               onChangeText={formik.handleChange('email')}
               onBlur={formik.handleBlur('email')}
               value={formik.values.email}
               style={styles.input}
               placeholder="Enter email"
             />
+          </View>
+          <View style={styles.inputWrapper}>
             <Text style={styles.labelText}>Password</Text>
             <TextInput
+              placeholderTextColor="#cfcfcf"
               onChangeText={formik.handleChange('password')}
               onBlur={formik.handleBlur('password')}
               value={formik.values.password}
@@ -42,23 +65,22 @@ export const LoginScreen: FunctionComponent = () => {
               secureTextEntry={true}
               placeholder="Enter password"
             />
-            <TouchableOpacity
-              style={styles.submitButton}
-              onPress={formik.handleSubmit}
-            >
-              <Text style={styles.submitButtonText}>Sign In</Text>
-            </TouchableOpacity>
-
-            <View style={styles.textContainer}>
-              <Text style={styles.subTitleText}>New user?</Text>
-              <TouchableOpacity onPress={() => navigation.navigate('RegisterScreen')}>
-                <Text> Sign up</Text>
-              </TouchableOpacity>
-            </View>
-
           </View>
-       
-    </View>
+          <TouchableOpacity
+            style={styles.submitButton}
+            onPress={formik.handleSubmit as any}>
+            <Text style={styles.submitButtonText}>Sign In</Text>
+          </TouchableOpacity>
+
+          <View style={styles.textContainer}>
+            <Text style={styles.subTitleText}>New user?</Text>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('RegisterScreen')}>
+              <Text style={styles.signText}> Sign up</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </KeyboardAvoidingView>
+    </ImageBackground>
   )
 }
-

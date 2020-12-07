@@ -3,41 +3,50 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ebebe3',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   logo: {
+    marginTop: 100,
     width: 200,
     height: 200
   },
+
   formContainer: {
-    marginVertical: 100,
     width: '100%',
-    marginBottom: 30,
+    marginVertical: 30,
     alignItems: 'center'
   },
+  inputWrapper: {
+    width: '75%',
+    justifyContent: 'center',
+    marginVertical: 10
+  },
   input: {
-    width: '70%',
-    margin: 15,
+    width: '100%',
+    marginTop: 10,
+    marginBottom: 3,
     padding: 3,
-    borderColor: '#2b2b28',
-    borderBottomWidth: 1
+    borderColor: '#f1f1f1',
+    borderBottomWidth: 1,
+    color: 'white',
+    
   },
   submitButton: {
-    width: '80%',
-    marginVertical: 30,
+    width: '85%',
+    marginVertical: 40,
     padding: 14,
-    borderRadius: 20,
-    backgroundColor: '#888888'
+    borderRadius: 25,
+    backgroundColor: '#f1f1f1'
   },
   submitButtonText: {
-    color: 'white',
+    color: 'black',
     textAlign: 'center',
     fontSize: 17
   },
   labelText: {
-    width: '80%'
+    width: '80%',
+    color: 'white',
   },
   textContainer: {
     width: '100%',
@@ -45,6 +54,11 @@ export const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   subTitleText: {
-    color: '#4a4a48'
+    color: '#f1f1f1'
+  },
+  signText: {
+    color: 'white',
+    textDecorationLine: 'underline',
+    textDecorationColor: 'white'
   }
 })
