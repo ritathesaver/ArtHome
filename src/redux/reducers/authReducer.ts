@@ -1,6 +1,6 @@
 import {createReducer} from 'typesafe-actions'
-import {restoreToken, signIn, signOut, signUp} from '../actions/authActions'
-import { IUsersState } from './usersReducer'
+import {restoreToken, signOut} from '../actions/authActions'
+import {parseJwt} from './../../utilities/parseJwt'
 
 export interface IAuthState {
   isLoading: boolean
@@ -11,7 +11,7 @@ export interface IAuthState {
 
 const INITIAL_STATE: IAuthState = {
   isLoading: false,
-  isSignout: true,
+  isSignout: false,
   userToken: '',
   id: '',
 }
@@ -27,7 +27,8 @@ export const authReducer = createReducer(INITIAL_STATE)
       }
     },
   )
-  	.handleType('SIGN_UP_SUCCESS',
+  .handleType(
+    'SIGN_UP_SUCCESS',
     (state: IAuthState, action: {type: string; payload: any}) => {
       console.log('HI')
       console.log(action)
@@ -39,25 +40,31 @@ export const authReducer = createReducer(INITIAL_STATE)
         id: action.payload.id,
       }
     },
-)
-    .handleType('SIGN_IN_SUCCESS',
+  )
+  .handleType(
+    'SIGN_IN_SUCCESS',
     (state: IAuthState, action: {type: string; payload: any}) => {
-      console.log('HI')
+      const token = action.payload.userToken
+      console.log(token, 'token')
+
+      const id = parseJwt(token)
+      console.log(id, 'id')
       //console.log('HEREHEREHRHEHREHHREHERHHREHEHHREHEHREHREH: ', action.payload, 'rr');
       return {
         ...state,
         isSignout: false,
         userToken: action.payload.userToken,
-        id: action.payload.id,
+        id: id.sub,
       }
     },
-)
-  
+  )
+
   .handleAction(signOut, (state: IAuthState) => {
     console.log('GOT INTO SIGN OUT')
     return {
       ...state,
       isSignout: true,
       userToken: null,
+      id: null,
     }
   })

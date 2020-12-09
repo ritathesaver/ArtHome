@@ -1,3 +1,15 @@
 import {createCustomAction} from 'typesafe-actions'
 
 export const getUsers = createCustomAction('GET_USERS')
+export const editUserAvatar = createCustomAction(
+  'EDIT_USER_AVATAR',
+  (avatarUri: string, body: Object) => ({
+    payload: {body, avatarUri},
+  }),
+)
+export const addSpecialization = createCustomAction(
+  'EDIT_USER_SPECIALIZATION',
+  (specialization: string[], body: Object) => ({
+    payload: {body, specialization},
+  }),
+)

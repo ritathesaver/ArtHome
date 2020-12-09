@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {FunctionComponent, useEffect} from 'react'
+import React, {FunctionComponent} from 'react'
 import {
   ImageBackground,
   KeyboardAvoidingView,
@@ -11,10 +11,9 @@ import {
 import {styles} from './styles'
 import {useNavigation} from '@react-navigation/native'
 import {useFormik} from 'formik'
-import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch } from '../../App'
-import { signIn } from '../../redux/actions/authActions'
-import { RootState } from '../../redux/rootReducer'
+import {useDispatch} from 'react-redux'
+import {AppDispatch} from '../../App'
+import {signIn} from '../../redux/actions/authActions'
 
 export const LoginScreen: FunctionComponent = () => {
   const navigation = useNavigation()

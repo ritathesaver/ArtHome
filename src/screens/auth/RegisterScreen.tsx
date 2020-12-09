@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {FunctionComponent, useEffect} from 'react'
+import React, {FunctionComponent} from 'react'
 import {
   ImageBackground,
   KeyboardAvoidingView,
@@ -12,14 +12,10 @@ import * as Yup from 'yup'
 import {styles} from './styles'
 import {useNavigation} from '@react-navigation/native'
 import {useFormik} from 'formik'
-const {v4: uuidv4} = require('uuid')
 import 'react-native-get-random-values'
-import axios from 'axios'
-import AsyncStorage from '@react-native-community/async-storage'
-import {useDispatch, useSelector} from 'react-redux'
+import {useDispatch} from 'react-redux'
 import {AppDispatch} from '../../App'
-import {createUser, restoreToken, signIn, signUp} from '../../redux/actions/authActions'
-import { RootState } from '../../redux/rootReducer'
+import {createUser, signUp} from '../../redux/actions/authActions'
 
 const SignupSchema = Yup.object().shape({
   email: Yup.string().email('Please enter valid email').required('Required'),
@@ -37,7 +33,6 @@ const SignupSchema = Yup.object().shape({
 })
 
 export const RegisterScreen: FunctionComponent = () => {
-
   const navigation = useNavigation()
   const dispatch: AppDispatch = useDispatch()
 
@@ -46,11 +41,13 @@ export const RegisterScreen: FunctionComponent = () => {
       email: '',
       password: '',
       confirmedPassword: '',
+      name: '',
     },
     onSubmit: async () => {
       //const token = await axios.post('http://localhost:3000/register', body)
       dispatch(signUp(formik.values.email, formik.values.password))
-      dispatch(createUser(formik.values.email))
+      dispatch(createUser(formik.values.email, formik.values.name))
+
       //await AsyncStorage.setItem('token', token.data.accessToken)
     },
     validationSchema: SignupSchema,
@@ -70,7 +67,23 @@ export const RegisterScreen: FunctionComponent = () => {
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <View style={styles.formContainer}>
           <View style={styles.inputWrapper}>
-            <Text style={styles.labelText}>Username</Text>
+            <Text style={styles.labelText}>Full name</Text>
+            <TextInput
+              placeholderTextColor="#cfcfcf"
+              onChangeText={formik.handleChange('name')}
+              onBlur={formik.handleBlur('name')}
+              value={formik.values.name}
+              style={styles.input}
+              placeholder="Enter your name"
+            />
+            {formik.errors.email && formik.touched.email && (
+              <Text style={{fontSize: 10, color: 'red', marginBottom: 10}}>
+                {formik.errors.email}
+              </Text>
+            )}
+          </View>
+          <View style={styles.inputWrapper}>
+            <Text style={styles.labelText}>Email</Text>
             <TextInput
               placeholderTextColor="#cfcfcf"
               onChangeText={formik.handleChange('email')}

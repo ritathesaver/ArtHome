@@ -21,10 +21,9 @@ import {store} from './redux'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import {SellStackScreen} from './navigators/SellNavigator'
 import {ProfileScreen} from './screens/profile/ProfileScreen'
-import { RootState } from './redux/rootReducer'
+import {RootState} from './redux/rootReducer'
 import AsyncStorage from '@react-native-community/async-storage'
-import { useState } from 'react'
-
+import {useState} from 'react'
 
 Icon.loadFont()
 
@@ -32,16 +31,17 @@ const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
 
 const App: FunctionComponent = () => {
-  const authToken = useSelector((state: RootState)=> state.auth.userToken)
+  const authToken = useSelector((state: RootState) => state.auth.userToken)
   const [token, setToken] = useState<null | string>('')
 
   useEffect(() => {
     (async () => {
-      authToken ?  await AsyncStorage.setItem('userToken', authToken) : await AsyncStorage.removeItem('userToken')
+      authToken
+        ? await AsyncStorage.setItem('userToken', authToken)
+        : await AsyncStorage.removeItem('userToken')
       const userToken = await AsyncStorage.getItem('userToken')
       setToken(userToken)
-    }
-    )()
+    })()
   }, [authToken])
 
   console.log(token)

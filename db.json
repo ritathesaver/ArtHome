@@ -11,59 +11,34 @@
       "password": "Qwe12345"
     },
     {
-      "email": "fsffef@gmail.com",
-      "password": "$2a$10$LPektgMTJ.Q7NzncigjmIuEDq78FLP1mmXuN/MbJuFOxWv7eJ0Eg2",
-      "id": 3
+      "email": "ritathesaver@gmail.com",
+      "password": "$2a$10$ux4g9RT.hSohsKvKJ3MJoujj7le2VqjNeMQ8N9RsiIVuvQATE1tcy",
+      "id": "c088176b-854f-4d15-96d7-5e2430d9f5ab"
     },
     {
-      "email": "Vccvc@gmail.com",
-      "password": "$2a$10$3W88agENgBewhpmxVgmdCOUXe9EIA09WWt9VPKsy7k7R8Rl/u2JXy",
-      "id": "e6a1a937-39be-4af4-8498-e65cbabab1e5"
+      "email": "uci@gmail.com",
+      "password": "$2a$10$WR7i8Zk9VcEt8gIGiJqL.OHE9ShHP8JKaT07pQ5hj07qaqXtrRuL.",
+      "id": "d380c22e-48b4-4956-a560-269a4e8742a8"
     },
     {
-      "email": "Csdsd@gmail.com",
-      "password": "$2a$10$6MEnQH1dD..lxxv0Np407edljJuTrFnrzJ/qFxmhNjFgPzrIBSxK6",
-      "id": "bbd62161-e480-43c3-96ec-9e312c4f50ba"
+      "email": "wfwf@gmail.com",
+      "password": "$2a$10$FcTVeQ.oUImjh9I3Y9UfBOPoslz3PmALNECoRZ3F2eD34/Vf0iE1K",
+      "id": "11a1af7f-4a72-4fc1-bcf3-d1e4a6f56b2b"
     },
     {
-      "email": "Vdvdv@gmail.com",
-      "password": "$2a$10$wviY/djvm8HgVjewODE5euWN3EtCxMiPyOYs5qMplkn8VG2noUVrW",
-      "id": "fa147bd1-dcdb-4fd0-bff2-cf63905f34db"
+      "email": "Rrr@gmail.com",
+      "password": "$2a$10$zx2E3nLTC5Nz5.ere1HtsuDBUjy5rvyGRwGo.yW7Bxx3KRLC4hZ1i",
+      "id": "781cb577-f676-486b-a055-e1084f3ca826"
     },
     {
-      "email": "Fdfdf@gmail.com",
-      "password": "$2a$10$vxWFE42sc.OXdvX96ZGWNemmm7pe2DGU8erJsTjT7SJKbvcjlr8BK",
-      "id": "3a1ed6e5-3f27-4ac5-a3fc-08c3edda3a0a"
+      "email": "Juuu@gmail.com",
+      "password": "$2a$10$Sd13ctgtZmCpcm8Cox7QeeoNwbkvJ2687XP3ssEIt3s73Yj6G8bZm",
+      "id": "8d0f4abf-3911-4766-a001-01a9984de43b"
     },
     {
-      "email": "Vffvffv@gmail.com",
-      "password": "$2a$10$eoKYqb5nTqI6mU3LKsfNy.pkjh8vW86nVA0VfbFpFb8.4zwpoRA7q",
-      "id": "17caa021-e8c5-48ad-a436-9e23e133603f"
-    },
-    {
-      "email": "Dfdffdf@gmail.com",
-      "password": "$2a$10$8ZPiGck1fVcrpGumAwoSk.t1kgnucR3O/MgTouW.L7bpCXE11NjXK",
-      "id": "3fb7d059-5ef7-4de6-9902-d31087d07d4a"
-    },
-    {
-      "email": "Rita@gmail.com",
-      "password": "$2a$10$U3jHYNpaN1HTe6MbsSIf8u546MaSNGXj1Gmg/zNlJskPJU8xfPofG",
-      "id": "387dfe40-c0c0-434d-a05b-e13ccf155999"
-    },
-    {
-      "email": "dwdwdw@gmail.com",
-      "password": "$2a$10$o76tnxSa9llqJKlofCqGVOZr0feuf8bWOIPflalCrtZaYbaLJMSru",
-      "id": "db08ba0a-c733-4abe-87c1-ed80e75edb42"
-    },
-    {
-      "email": "Sasasas@gmail.com",
-      "password": "$2a$10$bArfDzBP.H1zrOoEMX.AauigYVZ9MYlZYyYLcRUBAtpgjUdqZu6ka",
-      "id": "36958024-1085-4b16-b009-3c702e92ffb3"
-    },
-    {
-      "email": "dfdfdfd@gmail.com",
-      "password": "$2a$10$bV/Xx8BrtgcZKslkK5O8ku9gSOO4BDGOcKUkh/FO3DcqYYrqzCD3a",
-      "id": "7ee83bf2-5724-4c40-a167-c27b677cda46"
+      "email": "Gill@gmail.com",
+      "password": "$2a$10$cLlYdQVdg7B3R8mi9p3TpOr6nk6D90hLr7Sh33wqYDSR9OazA/gmq",
+      "id": "1b647d53-b0d9-49bc-8b59-8e80e4ef652b"
     }
   ],
   "creators": [
@@ -96,50 +71,10 @@
       ]
     },
     {
-      "id": "e6a1a937-39be-4af4-8498-e65cbabab1e5"
-    },
-    {
-      "id": "bbd62161-e480-43c3-96ec-9e312c4f50ba"
-    },
-    {
-      "id": "fa147bd1-dcdb-4fd0-bff2-cf63905f34db"
-    },
-    {
-      "id": "3a1ed6e5-3f27-4ac5-a3fc-08c3edda3a0a"
-    },
-    {
-      "id": "17caa021-e8c5-48ad-a436-9e23e133603f",
-      "userId": "17caa021-e8c5-48ad-a436-9e23e133603f",
-      "email": "Vffvffv@gmail.com",
-      "name": "Your name",
-      "about": "About you",
-      "location": "Your location"
-    },
-    {
-      "id": "3fb7d059-5ef7-4de6-9902-d31087d07d4a",
-      "userId": "3fb7d059-5ef7-4de6-9902-d31087d07d4a",
-      "email": "Dfdffdf@gmail.com",
-      "name": "Your name",
-      "about": "About you",
-      "location": "Your location",
-      "avatarUri": "https://us.123rf.com/450wm/2nix/2nix1408/2nix140800099/30818272-anonymous-avatar-profile-icon-vector-.jpg?ver=6",
-      "phone": null
-    },
-    {
-      "id": "387dfe40-c0c0-434d-a05b-e13ccf155999",
-      "userId": "387dfe40-c0c0-434d-a05b-e13ccf155999",
-      "email": "Rita@gmail.com",
-      "name": "Your name",
-      "about": "About you",
-      "address": "Your location",
-      "avatarUri": "https://us.123rf.com/450wm/2nix/2nix1408/2nix140800099/30818272-anonymous-avatar-profile-icon-vector-.jpg?ver=6",
-      "phone": null
-    },
-    {
-      "id": "db08ba0a-c733-4abe-87c1-ed80e75edb42",
-      "userId": "db08ba0a-c733-4abe-87c1-ed80e75edb42",
-      "email": "dwdwdw@gmail.com",
-      "name": "Your name",
+      "id": "c088176b-854f-4d15-96d7-5e2430d9f5ab",
+      "userId": "c088176b-854f-4d15-96d7-5e2430d9f5ab",
+      "email": "ritathesaver@gmail.com",
+      "name": "Rita The-Saver",
       "about": "About you",
       "address": "Your location",
       "avatarUri": "https://us.123rf.com/450wm/2nix/2nix1408/2nix140800099/30818272-anonymous-avatar-profile-icon-vector-.jpg?ver=6",
@@ -149,30 +84,69 @@
       ]
     },
     {
-      "id": "36958024-1085-4b16-b009-3c702e92ffb3",
-      "userId": "36958024-1085-4b16-b009-3c702e92ffb3",
-      "email": "Sasasas@gmail.com",
-      "name": "Your name",
-      "about": "About you",
-      "address": "Your location",
+      "id": "d380c22e-48b4-4956-a560-269a4e8742a8",
+      "userId": "d380c22e-48b4-4956-a560-269a4e8742a8",
+      "email": "uci@gmail.com",
+      "name": "Luci Blake",
+      "about": "Nothing to say yet",
+      "address": "none",
       "avatarUri": "https://us.123rf.com/450wm/2nix/2nix1408/2nix140800099/30818272-anonymous-avatar-profile-icon-vector-.jpg?ver=6",
-      "phone": null,
+      "phone": "none",
       "specialization": [
         "Your specialization"
       ]
     },
     {
-      "id": "7ee83bf2-5724-4c40-a167-c27b677cda46",
-      "userId": "7ee83bf2-5724-4c40-a167-c27b677cda46",
-      "email": "dfdfdfd@gmail.com",
-      "name": "Your name",
-      "about": "About you",
-      "address": "Your location",
+      "id": "11a1af7f-4a72-4fc1-bcf3-d1e4a6f56b2b",
+      "userId": "11a1af7f-4a72-4fc1-bcf3-d1e4a6f56b2b",
+      "email": "wfwf@gmail.com",
+      "name": "Fjwjff vsgsg",
+      "about": "Nothing to say yet",
+      "address": "none",
       "avatarUri": "https://us.123rf.com/450wm/2nix/2nix1408/2nix140800099/30818272-anonymous-avatar-profile-icon-vector-.jpg?ver=6",
-      "phone": null,
+      "phone": "none",
       "specialization": [
         "Your specialization"
       ]
+    },
+    {
+      "id": "781cb577-f676-486b-a055-e1084f3ca826",
+      "userId": "781cb577-f676-486b-a055-e1084f3ca826",
+      "email": "Rrr@gmail.com",
+      "name": "Fred fefef",
+      "about": "Nothing to say yet",
+      "address": "none",
+      "avatarUri": "file:///Users/admin/Library/Developer/CoreSimulator/Devices/CD9A9B0D-CE1C-4160-B6EC-53C7318159F0/data/Containers/Data/Application/6C46962E-A6A6-4ED4-BD6D-DA07BFBB86B5/Documents/images/3B42F03A-378F-4DFC-A66A-0A04B611B8BC.jpg",
+      "phone": "none",
+      "specialization": [
+        "Your specialization"
+      ]
+    },
+    {
+      "id": "8d0f4abf-3911-4766-a001-01a9984de43b",
+      "userId": "8d0f4abf-3911-4766-a001-01a9984de43b",
+      "email": "Juuu@gmail.com",
+      "name": "Julia Lang",
+      "about": "Nothing to say yet",
+      "address": "none",
+      "avatarUri": "file:///Users/admin/Library/Developer/CoreSimulator/Devices/CD9A9B0D-CE1C-4160-B6EC-53C7318159F0/data/Containers/Data/Application/6C46962E-A6A6-4ED4-BD6D-DA07BFBB86B5/Documents/images/3B42F03A-378F-4DFC-A66A-0A04B611B8BC.jpg",
+      "phone": "none",
+      "specialization": [
+        [
+          "Gvdgdg"
+        ]
+      ]
+    },
+    {
+      "id": "1b647d53-b0d9-49bc-8b59-8e80e4ef652b",
+      "userId": "1b647d53-b0d9-49bc-8b59-8e80e4ef652b",
+      "email": "Gill@gmail.com",
+      "name": "Robert Gill",
+      "about": "Nothing to say yet",
+      "address": "none",
+      "avatarUri": "file:///Users/admin/Library/Developer/CoreSimulator/Devices/CD9A9B0D-CE1C-4160-B6EC-53C7318159F0/data/Containers/Data/Application/96E6E20C-AFD7-4CAD-909A-A88FABB91385/Documents/images/5564804E-19EB-49E0-8626-D590E81BA469.jpg",
+      "phone": "none",
+      "specialization": []
     }
   ],
   "categories": [

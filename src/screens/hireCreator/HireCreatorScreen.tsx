@@ -28,8 +28,12 @@ export const HireCreatorScreen: FunctionComponent = () => {
   }, [dispatch])
 
   const users = useSelector((state: RootState) =>
-    state.users.users.map((user) => user),
+    state.users.users
+      .filter((user) => user.specialization.length > 0)
+      .map((user) => user),
   )
+
+  console.log(users)
 
   return (
     <SafeAreaView style={styles.container}>

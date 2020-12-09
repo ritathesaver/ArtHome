@@ -28,8 +28,6 @@ export const CreatorsScreen: FunctionComponent = () => {
   }, [dispatch])
   
   const users = useSelector((state: RootState) => state.users.users.map(user => user))
-  
-  console.log(users)
 
 
   return (
