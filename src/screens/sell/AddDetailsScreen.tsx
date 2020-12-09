@@ -9,7 +9,9 @@ import {
   TouchableOpacity,
 } from 'react-native-gesture-handler'
 import RNPickerSelect from 'react-native-picker-select'
+import {useSelector} from 'react-redux'
 import NextIcon from '../../assets/icons/next.svg'
+import {RootState} from '../../redux/rootReducer'
 
 interface IAddDetailsProps {
   route: any
@@ -20,6 +22,9 @@ export const AddDetailsScreen: FunctionComponent<IAddDetailsProps> = ({
 }) => {
   const [value, onChangeText] = useState('')
   const navigation = useNavigation()
+  const categoriesTitles = useSelector((state: RootState) =>
+    state.categories.categories.map((category) => category.title),
+  )
 
   /*const selectCategory = () => {
     return (
@@ -70,7 +75,7 @@ export const AddDetailsScreen: FunctionComponent<IAddDetailsProps> = ({
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <RNPickerSelect
             placeholder={{
-              label: 'Select',
+              label: `${route.params.title}`,
               value: null,
             }}
             style={{
@@ -88,11 +93,7 @@ export const AddDetailsScreen: FunctionComponent<IAddDetailsProps> = ({
               },
             }}
             onValueChange={(val) => console.log(val)}
-            items={[
-              {label: 'Football', value: 'football'},
-              {label: 'Baseball', value: 'baseball'},
-              {label: 'Hockey', value: 'hockey'},
-            ]}
+            items={categoriesTitles.map((item) => ({label: item, value: item}))}
             Icon={() => {
               return <NextIcon />
             }}
@@ -110,7 +111,9 @@ export const AddDetailsScreen: FunctionComponent<IAddDetailsProps> = ({
         PRICE
       </Text>
       <View style={{backgroundColor: 'white', marginBottom: 40}}>
-        <Text style={{fontSize: 20, margin: 15}}>BYN: 10</Text>
+        <Text style={{fontSize: 20, margin: 15}}>
+          BYN: {route.params.price}
+        </Text>
       </View>
 
       <Text

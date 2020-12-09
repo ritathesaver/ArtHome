@@ -1,5 +1,6 @@
 import {useNavigation} from '@react-navigation/native'
 import React, {FunctionComponent} from 'react'
+import {useState} from 'react'
 import {useEffect} from 'react'
 import {
   Dimensions,
@@ -19,12 +20,14 @@ interface ISetPriceProps {
 
 export const SetPriceScreen: FunctionComponent<ISetPriceProps> = ({route}) => {
   const navigation = useNavigation()
+  const [price, setPrice] = useState('')
 
   useEffect(() => {
     navigation.setParams({
       uri: route.params.uri,
+      price: price,
     })
-  }, [navigation, route.params.uri])
+  }, [navigation, price, route.params.uri])
 
   return (
     <KeyboardAvoidingView
@@ -46,7 +49,12 @@ export const SetPriceScreen: FunctionComponent<ISetPriceProps> = ({route}) => {
         />
         <View style={priceStyles.inputWrapper}>
           <Text style={priceStyles.priceText}>BYN:</Text>
-          <TextInput keyboardType="numeric" style={priceStyles.priceInput} />
+          <TextInput
+            defaultValue={price}
+            onChangeText={setPrice}
+            keyboardType="numeric"
+            style={priceStyles.priceInput}
+          />
         </View>
       </ScrollView>
     </KeyboardAvoidingView>

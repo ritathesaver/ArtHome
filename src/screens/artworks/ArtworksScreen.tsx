@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import {useNavigation} from '@react-navigation/native'
 import invert from 'invert-color'
-import React, {FunctionComponent} from 'react'
+import React, {FunctionComponent, useEffect} from 'react'
 import {
   Dimensions,
   FlatList,
@@ -11,19 +11,30 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native'
-import {artworks} from '../../assets/artworks/artworks'
 import SearchBox from '../../components/SearchBox/SearchBox'
 import {styles} from './styles'
-import {authors} from '../../assets/authors/authors'
+import {useDispatch, useSelector} from 'react-redux'
+import {RootState} from '../../redux/rootReducer'
+import {getCategories} from '../../redux/actions/cateroriesActions'
+import {AppDispatch} from '../../App'
 
 export const ArtworksScreen: FunctionComponent = () => {
   const navigation = useNavigation()
+  const dispatch: AppDispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getCategories())
+  }, [dispatch])
+
+  const categories = useSelector((state: RootState) =>
+    state.categories.categories.map((category) => category),
+  )
 
   return (
     <SafeAreaView style={styles.container}>
       <SearchBox />
       <FlatList
-        data={artworks}
+        data={categories}
         renderItem={({item}) => (
           <TouchableOpacity
             style={{
@@ -34,14 +45,8 @@ export const ArtworksScreen: FunctionComponent = () => {
               width: Dimensions.get('window').width / 2,
               height: 140,
             }}
-            onPress={() =>
-              navigation.navigate(
-                'ArtworksDetails',
-                // eslint-disable-next-line no-shadow
-                authors.map((item) => item.pictures),
-              )
-            }>
-            <Image style={styles.image} source={{uri: item.cover.uri}} />
+            onPress={() => navigation.navigate('ArtworksDetails')}>
+            <Image style={styles.image} source={{uri: item.coverUri}} />
             <View
               style={{
                 backgroundColor: item.overlayColor,

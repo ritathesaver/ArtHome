@@ -7,14 +7,14 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native'
-import { styles } from './styles'
+import {styles} from './styles'
 
 import {useNavigation} from '@react-navigation/native'
 import SearchBox from '../../components/SearchBox/SearchBox'
-import { useDispatch, useSelector } from 'react-redux'
-import { getUsers } from '../../redux/actions/usersActions'
-import { AppDispatch } from '../../App'
-import { RootState } from '../../redux/rootReducer'
+import {useDispatch, useSelector} from 'react-redux'
+import {getUsers} from '../../redux/actions/usersActions'
+import {AppDispatch} from '../../App'
+import {RootState} from '../../redux/rootReducer'
 
 export const CreatorsScreen: FunctionComponent = () => {
   const navigation = useNavigation()
@@ -22,13 +22,12 @@ export const CreatorsScreen: FunctionComponent = () => {
   const dispatch: AppDispatch = useDispatch()
 
   useEffect(() => {
-
     dispatch(getUsers())
-  
   }, [dispatch])
-  
-  const users = useSelector((state: RootState) => state.users.users.map(user => user))
 
+  const users = useSelector((state: RootState) =>
+    state.users.users.map((user) => user),
+  )
 
   return (
     <SafeAreaView style={styles.container}>
