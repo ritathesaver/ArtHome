@@ -1,17 +1,19 @@
 /* eslint-disable react-native/no-inline-styles */
 import {useNavigation} from '@react-navigation/native'
-import React, {FunctionComponent} from 'react'
+import React, {FunctionComponent, useCallback} from 'react'
 import {useState} from 'react'
-import {View, Text, ImageBackground} from 'react-native'
+import {View, Text, ImageBackground, Button} from 'react-native'
 import {
   ScrollView,
   TextInput,
   TouchableOpacity,
 } from 'react-native-gesture-handler'
 import RNPickerSelect from 'react-native-picker-select'
-import {useSelector} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
+import {AppDispatch} from '../../App'
 import NextIcon from '../../assets/icons/next.svg'
 import {RootState} from '../../redux/rootReducer'
+import {addPicture} from '../../redux/actions/picturesActions'
 
 interface IAddDetailsProps {
   route: any
@@ -20,24 +22,50 @@ interface IAddDetailsProps {
 export const AddDetailsScreen: FunctionComponent<IAddDetailsProps> = ({
   route,
 }) => {
-  const [value, onChangeText] = useState('')
+  const [descriptionValue, setDescriptionValue] = useState('')
+  const [titleValue, setTitleValue] = useState('')
+  const [categoryTitle, setCategoryTitle] = useState(route.params.title)
   const navigation = useNavigation()
+  const dispatch: AppDispatch = useDispatch()
   const categoriesTitles = useSelector((state: RootState) =>
     state.categories.categories.map((category) => category.title),
   )
+  const authId = useSelector((state: RootState) => state.auth.id)
+  const categoryId = useSelector(
+    (state: RootState) =>
+      state.categories.categories
+        .filter((category) => category.title === categoryTitle)
+        .map((category) => category.id)[0],
+  )
+  const onAdd = useCallback(() => {
+    if (titleValue && descriptionValue) {
+      dispatch(
+        addPicture(
+          authId,
+          categoryId,
+          titleValue,
+          descriptionValue,
+          route.params.uri,
+          route.params.price,
+          route.params.res,
+        ),
+      )
+      navigation.navigate('Home')
+    } else {
+      return <Text>All fields are required</Text>
+    }
+  }, [
+    authId,
+    categoryId,
+    descriptionValue,
+    dispatch,
+    navigation,
+    route.params.price,
+    route.params.res,
+    route.params.uri,
+    titleValue,
+  ])
 
-  /*const selectCategory = () => {
-    return (
-      <RNPickerSelect
-        onValueChange={(val) => console.log(val)}
-        items={[
-          {label: 'Football', value: 'football'},
-          {label: 'Baseball', value: 'baseball'},
-          {label: 'Hockey', value: 'hockey'},
-        ]}
-      />
-    )
-  }*/
   return (
     <ScrollView style={{flex: 1, backgroundColor: '#202122'}}>
       <ImageBackground
@@ -75,8 +103,8 @@ export const AddDetailsScreen: FunctionComponent<IAddDetailsProps> = ({
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <RNPickerSelect
             placeholder={{
-              label: `${route.params.title}`,
-              value: null,
+              label: categoryTitle,
+              value: categoryTitle,
             }}
             style={{
               inputIOS: {
@@ -92,7 +120,7 @@ export const AddDetailsScreen: FunctionComponent<IAddDetailsProps> = ({
                 right: 0,
               },
             }}
-            onValueChange={(val) => console.log(val)}
+            onValueChange={setCategoryTitle}
             items={categoriesTitles.map((item) => ({label: item, value: item}))}
             Icon={() => {
               return <NextIcon />
@@ -123,12 +151,32 @@ export const AddDetailsScreen: FunctionComponent<IAddDetailsProps> = ({
           marginHorizontal: 15,
           marginBottom: 5,
         }}>
+        TITLE
+      </Text>
+      <View style={{backgroundColor: 'white', marginBottom: 40}}>
+        <TextInput
+          onChangeText={(text) => setTitleValue(text)}
+          value={titleValue}
+          placeholder="Additional informamtion"
+          style={{fontSize: 17, margin: 15}}
+          maxLength={17}
+          multiline
+          numberOfLines={2}
+        />
+      </View>
+      <Text
+        style={{
+          fontSize: 17,
+          color: 'white',
+          marginHorizontal: 15,
+          marginBottom: 5,
+        }}>
         DESCRIPTION
       </Text>
       <View style={{backgroundColor: 'white', marginBottom: 40}}>
         <TextInput
-          onChangeText={(text) => onChangeText(text)}
-          value={value}
+          onChangeText={(text) => setDescriptionValue(text)}
+          value={descriptionValue}
           placeholder="Additional informamtion"
           style={{fontSize: 17, margin: 15}}
           maxLength={50}
@@ -162,6 +210,7 @@ export const AddDetailsScreen: FunctionComponent<IAddDetailsProps> = ({
           <NextIcon />
         </TouchableOpacity>
       </View>
+      <Button title="SUBMIT" onPress={() => onAdd()} />
     </ScrollView>
   )
 }

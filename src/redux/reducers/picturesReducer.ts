@@ -6,7 +6,7 @@ export interface IPictures {
   title: string
   description: string
   uri: string
-  price: number
+  price: string
   likes: number
   location: string
 }
@@ -23,12 +23,26 @@ const INITIAL_STATE: IPicturesState = {
   error: null,
 }
 
-export const picturesReducer = createReducer(INITIAL_STATE).handleType(
-  'GET_PICTURES_SUCCESS',
-  (state: IPicturesState, action: {type: string; payload: any}) => {
-    return {
-      ...state,
-      pictures: action.payload,
-    }
-  },
-)
+export const picturesReducer = createReducer(INITIAL_STATE)
+  .handleType(
+    'GET_PICTURES_SUCCESS',
+    (state: IPicturesState, action: {type: string; payload: any}) => {
+      return {
+        ...state,
+        pictures: action.payload,
+      }
+    },
+  )
+  .handleType(
+    'ADD_PICTURE_SUCCESS',
+    (state: IPicturesState, action: {type: string; payload: any}) => {
+      console.log(action.payload, 'payload')
+
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        pictures: [...state.pictures, action.payload],
+      }
+    },
+  )

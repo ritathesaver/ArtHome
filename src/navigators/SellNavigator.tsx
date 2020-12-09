@@ -86,13 +86,6 @@ export const SellStackScreen = () => {
         options={{
           ...screenStyle,
           title: 'AddDetails',
-          headerRight: () => (
-            <Button
-              color="white"
-              title="Submit"
-              onPress={() => navigation.navigate('Home')}
-            />
-          ),
           headerLeft: () => (
             <Button
               color="white"

@@ -79,9 +79,7 @@
       "address": "Your location",
       "avatarUri": "https://us.123rf.com/450wm/2nix/2nix1408/2nix140800099/30818272-anonymous-avatar-profile-icon-vector-.jpg?ver=6",
       "phone": null,
-      "specialization": [
-        "Your specialization"
-      ]
+      "specialization": []
     },
     {
       "id": "d380c22e-48b4-4956-a560-269a4e8742a8",
@@ -92,9 +90,7 @@
       "address": "none",
       "avatarUri": "https://us.123rf.com/450wm/2nix/2nix1408/2nix140800099/30818272-anonymous-avatar-profile-icon-vector-.jpg?ver=6",
       "phone": "none",
-      "specialization": [
-        "Your specialization"
-      ]
+      "specialization": []
     },
     {
       "id": "11a1af7f-4a72-4fc1-bcf3-d1e4a6f56b2b",
@@ -105,9 +101,7 @@
       "address": "none",
       "avatarUri": "https://us.123rf.com/450wm/2nix/2nix1408/2nix140800099/30818272-anonymous-avatar-profile-icon-vector-.jpg?ver=6",
       "phone": "none",
-      "specialization": [
-        "Your specialization"
-      ]
+      "specialization": []
     },
     {
       "id": "781cb577-f676-486b-a055-e1084f3ca826",
@@ -118,9 +112,7 @@
       "address": "none",
       "avatarUri": "file:///Users/admin/Library/Developer/CoreSimulator/Devices/CD9A9B0D-CE1C-4160-B6EC-53C7318159F0/data/Containers/Data/Application/6C46962E-A6A6-4ED4-BD6D-DA07BFBB86B5/Documents/images/3B42F03A-378F-4DFC-A66A-0A04B611B8BC.jpg",
       "phone": "none",
-      "specialization": [
-        "Your specialization"
-      ]
+      "specialization": []
     },
     {
       "id": "8d0f4abf-3911-4766-a001-01a9984de43b",
@@ -254,6 +246,16 @@
       "price": 20,
       "likes": 21,
       "location": "Minsk, Belarus"
+    },
+    {
+      "id": "6a0efa2e-ec3f-4075-a4dc-3546c04daf4a",
+      "userId": "1b647d53-b0d9-49bc-8b59-8e80e4ef652b",
+      "categoryId": 5,
+      "title": "4554t4t54t",
+      "description": "Esfsefsefesfeg Frenchmen fringed",
+      "uri": "https://res.cloudinary.com/dwucj2mkl/image/upload/v1607540473/idwjr1g31hjwjb07gye2.jpg",
+      "price": "5",
+      "location": "Oktyabrsky, Grodno, Belarus"
     }
   ]
 }

@@ -8,6 +8,7 @@ import {HireCreatorScreen} from '../screens/hireCreator/HireCreatorScreen'
 import {ArtworksDetails} from '../screens/artworks/ArtWorksDetails'
 import {CartScreen} from '../screens/cart/CartScreen'
 import {CreatorPageScreen} from './CreatorPageNavigator'
+import {GalleryAll} from '../screens/galleries/GalleryAll'
 
 const screenStyle = {
   headerStyle: {
@@ -92,6 +93,15 @@ export const HomeStackScreen = () => {
         }}
         name="HireCreator"
         component={HireCreatorScreen}
+      />
+      <HomeStack.Screen
+        options={{
+          ...screenStyle,
+          title: 'GalleryAll',
+          headerBackTitleVisible: false,
+        }}
+        name="GalleryAll"
+        component={GalleryAll}
       />
     </HomeStack.Navigator>
   )

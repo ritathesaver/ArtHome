@@ -16,6 +16,7 @@ import {styles} from './styles'
 import CameraRoll from '@react-native-community/cameraroll'
 import {useNavigation} from '@react-navigation/native'
 import {IImageSize} from '../creators/CreatorDetails'
+import axios from 'axios'
 
 export const OpenCameraScreen: FunctionComponent = () => {
   const navigation = useNavigation()
@@ -33,6 +34,7 @@ export const OpenCameraScreen: FunctionComponent = () => {
       storageOptions: {
         skipBackup: true,
         path: 'images',
+        base64: true,
       },
     }
     ImagePicker.launchImageLibrary(options, (response) => {
@@ -44,6 +46,7 @@ export const OpenCameraScreen: FunctionComponent = () => {
         console.log('ImagePicker Error: ', response.error)
       } else {
         setFileData(response.uri)
+        cloudinaryUpload(fileData)
       }
     })
   }
@@ -51,6 +54,26 @@ export const OpenCameraScreen: FunctionComponent = () => {
   const onBackToCamera = () => {
     setFileData('')
   }
+
+  const cloudinaryUpload = async (dataUri: string) => {
+    const data = new FormData()
+    data.append('file', {uri: dataUri, type: 'image/png', name: `${dataUri}`})
+    data.append('upload_preset', 'x6a3whk4')
+    data.append('cloud_name', 'dwucj2mkl')
+
+    console.log(data)
+
+    const res = await axios({
+      url: 'https://api.cloudinary.com/v1_1/dwucj2mkl/image/upload',
+      method: 'POST',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      data: data,
+    })
+    console.log(res.data.secure_url)
+    setFileData(res.data.secure_url)
+  }
+
+  console.log(fileData)
 
   const takePicture = async () => {
     if (camera) {

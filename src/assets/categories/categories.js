@@ -37,7 +37,7 @@ export const categories = [
         'https://images.pexels.com/photos/139764/pexels-photo-139764.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
     },
     overlayColor: '#ffffff',
-    screen: 'Creators',
+    screen: 'GalleryAll',
   },
   {
     key: 'c5',
