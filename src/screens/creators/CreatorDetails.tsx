@@ -11,6 +11,7 @@ import {detailStyles} from './styles'
 import {Dimensions} from 'react-native'
 import FastImage from 'react-native-fast-image'
 import LikeActiveSvg from '../../assets/icons/heart (2).svg'
+import { IPictures } from '../../redux/reducers/picturesReducer'
 
 interface IDetailsProps {
   route: any
@@ -27,7 +28,7 @@ export interface IImageSize {
   ratio: number
 }
 
-export interface IImageWithSize extends IImage, IImageSize {}
+export interface IImageWithSize extends IPictures, IImageSize {}
 
 const columnWidth: number = Dimensions.get('window').width / 2
 

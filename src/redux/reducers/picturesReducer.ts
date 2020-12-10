@@ -1,7 +1,7 @@
 import {createReducer} from 'typesafe-actions'
 
 export interface IPictures {
-  userId: number
+  creatorId: number
   id: number
   title: string
   description: string

@@ -51,12 +51,12 @@ export const categories = [
   },
   {
     key: 'c6',
-    title: 'Events',
+    title: 'My gallery',
     image: {
       uri:
         'https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
     },
     overlayColor: '#282b35',
-    screen: 'Creators',
+    screen: 'MyGallery',
   },
 ]

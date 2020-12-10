@@ -9,11 +9,12 @@ import {ArtworksDetails} from '../screens/artworks/ArtWorksDetails'
 import {CartScreen} from '../screens/cart/CartScreen'
 import {CreatorPageScreen} from './CreatorPageNavigator'
 import {GalleryAll} from '../screens/galleries/GalleryAll'
+import {MyGallery} from '../screens/galleries/MyGallery'
 
 const screenStyle = {
   headerStyle: {
     backgroundColor: '#202122',
-    height: 70,
+    height: 80,
     shadowColor: 'transparent',
   },
   headerTintColor: 'white',
@@ -97,11 +98,20 @@ export const HomeStackScreen = () => {
       <HomeStack.Screen
         options={{
           ...screenStyle,
-          title: 'GalleryAll',
           headerBackTitleVisible: false,
+          title: 'Gallery',
         }}
         name="GalleryAll"
         component={GalleryAll}
+      />
+      <HomeStack.Screen
+        options={{
+          ...screenStyle,
+          headerBackTitleVisible: false,
+          title: 'My gallery',
+        }}
+        name="MyGallery"
+        component={MyGallery}
       />
     </HomeStack.Navigator>
   )

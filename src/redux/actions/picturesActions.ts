@@ -7,7 +7,7 @@ const id: string = uuidv4()
 export const addPicture = createCustomAction(
   'ADD_PICTURE',
   (
-    userId: string,
+    creatorId: string,
     categoryId: string,
     title: string,
     description: string,
@@ -15,8 +15,35 @@ export const addPicture = createCustomAction(
     price: string,
     location: string,
   ) => ({
-    payload: {id, userId, categoryId, title, description, uri, price, location},
+    payload: {
+      id,
+      creatorId,
+      categoryId,
+      title,
+      description,
+      uri,
+      price,
+      location,
+    },
   }),
 )
 
 export const getPictures = createCustomAction('GET_PICTURES')
+
+export const getPicturesByUser = createCustomAction(
+  'GET_PICTURES_BY_USER',
+  (creatorId: string) => ({
+    payload: {
+      creatorId,
+    },
+  }),
+)
+
+export const getPicturesByCategory = createCustomAction(
+  'GET_PICTURES_BY_CATEGORY',
+  (categoryId: string) => ({
+    payload: {
+      categoryId,
+    },
+  }),
+)

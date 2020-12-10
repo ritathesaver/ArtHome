@@ -45,7 +45,9 @@ export const ArtworksScreen: FunctionComponent = () => {
               width: Dimensions.get('window').width / 2,
               height: 140,
             }}
-            onPress={() => navigation.navigate('ArtworksDetails')}>
+            onPress={() =>
+              navigation.navigate('ArtworksDetails', {id: item.id})
+            }>
             <Image style={styles.image} source={{uri: item.coverUri}} />
             <View
               style={{

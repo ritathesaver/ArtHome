@@ -1,8 +1,8 @@
 import React, {FunctionComponent} from 'react'
 
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs'
-import {CreatorDetails} from '../screens/creators/CreatorDetails'
 import {AboutCreatorScreen} from '../screens/hireCreator/AboutCreatorScreen'
+import {GalleryCreator} from '../screens/galleries/GalleryCreator'
 
 interface ICreatorPageProps {
   route: any
@@ -24,7 +24,7 @@ export const CreatorPageScreen: FunctionComponent<ICreatorPageProps> = ({
       />
       <Tab.Screen
         name="Portfolio"
-        children={() => <CreatorDetails route={route} />}
+        children={() => <GalleryCreator route={route} />}
       />
     </Tab.Navigator>
   )

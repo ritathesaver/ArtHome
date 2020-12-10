@@ -6,6 +6,13 @@ async function getData() {
   return data
 }
 
+async function getUser(body) {
+  console.log(body)
+  const {data} = await axios.get(`http://localhost:3000/creators/${body.id}`)
+  console.log(data, 'daaaat')
+  return data
+}
+
 async function editAvatarData(body) {
   const {data} = await axios.put(
     `http://localhost:3000/creators/${body.body.id}`,
@@ -50,8 +57,18 @@ function* workerGetUsers() {
   yield put({type: 'GET_USERS_SUCCESS', payload: resGet})
 }
 
+function* workerGetUserById(action) {
+  const resGet = yield call(getUser, action.payload)
+
+  yield put({type: 'GET_USERS_SUCCESS', payload: [resGet]})
+}
+
 export function* watchGetUsers() {
   yield takeLatest('GET_USERS', workerGetUsers)
+}
+
+export function* watchGetUserById() {
+  yield takeLatest('GET_USER_BY_ID', workerGetUserById)
 }
 export function* watchEditAvatar() {
   yield takeLatest('EDIT_USER_AVATAR', workerEditAvatar)

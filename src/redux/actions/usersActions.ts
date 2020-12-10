@@ -13,3 +13,9 @@ export const addSpecialization = createCustomAction(
     payload: {body, specialization},
   }),
 )
+export const getUserById = createCustomAction(
+  'GET_USER_BY_ID',
+  (id: string) => ({
+    payload: {id},
+  }),
+)

@@ -1,8 +1,18 @@
 import {all} from 'redux-saga/effects'
 import {watchSignUp, watchSignIn, watchAddUser} from './authSagas'
-import {watchGetUsers, watchEditAvatar, watchAddSpec} from './userSagas'
+import {
+  watchGetUsers,
+  watchEditAvatar,
+  watchAddSpec,
+  watchGetUserById,
+} from './userSagas'
 import {watchGetCategories} from './caterogiesSagas'
-import {watchAddPicture, watchGetPictures} from './pictureSagas'
+import {
+  watchAddPicture,
+  watchGetPictures,
+  watchGetPicturesByUser,
+  watchGetPicturesByCategory,
+} from './pictureSagas'
 
 export function* rootSaga() {
   yield all([
@@ -15,5 +25,8 @@ export function* rootSaga() {
     watchGetCategories(),
     watchAddPicture(),
     watchGetPictures(),
+    watchGetPicturesByUser(),
+    watchGetPicturesByCategory(),
+    watchGetUserById(),
   ])
 }
