@@ -35,7 +35,7 @@ const columnWidth: number = Dimensions.get('window').width / 2
 export const CreatorDetails: FunctionComponent<IDetailsProps> = ({route}) => {
   const [columns, setColumns] = useState<Array<Array<IImageWithSize>>>([[], []])
 
-  console.log(route.params)
+  // console.log(route.params)
 
   useEffect(() => {
     // eslint-disable-next-line prettier/prettier

@@ -33,7 +33,7 @@ export const HireCreatorScreen: FunctionComponent = () => {
       .map((user) => user),
   )
 
-  console.log(users)
+  // console.log(users)
 
   return (
     <SafeAreaView style={styles.container}>
@@ -41,6 +41,7 @@ export const HireCreatorScreen: FunctionComponent = () => {
 
       <FlatList
         data={users}
+        keyExtractor={(item) => item.id}
         renderItem={({item}) => (
           <View
             style={{

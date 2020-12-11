@@ -19,19 +19,21 @@ const INITIAL_STATE: IAuthState = {
 export const authReducer = createReducer(INITIAL_STATE)
   .handleAction(
     restoreToken,
-    (state: IAuthState, action: {type: string; payload: any}) => {
+    (state: IAuthState, action: { type: string; payload: any }) => {
+      const id = parseJwt(action.payload)
       return {
         ...state,
         userToken: action.payload,
         isLoading: false,
+        id: id.sub,
       }
     },
   )
   .handleType(
     'SIGN_UP_SUCCESS',
     (state: IAuthState, action: {type: string; payload: any}) => {
-      console.log('HI')
-      console.log(action)
+      // console.log('HI')
+      // console.log(action)
       //console.log('HEREHEREHRHEHREHHREHERHHREHEHHREHEHREHREH: ', action.payload, 'rr');
       return {
         ...state,
@@ -45,10 +47,10 @@ export const authReducer = createReducer(INITIAL_STATE)
     'SIGN_IN_SUCCESS',
     (state: IAuthState, action: {type: string; payload: any}) => {
       const token = action.payload.userToken
-      console.log(token, 'token')
+      // console.log(token, 'token')
 
       const id = parseJwt(token)
-      console.log(id, 'id')
+      // console.log(id, 'id')
       //console.log('HEREHEREHRHEHREHHREHERHHREHEHHREHEHREHREH: ', action.payload, 'rr');
       return {
         ...state,
@@ -58,9 +60,8 @@ export const authReducer = createReducer(INITIAL_STATE)
       }
     },
   )
-
   .handleAction(signOut, (state: IAuthState) => {
-    console.log('GOT INTO SIGN OUT')
+    // console.log('GOT INTO SIGN OUT')
     return {
       ...state,
       isSignout: true,

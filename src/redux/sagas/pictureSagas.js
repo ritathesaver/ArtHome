@@ -1,5 +1,6 @@
 import {call, put, takeLatest} from 'redux-saga/effects'
 import axios from 'axios'
+import { getPicturesByCategoryAsync, getPicturesAsync } from '../actions/picturesActions'
 
 async function getData() {
   const {data} = await axios.get('http://localhost:3000/pictures')
@@ -7,7 +8,7 @@ async function getData() {
 }
 
 async function getDataByUser(body) {
-  console.log(data)
+  // console.log(data)
   const {data} = await axios.get(
     `http://localhost:3000/creators/${body.creatorId}/pictures`,
   )
@@ -15,7 +16,7 @@ async function getDataByUser(body) {
 }
 
 async function getDataByCategory(body) {
-  console.log(data)
+  // console.log(data)
   const {data} = await axios.get(
     `http://localhost:3000/categories/${body.categoryId}/pictures`,
   )
@@ -24,14 +25,19 @@ async function getDataByCategory(body) {
 
 async function addData(body) {
   const {data} = await axios.post('http://localhost:3000/pictures', body)
-  console.log(data, 'piicc')
+  // console.log(data, 'piicc')
   return data
 }
 
 function* workerGetPictures() {
-  const resGet = yield call(getData)
+  yield put(getPicturesAsync.request())
+  try {
+		const resGet = yield call(getData)
 
-  yield put({type: 'GET_PICTURES_SUCCESS', payload: resGet})
+    yield put(getPicturesAsync.success(resGet))
+	} catch (err) {
+		yield put(getPicturesAsync.failure(err))
+	}
 }
 
 function* workerGetPicturesBy(action) {
@@ -47,9 +53,15 @@ function* workerAddPicture(action) {
 }
 
 function* workerGetPicturesByCategory(action) {
-  const resGet = yield call(getDataByCategory, action.payload)
+  yield put(getPicturesByCategoryAsync.request())
 
-  yield put({type: 'GET_PICTURES_SUCCESS', payload: resGet})
+	try {
+		const resGet = yield call(getDataByCategory, action.payload)
+
+    yield put(getPicturesByCategoryAsync.success(resGet))
+	} catch (err) {
+		yield put(getPicturesByCategoryAsync.failure(err))
+	}
 }
 
 export function* watchGetPictures() {

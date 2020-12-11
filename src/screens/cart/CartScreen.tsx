@@ -22,7 +22,7 @@ interface ICartProps {
 }
 
 export const CartScreen: FunctionComponent<ICartProps> = ({route}) => {
-  console.log(route.params)
+  // console.log(route.params)
   const dispatch: AppDispatch = useDispatch()
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export const CartScreen: FunctionComponent<ICartProps> = ({route}) => {
   const userName = useSelector(
     (state: RootState) => state.users.users.map((user) => user.name)[0],
   )
-  console.log(userName)
+  // console.log(userName)
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView

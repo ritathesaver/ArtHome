@@ -14,7 +14,7 @@ interface ISetCategoryProps {
 export const CategoriesListScreen: FunctionComponent<ISetCategoryProps> = ({
   route,
 }) => {
-  console.log(route.params.uri)
+  // console.log(route.params.uri)
   const navigation = useNavigation()
   const dispatch: AppDispatch = useDispatch()
 

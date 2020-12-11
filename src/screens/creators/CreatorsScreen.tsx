@@ -34,6 +34,7 @@ export const CreatorsScreen: FunctionComponent = () => {
       <SearchBox />
 
       <FlatList
+        keyExtractor={(item) => item.id}
         data={users}
         renderItem={({item}) => (
           <TouchableOpacity

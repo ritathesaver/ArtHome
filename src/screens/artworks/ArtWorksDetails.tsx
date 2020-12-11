@@ -1,6 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {FunctionComponent, useEffect, useState} from 'react'
 import {
+  ActivityIndicator,
   Dimensions,
   FlatList,
   Image,
@@ -34,20 +35,21 @@ export const ArtworksDetails: FunctionComponent<IDetailsProps> = ({route}) => {
     dispatch(getPicturesByCategory(route.params.id))
   }, [route.params.id, dispatch])
 
+  const loading = useSelector((state: RootState) => state.pictures.loading)
+
   const pictures = useSelector((state: RootState) => state.pictures.pictures)
 
-  console.log(pictures, 'dddd')
+  // console.log(pictures, 'dddd')
 
   const [column, setColumn] = useState<Array<IImageWithSize>>([])
 
-  //const concatedArray = [].concat.apply([], pictures)
 
   useEffect(() => {
     // eslint-disable-next-line prettier/prettier
     (async () => {
       const imagesWithSize: IImageWithSize[] = await Promise.all(
         pictures.map(async (item: IPictures) => {
-          console.log(item)
+          // console.log(item)
           const result: IImageSize = await new Promise((resolve) => {
             Image.getSize(item.uri, (width, height) =>
               resolve({
@@ -60,52 +62,56 @@ export const ArtworksDetails: FunctionComponent<IDetailsProps> = ({route}) => {
           return {...result, ...item}
         }),
       )
-      console.log(imagesWithSize)
+      // console.log(imagesWithSize)
       setColumn(imagesWithSize)
     })()
   }, [pictures, route.params])
 
-  console.log(column, 'cooooollllllmn')
+  // console.log(column, 'cooooollllllmn')
 
   return (
     <SafeAreaView style={detailStyles.container}>
       <SearchBox />
-      <FlatList
-        data={column}
-        renderItem={({item}) => (
-          <TouchableOpacity onPress={() => navigation.navigate('Cart', item)}>
-            <View
-              style={{
-                flex: 1,
-                flexDirection: 'column',
-                padding: 5,
-                width: Dimensions.get('window').width,
-                alignItems: 'center',
-              }}>
-              <FastImage
-                style={{
-                  width: columnWidth,
-                  height: item.ratio * columnWidth,
-                  margin: 1,
-                }}
-                source={{uri: item.uri}}>
-                <TouchableOpacity>
-                  <LikeActiveSvg
-                    style={{position: 'absolute', top: 10, right: 10}}
-                  />
-                </TouchableOpacity>
-              </FastImage>
+      {loading ? (
+        <ActivityIndicator size="large" color="#af6b58" />
+      ) : (
+        <FlatList
+          data={column}
+          renderItem={({ item }) => (
+            <TouchableOpacity onPress={() => navigation.navigate('Cart', item)}>
               <View
                 style={{
-                  alignItems: 'center',
+                  flex: 1,
+                  flexDirection: 'column',
+                  padding: 5,
                   width: Dimensions.get('window').width,
+                  alignItems: 'center',
                 }}>
-                <Text>{item.title}</Text>
+                <FastImage
+                  style={{
+                    width: columnWidth,
+                    height: item.ratio * columnWidth,
+                    margin: 1,
+                  }}
+                  source={{ uri: item.uri }}>
+                  <TouchableOpacity>
+                    <LikeActiveSvg
+                      style={{ position: 'absolute', top: 10, right: 10 }}
+                    />
+                  </TouchableOpacity>
+                </FastImage>
+                <View
+                  style={{
+                    alignItems: 'center',
+                    width: Dimensions.get('window').width,
+                  }}>
+                  <Text>{item.title}</Text>
+                </View>
               </View>
-            </View>
-          </TouchableOpacity>
-        )}
-      />
+            </TouchableOpacity>
+          )}
+        />
+      )}
     </SafeAreaView>
   )
 }

@@ -6,7 +6,7 @@ const id = uuidv4()
 
 export const restoreToken = createCustomAction(
   'RESTORE_TOKEN',
-  (token: string) => ({payload: {token}}),
+  (token: string) => ({payload: token}),
 )
 export const signIn = createCustomAction(
   'SIGN_IN',

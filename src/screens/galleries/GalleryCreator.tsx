@@ -11,7 +11,7 @@ interface ICreatorPageProps {
 export const GalleryCreator: FunctionComponent<ICreatorPageProps> = ({
   route,
 }) => {
-  console.log(route.params.id)
+  // console.log(route.params.id)
   const dispatch: AppDispatch = useDispatch()
 
   useEffect(() => {

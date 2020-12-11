@@ -15,7 +15,7 @@ import CameraSvg from './assets/icons/camera (1).svg'
 import CameraActiveSvg from './assets/icons/camera.svg'
 import ProfileSvg from './assets/icons/user (3).svg'
 import ProfileActiveSvg from './assets/icons/user (2).svg'
-import {useSelector} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {store} from './redux'
 
 import Icon from 'react-native-vector-icons/MaterialIcons'
@@ -24,6 +24,7 @@ import {ProfileScreen} from './screens/profile/ProfileScreen'
 import {RootState} from './redux/rootReducer'
 import AsyncStorage from '@react-native-community/async-storage'
 import {useState} from 'react'
+import { restoreToken } from './redux/actions/authActions'
 
 Icon.loadFont()
 
@@ -32,23 +33,27 @@ const Tab = createBottomTabNavigator()
 
 const App: FunctionComponent = () => {
   const authToken = useSelector((state: RootState) => state.auth.userToken)
-  const [token, setToken] = useState<null | string>('')
+  const dispatch: AppDispatch = useDispatch()
 
   useEffect(() => {
     (async () => {
-      authToken
-        ? await AsyncStorage.setItem('userToken', authToken)
-        : await AsyncStorage.removeItem('userToken')
+      console.log(authToken)
+      if (authToken) {
+        await AsyncStorage.setItem('userToken', authToken)
+        return
+      }
+
       const userToken = await AsyncStorage.getItem('userToken')
-      setToken(userToken)
+      if(userToken)
+      dispatch(restoreToken(userToken))
     })()
   }, [authToken])
 
-  console.log(token)
+  // console.log(token)
 
   return (
     <NavigationContainer>
-      {token ? (
+      {authToken ? (
         <Tab.Navigator
           tabBarOptions={{
             activeTintColor: 'white',

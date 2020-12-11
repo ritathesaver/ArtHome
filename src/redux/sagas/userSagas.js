@@ -7,9 +7,9 @@ async function getData() {
 }
 
 async function getUser(body) {
-  console.log(body)
+  // console.log(body)
   const {data} = await axios.get(`http://localhost:3000/creators/${body.id}`)
-  console.log(data, 'daaaat')
+  // console.log(data, 'daaaat')
   return data
 }
 
@@ -21,7 +21,7 @@ async function editAvatarData(body) {
       avatarUri: body.avatarUri,
     },
   )
-  console.log(data, 'editAvatarData')
+  // console.log(data, 'editAvatarData')
   return data
 }
 

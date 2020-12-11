@@ -1,6 +1,7 @@
-import {createCustomAction} from 'typesafe-actions'
+import {createAsyncAction, createCustomAction} from 'typesafe-actions'
 const {v4: uuidv4} = require('uuid')
 import 'react-native-get-random-values'
+import { IPictures } from '../reducers/picturesReducer'
 
 const id: string = uuidv4()
 
@@ -30,14 +31,11 @@ export const addPicture = createCustomAction(
 
 export const getPictures = createCustomAction('GET_PICTURES')
 
-export const getPicturesByUser = createCustomAction(
-  'GET_PICTURES_BY_USER',
-  (creatorId: string) => ({
-    payload: {
-      creatorId,
-    },
-  }),
-)
+export const getPicturesAsync = createAsyncAction('GET_PICTURES_STARTED', 'GET_PICTURES_SUCCESS', 'GET_PICTURES_FAILURE')<
+	null,
+	IPictures,
+	Error
+>()
 
 export const getPicturesByCategory = createCustomAction(
   'GET_PICTURES_BY_CATEGORY',
@@ -47,3 +45,9 @@ export const getPicturesByCategory = createCustomAction(
     },
   }),
 )
+
+export const getPicturesByCategoryAsync = createAsyncAction('GET_PICTURES_BY_CATEGORY_STARTED', 'GET_PICTURES_BY_CATEGORY_SUCCESS', 'GET_PICTURES_BY_CATEGORY_FAILURE')<
+	null,
+	IPictures,
+	Error
+>()

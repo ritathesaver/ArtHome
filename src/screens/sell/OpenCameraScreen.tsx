@@ -41,9 +41,9 @@ export const OpenCameraScreen: FunctionComponent = () => {
       //console.log('Response = ', response);
 
       if (response.didCancel) {
-        console.log('User cancelled image picker')
+        // console.log('User cancelled image picker')
       } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error)
+        // console.log('ImagePicker Error: ', response.error)
       } else {
         setFileData(response.uri)
         cloudinaryUpload(fileData)
@@ -61,7 +61,7 @@ export const OpenCameraScreen: FunctionComponent = () => {
     data.append('upload_preset', 'x6a3whk4')
     data.append('cloud_name', 'dwucj2mkl')
 
-    console.log(data)
+    // console.log(data)
 
     const res = await axios({
       url: 'https://api.cloudinary.com/v1_1/dwucj2mkl/image/upload',
@@ -69,11 +69,11 @@ export const OpenCameraScreen: FunctionComponent = () => {
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       data: data,
     })
-    console.log(res.data.secure_url)
+    // console.log(res.data.secure_url)
     setFileData(res.data.secure_url)
   }
 
-  console.log(fileData)
+  // console.log(fileData)
 
   const takePicture = async () => {
     if (camera) {
@@ -84,7 +84,7 @@ export const OpenCameraScreen: FunctionComponent = () => {
         Alert.alert('Success', JSON.stringify(data))
         setFileData(data.uri)
       } catch (err) {
-        console.log(err.message)
+        // console.log(err.message)
       }
     }
   }

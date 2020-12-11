@@ -3,7 +3,7 @@ import axios from 'axios'
 
 async function getData() {
   const {data} = await axios.get('http://localhost:3000/categories')
-  console.log(data)
+  // console.log(data)
   return data
 }
 function* workerGetCategories() {

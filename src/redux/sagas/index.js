@@ -13,6 +13,7 @@ import {
   watchGetPicturesByUser,
   watchGetPicturesByCategory,
 } from './pictureSagas'
+import { watchAddLike, watchDeleteLike, watchGetLikes } from './likesSagas'
 
 export function* rootSaga() {
   yield all([
@@ -28,5 +29,8 @@ export function* rootSaga() {
     watchGetPicturesByUser(),
     watchGetPicturesByCategory(),
     watchGetUserById(),
+    watchAddLike(),
+    watchDeleteLike(),
+    watchGetLikes()
   ])
 }

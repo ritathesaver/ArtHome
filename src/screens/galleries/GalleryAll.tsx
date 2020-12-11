@@ -1,4 +1,5 @@
 import React, {FunctionComponent, useEffect} from 'react'
+import { ActivityIndicator, View } from 'react-native'
 import {useDispatch, useSelector} from 'react-redux'
 import {AppDispatch} from '../../App'
 import {Gallery} from '../../components/Gallery/Gallery'
@@ -12,12 +13,17 @@ export const GalleryAll: FunctionComponent = () => {
     dispatch(getPictures())
   }, [dispatch])
 
+  const loading = useSelector((state: RootState) => state.pictures.loading)
+  // console.log(loading)
   const pictures = useSelector((state: RootState) => state.pictures.pictures)
   //console.log(pictures)
+  if (loading) {
+    return <View style={{flex:1 }}><ActivityIndicator size="large" color="#f8b500" /></View>
+	}
 
   return (
     <>
-      <Gallery picturesArray={pictures} />
+     <Gallery picturesArray={pictures} />
     </>
   )
 }

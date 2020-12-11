@@ -24,7 +24,7 @@ export const usersReducer = createReducer(INITIAL_STATE)
   .handleType(
     'GET_USERS_SUCCESS',
     (state: IUsersState, action: {type: string; payload: any}) => {
-      console.log(action.payload, 'aaaaaaaaaa')
+      // console.log(action.payload, 'aaaaaaaaaa')
       return {
         ...state,
         users: action.payload,
@@ -34,7 +34,7 @@ export const usersReducer = createReducer(INITIAL_STATE)
   .handleType(
     'ADD_USER_SUCCESS',
     (state: IUsersState, action: {type: string; payload: any}) => {
-      console.log(action.payload, 'payload')
+      // console.log(action.payload, 'payload')
 
       //console.log('HEREHEREHRHEHREHHREHERHHREHEHHREHEHREHREH: ', action.payload, 'rr');
       return {
