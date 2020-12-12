@@ -30,6 +30,11 @@ const columnWidth: number = Dimensions.get('window').width * 0.75
 export const ArtworksDetails: FunctionComponent<IDetailsProps> = ({route}) => {
   const navigation = useNavigation()
   const dispatch: AppDispatch = useDispatch()
+  const [search, setSearch] = useState('')
+
+  const clearSearch = () => {
+		setSearch('')
+	}
 
   useEffect(() => {
     dispatch(getPicturesByCategory(route.params.id))
@@ -37,11 +42,14 @@ export const ArtworksDetails: FunctionComponent<IDetailsProps> = ({route}) => {
 
   const loading = useSelector((state: RootState) => state.pictures.loading)
 
-  const pictures = useSelector((state: RootState) => state.pictures.pictures)
+  const pictures = useSelector((state: RootState) => state.pictures.pictures.filter(((pic) => pic.title.toLowerCase().includes(search.toLowerCase()))))
+
+
 
   // console.log(pictures, 'dddd')
 
   const [column, setColumn] = useState<Array<IImageWithSize>>([])
+
 
 
   useEffect(() => {
@@ -67,11 +75,10 @@ export const ArtworksDetails: FunctionComponent<IDetailsProps> = ({route}) => {
     })()
   }, [pictures, route.params])
 
-  // console.log(column, 'cooooollllllmn')
 
   return (
     <SafeAreaView style={detailStyles.container}>
-      <SearchBox />
+      <SearchBox setSearch={setSearch} search={search} />
       {loading ? (
         <ActivityIndicator size="large" color="#af6b58" />
       ) : (

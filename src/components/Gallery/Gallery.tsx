@@ -36,13 +36,12 @@ export const Gallery: FunctionComponent<IDetailsProps> = (picturesArray) => {
   const dispatch: AppDispatch = useDispatch()
   const authId = useSelector((state: RootState) => state.auth.id)  
   const likes = useSelector((state: RootState) => state.likes.likes)
-  const [isLiked, setIsLiked] = useState(false)
 
   console.log(authId, 'aa')
 
   useEffect(() => {
     dispatch(getLikes())
-  }, [dispatch, isLiked])
+  }, [dispatch])
   
   //const usersLike = useSelector((state: RootState) => state.likes.likes.map(user => user.creatorId))
   //const picsLike= useSelector((state: RootState) => state.likes.likes.map(pic => pic.pictureId))
@@ -52,14 +51,12 @@ export const Gallery: FunctionComponent<IDetailsProps> = (picturesArray) => {
 
   const onLike = useCallback((id) => {
     dispatch(putLike(id, authId))
-    setIsLiked(true)
   }, [dispatch, authId])
 
   const onDislike = useCallback((likeId) => {
     console.log('deleteLike', likeId)
     dispatch(deleteLike(likeId))
-    setIsLiked(false)
-  }, [dispatch, authId])
+  }, [dispatch])
 
   
   const [columns, setColumns] = useState<Array<Array<IImageWithSize>>>([[], []])

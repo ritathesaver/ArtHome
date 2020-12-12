@@ -15,7 +15,7 @@ const INITIAL_STATE: ILikesState = {
 }
 
 export const likesReducer = createReducer(INITIAL_STATE).handleType(
-  'ADD_LIKE_SUCCESS',
+  'PUT_LIKE_SUCCESS',
   (state: ILikesState, action: { type: string; payload: any }) => {
     console.log('ADD LIKE')
     return {
@@ -25,10 +25,11 @@ export const likesReducer = createReducer(INITIAL_STATE).handleType(
   },
 ).handleType(
   'DELETE_LIKE_SUCCESS',
-  (state: ILikesState, action: {type: string; payload: any}) => {
+  (state: ILikesState, action: { type: string; payload: any }) => {
+    console.log(action.payload)
     return {
       ...state,
-       likes: state.likes.filter((like) => like.id !== action.payload.id)
+       likes: state.likes.filter((like) => like.id !== action.payload)
     }
   },
 )

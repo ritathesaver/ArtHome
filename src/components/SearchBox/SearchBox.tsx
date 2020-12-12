@@ -6,7 +6,12 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 
 Icon.loadFont()
 
-const SearchBox: FunctionComponent = () => {
+interface ISearchProps {
+	setSearch: (value: string) => void
+	search: string
+}
+
+const SearchBox: FunctionComponent<ISearchProps> = ({ setSearch, search }) => {
   return (
     <View style={styles.container}>
       <View style={styles.searchBox}>
@@ -16,6 +21,8 @@ const SearchBox: FunctionComponent = () => {
           style={{flex: 1, marginHorizontal: 5}}
           underlineColorAndroid="transparent"
           placeholder="Search..."
+          onChangeText={setSearch}
+          value={search}
         />
       </View>
     </View>

@@ -36,7 +36,7 @@ function* workerAddLike(action) {
 function* workerDeleteLike(action) {
   const resGet = yield call(deleteData, action.payload)
 
-  yield put({type: 'DELETE_LIKE_SUCCESS', payload: resGet})
+  yield put({type: 'DELETE_LIKE_SUCCESS', payload: action.payload.likeId})
 }
 
 export function* watchGetLikes() {

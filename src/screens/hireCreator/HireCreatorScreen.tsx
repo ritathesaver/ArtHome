@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {FunctionComponent, useEffect} from 'react'
+import React, {FunctionComponent, useEffect, useState} from 'react'
 import {
   Dimensions,
   FlatList,
@@ -22,14 +22,20 @@ import {RootState} from '../../redux/rootReducer'
 export const HireCreatorScreen: FunctionComponent = () => {
   const navigation = useNavigation()
   const dispatch: AppDispatch = useDispatch()
+  const [search, setSearch] = useState('')
+  
+  const clearSearch = () => {
+		setSearch('')
+	}
 
   useEffect(() => {
     dispatch(getUsers())
   }, [dispatch])
 
-  const users = useSelector((state: RootState) =>
+  const searchedUsers = useSelector((state: RootState) =>
     state.users.users
       .filter((user) => user.specialization.length > 0)
+      .filter((user) => user.name.toLowerCase().includes(search.toLowerCase()))
       .map((user) => user),
   )
 
@@ -37,10 +43,10 @@ export const HireCreatorScreen: FunctionComponent = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <SearchBox />
+      <SearchBox setSearch={setSearch} search={search} />
 
       <FlatList
-        data={users}
+        data={searchedUsers}
         keyExtractor={(item) => item.id}
         renderItem={({item}) => (
           <View

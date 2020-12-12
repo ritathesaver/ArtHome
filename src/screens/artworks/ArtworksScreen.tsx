@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import {useNavigation} from '@react-navigation/native'
 import invert from 'invert-color'
-import React, {FunctionComponent, useEffect} from 'react'
+import React, {FunctionComponent, useEffect, useState} from 'react'
 import {
   Dimensions,
   FlatList,
@@ -21,20 +21,25 @@ import {AppDispatch} from '../../App'
 export const ArtworksScreen: FunctionComponent = () => {
   const navigation = useNavigation()
   const dispatch: AppDispatch = useDispatch()
+  const [search, setSearch] = useState('')
+  
+  const clearSearch = () => {
+		setSearch('')
+	}
 
   useEffect(() => {
     dispatch(getCategories())
   }, [dispatch])
 
-  const categories = useSelector((state: RootState) =>
-    state.categories.categories.map((category) => category),
+  const searchedCategories = useSelector((state: RootState) =>
+    state.categories.categories.filter((category) => category.title.toLowerCase().includes(search.toLowerCase())).map((category) => category),
   )
 
   return (
     <SafeAreaView style={styles.container}>
-      <SearchBox />
+      <SearchBox setSearch={setSearch} search={search} />
       <FlatList
-        data={categories}
+        data={searchedCategories}
         renderItem={({item}) => (
           <TouchableOpacity
             style={{
@@ -45,9 +50,10 @@ export const ArtworksScreen: FunctionComponent = () => {
               width: Dimensions.get('window').width / 2,
               height: 140,
             }}
-            onPress={() =>
-              navigation.navigate('ArtworksDetails', {id: item.id})
-            }>
+            onPress={() => {
+              clearSearch()
+              navigation.navigate('ArtworksDetails', { id: item.id })
+            }}>
             <Image style={styles.image} source={{uri: item.coverUri}} />
             <View
               style={{

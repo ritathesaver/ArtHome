@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {FunctionComponent, useEffect} from 'react'
+import React, {FunctionComponent, useEffect, useState} from 'react'
 import {
   FlatList,
   Image,
@@ -18,6 +18,10 @@ import {RootState} from '../../redux/rootReducer'
 
 export const CreatorsScreen: FunctionComponent = () => {
   const navigation = useNavigation()
+  const [search, setSearch] = useState('')
+  const clearSearch = () => {
+		setSearch('')
+	}
 
   const dispatch: AppDispatch = useDispatch()
 
@@ -25,20 +29,24 @@ export const CreatorsScreen: FunctionComponent = () => {
     dispatch(getUsers())
   }, [dispatch])
 
-  const users = useSelector((state: RootState) =>
-    state.users.users.map((user) => user),
+  const searchedUsers  = useSelector((state: RootState) =>
+    state.users.users.filter((users) => users.name.toLowerCase().includes(search.toLowerCase())).map((name) => name),
   )
 
   return (
     <SafeAreaView style={styles.container}>
-      <SearchBox />
+      <SearchBox setSearch={setSearch} search={search} />
 
       <FlatList
         keyExtractor={(item) => item.id}
-        data={users}
+        data={searchedUsers}
         renderItem={({item}) => (
           <TouchableOpacity
-            onPress={() => navigation.navigate('Details', item)}
+            onPress={() => {
+              clearSearch()
+              navigation.navigate('Details', item)
+             }
+            }
             style={{
               flexDirection: 'column',
               margin: 20,

@@ -20,7 +20,8 @@ import {store} from './redux'
 
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import {SellStackScreen} from './navigators/SellNavigator'
-import {ProfileScreen} from './screens/profile/ProfileScreen'
+import { ProfileScreen } from './screens/profile/ProfileScreen'
+import {Saved} from './screens/galleries/Saved'
 import {RootState} from './redux/rootReducer'
 import AsyncStorage from '@react-native-community/async-storage'
 import {useState} from 'react'
@@ -83,7 +84,7 @@ const App: FunctionComponent = () => {
           />
           <Tab.Screen
             name="Saved"
-            component={AuthStackScreen}
+            component={Saved}
             options={{
               tabBarLabel: 'Saved',
               tabBarIcon: ({focused}) =>

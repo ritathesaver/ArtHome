@@ -10,6 +10,7 @@ import {CartScreen} from '../screens/cart/CartScreen'
 import {CreatorPageScreen} from './CreatorPageNavigator'
 import {GalleryAll} from '../screens/galleries/GalleryAll'
 import {MyGallery} from '../screens/galleries/MyGallery'
+import { GalleryCreator } from '../screens/galleries/GalleryCreator'
 
 const screenStyle = {
   headerStyle: {
@@ -49,7 +50,7 @@ export const HomeStackScreen = () => {
           headerBackTitleVisible: false,
         }}
         name="Details"
-        component={CreatorDetails}
+        component={GalleryCreator}
       />
       <HomeStack.Screen
         options={{

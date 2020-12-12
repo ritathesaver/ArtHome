@@ -35,7 +35,16 @@ export const getPicturesAsync = createAsyncAction('GET_PICTURES_STARTED', 'GET_P
 	null,
 	IPictures,
 	Error
->()
+  >()
+
+  export const getPicturesByUser = createCustomAction(
+  'GET_PICTURES_BY_USER',
+  (creatorId: string) => ({
+    payload: {
+      creatorId,
+    },
+  }),
+)
 
 export const getPicturesByCategory = createCustomAction(
   'GET_PICTURES_BY_CATEGORY',
