@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {AppDispatch} from '../../App'
 import {Gallery} from '../../components/Gallery/Gallery'
 import { getLikes } from '../../redux/actions/likesActions'
+import { getPictures } from '../../redux/actions/picturesActions'
 import {RootState} from '../../redux/rootReducer'
 
 export const Saved: FunctionComponent = () => {
@@ -11,6 +12,7 @@ export const Saved: FunctionComponent = () => {
 
   useEffect(() => {
     dispatch(getLikes())
+      dispatch(getPictures())
   }, [dispatch])
 
   const likedPicturesIds = useSelector((state: RootState) => state.likes.likes.filter(likes => likes.creatorId === authId).map(likes => likes.pictureId))

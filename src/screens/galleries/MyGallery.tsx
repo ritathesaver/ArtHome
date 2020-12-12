@@ -8,12 +8,13 @@ import {RootState} from '../../redux/rootReducer'
 export const MyGallery: FunctionComponent = () => {
   const dispatch: AppDispatch = useDispatch()
   const authId = useSelector((state: RootState) => state.auth.id)
+    const pictures = useSelector((state: RootState) => state.pictures.pictures)
 
   useEffect(() => {
     dispatch(getPicturesByUser(authId))
-  }, [authId, dispatch])
+  }, [dispatch, pictures])
 
-  const pictures = useSelector((state: RootState) => state.pictures.pictures)
+
   //console.log(pictures)
 
   return (

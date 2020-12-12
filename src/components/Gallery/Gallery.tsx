@@ -5,6 +5,7 @@ import {
   FlatList,
   Image,
   SafeAreaView,
+  Text,
   TouchableOpacity,
   View,
 } from 'react-native'
@@ -37,16 +38,19 @@ export const Gallery: FunctionComponent<IDetailsProps> = (picturesArray) => {
   const dispatch: AppDispatch = useDispatch()
   const authId = useSelector((state: RootState) => state.auth.id)  
   const likes = useSelector((state: RootState) => state.likes.likes)
-
-  console.log(authId, 'aa')
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     dispatch(getLikes())
-  }, [dispatch])
-  
+  },[dispatch])
+
+  console.log(authId, 'aa')
+
+ 
   //const usersLike = useSelector((state: RootState) => state.likes.likes.map(user => user.creatorId))
   //const picsLike= useSelector((state: RootState) => state.likes.likes.map(pic => pic.pictureId))
   console.log(likes.length, 'LIKES')
+
  //const likedId = useSelector((state: RootState) => state.likes.likes.filter(likes => likes.creatorId === authId && likes.pictureId === pictureId)[0])
  // console.log(likedId, 'liii')
 
@@ -115,29 +119,15 @@ export const Gallery: FunctionComponent<IDetailsProps> = (picturesArray) => {
       )
   }
 
-  const detailPic = (item: IImageWithSize) => {
-    return (
-      <>
-      <FastImage
-                  style={{
-                    width: columnWidth,
-                    height: item.ratio * columnWidth,
-                    margin: 1,
-                  }}
-          source={{ uri: item.uri }}></FastImage>
-        
-      </>
-
-    )
-  }
 
   const imagesColumns = columns.map((column, index) => (
     <View key={index} style={{width: '49%', marginRight: 5}}>
       {column.map((item: IImageWithSize) => {
-     
         return (
-         <TouchableOpacity onPress={() => detailPic(item)}>
-          <FastImage
+          <TouchableOpacity>
+            <FastImage
+              onLoadStart={() => { setLoading(true) }}
+            onLoadEnd={() => { setLoading(false) }}
             key={item.id}
             style={{
               width: columnWidth,
@@ -158,6 +148,8 @@ export const Gallery: FunctionComponent<IDetailsProps> = (picturesArray) => {
 
   return (
     <SafeAreaView style={detailStyles.container}>
+      <ActivityIndicator style={{
+            position:'absolute', left:0, right:0, bottom:0, top:0 }} size="large" color="black" animating={loading} ></ActivityIndicator>
         <FlatList
           data={imagesColumns}
           renderItem={({ item }) => (
@@ -172,7 +164,7 @@ export const Gallery: FunctionComponent<IDetailsProps> = (picturesArray) => {
             </View>
           )}
           numColumns={2}
-        /> 
+        />
     </SafeAreaView>
     
   )

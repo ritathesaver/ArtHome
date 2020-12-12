@@ -18,6 +18,8 @@ import {useNavigation} from '@react-navigation/native'
 import {IImageSize} from '../creators/CreatorDetails'
 import axios from 'axios'
 
+import FastImage from 'react-native-fast-image'
+
 export const OpenCameraScreen: FunctionComponent = () => {
   const navigation = useNavigation()
 
@@ -33,7 +35,6 @@ export const OpenCameraScreen: FunctionComponent = () => {
     let options = {
       storageOptions: {
         skipBackup: true,
-        path: 'images',
         base64: true,
       },
     }
@@ -45,11 +46,14 @@ export const OpenCameraScreen: FunctionComponent = () => {
       } else if (response.error) {
         // console.log('ImagePicker Error: ', response.error)
       } else {
-        setFileData(response.uri)
-        cloudinaryUpload(fileData)
+        //setFileData(response.uri)
+        cloudinaryUpload(response.uri)
+
       }
     })
   }
+
+
 
   const onBackToCamera = () => {
     setFileData('')
@@ -57,19 +61,18 @@ export const OpenCameraScreen: FunctionComponent = () => {
 
   const cloudinaryUpload = async (dataUri: string) => {
     const data = new FormData()
-    data.append('file', {uri: dataUri, type: 'image/png', name: `${dataUri}`})
-    data.append('upload_preset', 'x6a3whk4')
+    console.log(dataUri)
+    data.append('file', {uri: dataUri, type: 'image/jpeg;base64', name: Date.now() +'.jpg'})
+    data.append('upload_preset', 'dwucj2mkl')
     data.append('cloud_name', 'dwucj2mkl')
-
     // console.log(data)
 
     const res = await axios({
       url: 'https://api.cloudinary.com/v1_1/dwucj2mkl/image/upload',
       method: 'POST',
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       data: data,
     })
-    // console.log(res.data.secure_url)
+    console.log(res.data.secure_url)
     setFileData(res.data.secure_url)
   }
 
@@ -77,12 +80,12 @@ export const OpenCameraScreen: FunctionComponent = () => {
 
   const takePicture = async () => {
     if (camera) {
-      const options = {quality: 0.7, base64: true}
+      const options = {quality: 0.8, base64: true}
 
       try {
         const data = await camera.takePictureAsync(options)
         Alert.alert('Success', JSON.stringify(data))
-        setFileData(data.uri)
+        cloudinaryUpload(data.uri)
       } catch (err) {
         // console.log(err.message)
       }
@@ -123,7 +126,7 @@ export const OpenCameraScreen: FunctionComponent = () => {
       {fileData ? (
         <View style={styles.afterShootContainer}>
           <View style={{width: Dimensions.get('window').width}}>
-            <Image
+            <FastImage
               style={{
                 width: Dimensions.get('window').width,
                 height: Dimensions.get('window').width * size.ratio,
@@ -151,7 +154,7 @@ export const OpenCameraScreen: FunctionComponent = () => {
             backgroundColor: 'black',
 
             justifyContent: 'center',
-          }}>
+            }}>
           <RNCamera
             ref={(ref) => {
               setCamera(ref)

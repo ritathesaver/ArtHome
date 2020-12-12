@@ -5,6 +5,7 @@ export const detailStyles = StyleSheet.create({
     justifyContent: 'center',
     flex: 1,
     flexDirection: 'column',
+        width: '100%',
   },
   wrapper: {
     flex: 1,

@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {AppDispatch} from '../../App'
 import {Gallery} from '../../components/Gallery/Gallery'
 import { getLikes } from '../../redux/actions/likesActions'
+import { getPictures } from '../../redux/actions/picturesActions'
 import {RootState} from '../../redux/rootReducer'
 
 export const TrendingScreen: FunctionComponent = () => {
@@ -10,6 +11,7 @@ export const TrendingScreen: FunctionComponent = () => {
 
   useEffect(() => {
     dispatch(getLikes())
+    dispatch(getPictures())
   }, [dispatch])
 
   const likedPicturesIds = useSelector((state: RootState) => state.likes.likes.map(likes => likes.pictureId))
