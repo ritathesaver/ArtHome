@@ -11,6 +11,7 @@ import {CreatorPageScreen} from './CreatorPageNavigator'
 import {GalleryAll} from '../screens/galleries/GalleryAll'
 import {MyGallery} from '../screens/galleries/MyGallery'
 import { GalleryCreator } from '../screens/galleries/GalleryCreator'
+import { TrendingScreen } from '../screens/galleries/TrendingScreen'
 
 const screenStyle = {
   headerStyle: {
@@ -113,6 +114,15 @@ export const HomeStackScreen = () => {
         }}
         name="MyGallery"
         component={MyGallery}
+      />
+       <HomeStack.Screen
+        options={{
+          ...screenStyle,
+          headerBackTitleVisible: false,
+          title: 'Trending',
+        }}
+        name="TrendingScreen"
+        component={TrendingScreen}
       />
     </HomeStack.Navigator>
   )

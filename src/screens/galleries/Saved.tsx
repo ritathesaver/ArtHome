@@ -1,5 +1,4 @@
 import React, {FunctionComponent, useEffect} from 'react'
-import { Text } from 'react-native'
 import {useDispatch, useSelector} from 'react-redux'
 import {AppDispatch} from '../../App'
 import {Gallery} from '../../components/Gallery/Gallery'
@@ -18,17 +17,18 @@ export const Saved: FunctionComponent = () => {
 
   const pictures = useSelector((state: RootState) => state.pictures.pictures)
 
-  const likedPictures = pictures.map(pic => {
-    likedPicturesIds.filter(id => id === pic.id)
+  const likedPictures = pictures.filter(pic => {
+    return likedPicturesIds.find(id => id === pic.id)
   })
-  console.log(likedPictures)
-  
+
+  console.log(likedPictures, 'aa')
+
 
   //console.log(pictures)
 
   return (
     <>
-      <Text>kek</Text>
+      <Gallery picturesArray={likedPictures} />
     </>
   )
 }

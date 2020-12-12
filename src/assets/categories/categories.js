@@ -47,7 +47,7 @@ export const categories = [
         'https://images.pexels.com/photos/4906326/pexels-photo-4906326.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
     },
     overlayColor: '#ffffff',
-    screen: 'Creators',
+    screen: 'TrendingScreen',
   },
   {
     key: 'c6',

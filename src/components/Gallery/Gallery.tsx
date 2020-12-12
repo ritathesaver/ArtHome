@@ -1,6 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {FunctionComponent, useCallback, useEffect, useState} from 'react'
 import {
+  ActivityIndicator,
   FlatList,
   Image,
   SafeAreaView,
@@ -114,11 +115,28 @@ export const Gallery: FunctionComponent<IDetailsProps> = (picturesArray) => {
       )
   }
 
+  const detailPic = (item: IImageWithSize) => {
+    return (
+      <>
+      <FastImage
+                  style={{
+                    width: columnWidth,
+                    height: item.ratio * columnWidth,
+                    margin: 1,
+                  }}
+          source={{ uri: item.uri }}></FastImage>
+        
+      </>
+
+    )
+  }
+
   const imagesColumns = columns.map((column, index) => (
     <View key={index} style={{width: '49%', marginRight: 5}}>
       {column.map((item: IImageWithSize) => {
      
         return (
+         <TouchableOpacity onPress={() => detailPic(item)}>
           <FastImage
             key={item.id}
             style={{
@@ -130,7 +148,8 @@ export const Gallery: FunctionComponent<IDetailsProps> = (picturesArray) => {
               uri: `${item.uri}`,
             }}>
             {getLikeComponent(item.id)}
-          </FastImage>
+            </FastImage>
+         </TouchableOpacity>
         )
       })}
     </View>
@@ -139,22 +158,22 @@ export const Gallery: FunctionComponent<IDetailsProps> = (picturesArray) => {
 
   return (
     <SafeAreaView style={detailStyles.container}>
-      
-      <FlatList
-        data={imagesColumns}
-        renderItem={({item}) => (
-        <View
-          style={{
-            flex: 1,
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            alignItems: 'flex-start',
-          }}>
-          <View style={{width: '49%', marginRight: 5}}>{item}</View>
-        </View>
-        )}
-        numColumns={2}
-      />
+        <FlatList
+          data={imagesColumns}
+          renderItem={({ item }) => (
+            <View
+              style={{
+                flex: 1,
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+                alignItems: 'flex-start',
+              }}>
+              <View style={{ width: '49%', marginRight: 5 }}>{item}</View>
+            </View>
+          )}
+          numColumns={2}
+        /> 
     </SafeAreaView>
+    
   )
 }
