@@ -47,7 +47,7 @@ export const HireCreatorScreen: FunctionComponent = () => {
 
       <FlatList
         data={searchedUsers}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.id.toString()}
         renderItem={({item}) => (
           <View
             style={{

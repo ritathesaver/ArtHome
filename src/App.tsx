@@ -25,7 +25,7 @@ import {Saved} from './screens/galleries/Saved'
 import {RootState} from './redux/rootReducer'
 import AsyncStorage from '@react-native-community/async-storage'
 import {useState} from 'react'
-import { restoreToken } from './redux/actions/authActions'
+import { restoreToken, signOut } from './redux/actions/authActions'
 
 Icon.loadFont()
 
@@ -35,6 +35,7 @@ const Tab = createBottomTabNavigator()
 const App: FunctionComponent = () => {
   const authToken = useSelector((state: RootState) => state.auth.userToken)
   const dispatch: AppDispatch = useDispatch()
+  const signOut = useSelector((state: RootState) => state.auth.isSignout)
 
   useEffect(() => {
     (async () => {
@@ -44,9 +45,14 @@ const App: FunctionComponent = () => {
         return
       }
 
+       if (signOut)
+        return await AsyncStorage.removeItem('userToken')
+
       const userToken = await AsyncStorage.getItem('userToken')
       if(userToken)
-      dispatch(restoreToken(userToken))
+        dispatch(restoreToken(userToken))
+      
+     
     })()
   }, [authToken])
 

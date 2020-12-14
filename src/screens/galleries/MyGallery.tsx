@@ -1,4 +1,5 @@
 import React, {FunctionComponent, useEffect} from 'react'
+import { Text, View } from 'react-native'
 import {useDispatch, useSelector} from 'react-redux'
 import {AppDispatch} from '../../App'
 import {Gallery} from '../../components/Gallery/Gallery'
@@ -19,7 +20,14 @@ export const MyGallery: FunctionComponent = () => {
 
   return (
     <>
-      <Gallery picturesArray={pictures} />
+      {pictures.length ? 
+        <Gallery picturesArray={pictures} />
+        : (
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <Text>No pictures found</Text>
+       </View>)
+      }
+   
     </>
   )
 }
