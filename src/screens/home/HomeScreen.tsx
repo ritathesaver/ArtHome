@@ -1,29 +1,99 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {FunctionComponent} from 'react'
+import React, {FunctionComponent, useEffect, useState} from 'react'
 import {
   Dimensions,
   FlatList,
   Image,
-  SafeAreaView,
   Text,
+  TextInput,
   TouchableOpacity,
   View,
+  KeyboardAvoidingView,
 } from 'react-native'
 import {styles} from './styles'
 import invert from 'invert-color'
 
 import {categories} from '../../assets/categories/categories'
-import {useNavigation} from '@react-navigation/native'
-import SearchBox from '../../components/SearchBox/SearchBox'
-
+import { useNavigation } from '@react-navigation/native'
+import SearchIcon from '../../assets/icons/loupe.svg'
+import { getUsers } from '../../redux/actions/usersActions'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch } from '../../App'
+import { RootState } from '../../redux/rootReducer'
+import { getPictures } from '../../redux/actions/picturesActions'
+import FastImage from 'react-native-fast-image'
 export const HomeScreen: FunctionComponent = () => {
-  const navigation = useNavigation()
 
+  const navigation = useNavigation()
+  const dispatch: AppDispatch = useDispatch()
+  const [isFocused, setIsFocused] = useState(false)
+  const [search, setSearch] = useState('')
+
+  useEffect(() => {
+    dispatch(getUsers())
+    dispatch(getPictures())
+  }, [dispatch])
+
+  const searchedUsers = useSelector((state: RootState) =>
+    state.users.users
+      .filter((user) => user.name.toLowerCase().includes(search.toLowerCase()))
+      .map((user) => user),
+  )
+
+    const searchedPictures = useSelector((state: RootState) => state.pictures.pictures.filter(((pic) => pic.title.toLowerCase().includes(search.toLowerCase()))))
+  
   return (
-    <SafeAreaView style={styles.container}>
-      {/* <SearchBox /> */}
+      <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={120} style={styles.container}>
+      <View style={styles.searchContainer}>
+        <View style={styles.searchBox}>
+          <SearchIcon />
+          <TextInput
+            onSubmitEditing={() => setIsFocused(false)}
+            // eslint-disable-next-line react-native/no-inline-styles
+            style={{flex: 1, marginHorizontal: 5}}
+            underlineColorAndroid="transparent"
+            placeholder="Search..."
+            onFocus={() => setIsFocused(true)}
+            onChangeText={setSearch}
+            value={search}
+          />
+           </View>
+      </View>
+      {isFocused ? (
+        <>
+          
+          <Text style={{ fontSize: 20, margin: 15}}>Creators:</Text>
           <FlatList
-            data={categories}
+          data={searchedUsers}
+          key={'_'}
+          keyExtractor={item => "_" + item.id}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          numColumns={1}
+          renderItem={({ item }) => (
+            <View style={{ margin: 15, alignItems: 'center'}}>
+              <FastImage style={{ width: 70, height: 70, borderRadius: 35 }} source={{ uri: item.avatarUri }}></FastImage>
+              <Text>{item.name}</Text>
+            </View>
+            )} />
+          <Text style={{ fontSize: 20, margin: 15}}>Artworks:</Text>
+          <FlatList
+            data={searchedPictures}
+            keyExtractor={item => item.id}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            numColumns={1}
+            renderItem={({ item }) => (
+              <View style={{ margin: 15, alignItems: 'center'}}>
+                <FastImage style={{ width: 120, height: 120, borderRadius: 10 }} source={{ uri: item.uri }}></FastImage>
+                <Text>{item.title}</Text>
+              </View>
+            )} /></>
+      ) :
+          (<FlatList
+          data={categories}
+          key={'#'}
+          keyExtractor={item => "#" + item.key}
             renderItem={({ item }) => (
               <TouchableOpacity
                 style={{
@@ -53,7 +123,7 @@ export const HomeScreen: FunctionComponent = () => {
             )}
             numColumns={2}
           />
-          
-    </SafeAreaView>
+     )}
+        </KeyboardAvoidingView>
   )
 }

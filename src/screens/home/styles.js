@@ -5,6 +5,24 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center'
   },
+  searchContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#202122',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+  },
+  searchBox: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    borderWidth: 0.5,
+    borderColor: '#ccc',
+    height: 45,
+    borderRadius: 25,
+    padding: 10,
+  },
    box: {
     width: 180,
     height: 200,
