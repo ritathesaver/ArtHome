@@ -26,54 +26,68 @@ export const ArtworksScreen: FunctionComponent = () => {
   
   const clearSearch = () => {
 		setSearch('')
-	}
+  }
+  
+
+    const error = useSelector((state: RootState) =>
+      state.categories.error)
 
   useEffect(() => {
       dispatch(getCategories())
 
   }, [dispatch])
 
-  const searchedCategories = useSelector((state: RootState) =>
+    const searchedCategories = useSelector((state: RootState) =>
     state.categories.categories.filter((category) => category.title.toLowerCase().includes(search.toLowerCase())).map((category) => category),
-  )
+    )
+
+  
 
   return (
-    <SafeAreaView style={styles.container}>
-      <SearchBox setSearch={setSearch} search={search} />
-      <FlatList
-        data={searchedCategories}
-        renderItem={({item}) => (
-          <TouchableOpacity
-            style={{
-              flex: 1,
-              flexDirection: 'column',
-              marginVertical: 15,
-              marginHorizontal: 5,
-              width: Dimensions.get('window').width / 2,
-              height: 140,
-            }}
-            onPress={() => {
-              clearSearch()
-              navigation.navigate('ArtworksDetails', { id: item.id })
-            }}>
-            <Image style={styles.image} source={{uri: item.coverUri}} />
-            <View
-              style={{
-                backgroundColor: item.overlayColor,
-                height: 45,
-              }}>
-              <Text
-                style={{
-                  ...styles.title,
-                  color: `${invert(item.overlayColor, true)}`,
-                }}>
-                {item.title}
-              </Text>
-            </View>
-          </TouchableOpacity>
-        )}
-        numColumns={2}
-      />
-    </SafeAreaView>
+    <>
+      {error ?
+        (Alert.alert(`${error}`, 'Lost connection')) :
+
+        (
+          <SafeAreaView style={styles.container}>
+            <SearchBox setSearch={setSearch} search={search} />
+            <FlatList
+              data={searchedCategories}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  style={{
+                    flex: 1,
+                    flexDirection: 'column',
+                    marginVertical: 15,
+                    marginHorizontal: 5,
+                    width: Dimensions.get('window').width / 2,
+                    height: 140,
+                  }}
+                  onPress={() => {
+                    clearSearch()
+                    navigation.navigate('ArtworksDetails', { id: item.id })
+                  }}>
+                  <Image style={styles.image} source={{ uri: item.coverUri }} />
+                  <View
+                    style={{
+                      backgroundColor: item.overlayColor,
+                      height: 45,
+                    }}>
+                    <Text
+                      style={{
+                        ...styles.title,
+                        color: `${invert(item.overlayColor, true)}`,
+                      }}>
+                      {item.title}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              )}
+              numColumns={2}
+            />
+           </SafeAreaView>
+        )
+        }
+      </>
   )
 }

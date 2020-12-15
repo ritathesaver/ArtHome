@@ -49,7 +49,7 @@ export const picturesReducer = createReducer(INITIAL_STATE)
       }
     },
 )
-  	.handleAction(getPicturesByCategoryAsync.request, (state: IPicturesState) => ({
+  .handleAction(getPicturesByCategoryAsync.request, (state: IPicturesState) => ({
 		...state,
 		loading: true
     }))

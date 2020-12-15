@@ -33,6 +33,11 @@ export const HireCreatorScreen: FunctionComponent = () => {
       dispatch(getUsers())
   }, [dispatch])
 
+  const error = useSelector((state: RootState) =>
+    state.users.error)
+  
+  console.log(error)
+
   const searchedUsers = useSelector((state: RootState) =>
     state.users.users
       .filter((user) => user.specialization.length > 0)
@@ -43,38 +48,45 @@ export const HireCreatorScreen: FunctionComponent = () => {
   // console.log(users)
 
   return (
-    <SafeAreaView style={styles.container}>
-      <SearchBox setSearch={setSearch} search={search} />
+   <>
+      {error ?
+        (Alert.alert(`${error}`, 'Lost connection')) :
 
-      <FlatList
-        data={searchedUsers}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({item}) => (
-          <View
-            style={{
-              ...styles.wrapper,
-              width: Dimensions.get('window').width,
-            }}>
-            <View style={styles.infoWrapper}>
-              <View style={styles.imageContainer}>
-                <Image style={styles.image} source={{uri: item.avatarUri}} />
+        ( <SafeAreaView style={styles.container}>
+          <SearchBox setSearch={setSearch} search={search} />
+          <FlatList
+          data={searchedUsers}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => (
+            <View
+              style={{
+                ...styles.wrapper,
+                width: Dimensions.get('window').width,
+              }}>
+              <View style={styles.infoWrapper}>
+                <View style={styles.imageContainer}>
+                  <Image style={styles.image} source={{ uri: item.avatarUri }} />
+                </View>
+                <View style={{ flexDirection: 'column', marginLeft: 5 }}>
+                  <Text style={styles.title}>{item.name}</Text>
+                  <Text style={styles.title}>
+                    {item.specialization.map((spec) => spec + ' ')}
+                  </Text>
+                </View>
               </View>
-              <View style={{flexDirection: 'column', marginLeft: 5}}>
-                <Text style={styles.title}>{item.name}</Text>
-                <Text style={styles.title}>
-                  {item.specialization.map((spec) => spec + ' ')}
-                </Text>
-              </View>
+              <TouchableOpacity
+                onPress={() => { clearSearch(); navigation.navigate('CreatorPage', item) }}>
+                <View style={{ height: '100%', justifyContent: 'center' }}>
+                  <NextIcon />
+                </View>
+              </TouchableOpacity>
             </View>
-            <TouchableOpacity
-              onPress={() => navigation.navigate('CreatorPage', item)}>
-              <View style={{height: '100%', justifyContent: 'center'}}>
-                <NextIcon />
-              </View>
-            </TouchableOpacity>
-          </View>
-        )}
-      />
-    </SafeAreaView>
+          )}
+          />
+         </SafeAreaView>
+        )
+      }
+
+    </>
   )
 }

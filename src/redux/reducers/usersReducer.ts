@@ -30,6 +30,16 @@ export const usersReducer = createReducer(INITIAL_STATE)
         users: action.payload,
       }
     },
+)
+   .handleType(
+    'GET_USERS_ERROR',
+    (state: IUsersState, action: {type: string; payload: any}) => {
+       console.log(action.payload, 'aaaaaaaaaa')
+      return {
+        ...state,
+        error: action.payload
+      }
+    },
   )
   .handleType(
     'ADD_USER_SUCCESS',

@@ -27,4 +27,12 @@ export const categoriesReducer = createReducer(INITIAL_STATE).handleType(
       categories: action.payload,
     }
   },
+).handleType(
+  'GET_CATEGORIES_FAILURE',
+  (state: ICategoriesState, action: {type: string; payload: any}) => {
+    return {
+        ...state,
+        error: action.payload
+    }
+  },
 )

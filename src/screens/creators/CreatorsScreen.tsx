@@ -1,6 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {FunctionComponent, useEffect, useState} from 'react'
 import {
+  Alert,
   FlatList,
   Image,
   SafeAreaView,
@@ -25,7 +26,12 @@ export const CreatorsScreen: FunctionComponent = () => {
 
   const dispatch: AppDispatch = useDispatch()
 
-  useEffect(() => {
+  
+
+    const error = useSelector((state: RootState) =>
+      state.users.error)
+  
+      useEffect(() => {
       dispatch(getUsers())
   }, [dispatch])
 
@@ -34,6 +40,11 @@ export const CreatorsScreen: FunctionComponent = () => {
   )
 
   return (
+     <>
+      {error ?
+        (Alert.alert(`${error}`, 'Lost connection')) :
+
+        (
     <SafeAreaView style={styles.container}>
       <SearchBox setSearch={setSearch} search={search} />
 
@@ -60,6 +71,9 @@ export const CreatorsScreen: FunctionComponent = () => {
         )}
         numColumns={3}
       />
-    </SafeAreaView>
+          </SafeAreaView>
+        )
+        }
+      </>
   )
 }

@@ -25,6 +25,7 @@ import {Saved} from './screens/galleries/Saved'
 import {RootState} from './redux/rootReducer'
 import AsyncStorage from '@react-native-community/async-storage'
 import { restoreToken} from './redux/actions/authActions'
+import { CartDetails } from './screens/cart/ComingSoon'
 
 Icon.loadFont()
 
@@ -79,7 +80,7 @@ const App: FunctionComponent = () => {
           />
           <Tab.Screen
             name="Cart"
-            component={AuthStackScreen}
+            component={CartDetails}
             options={{
               tabBarLabel: 'Cart',
               tabBarIcon: ({ focused }) =>

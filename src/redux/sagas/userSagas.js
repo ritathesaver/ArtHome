@@ -3,25 +3,18 @@ import axios from 'axios'
 import { Alert} from 'react-native'
 
 async function getData() {
-  try {
+
     const { data } = await axios.get('http://localhost:3000/creators')
     return data
-  }
-   catch (err) {
-    Alert.alert(`${err}`, 'Lost connection')
-  }
 
-}
+  }
 
 async function getUser(body) {
   // console.log(body)
-  try {
+
     const { data } = await axios.get(`http://localhost:3000/creators/${body.id}`)
     return data
-  }
-   catch (err) {
-    Alert.alert(`${err}`, 'Lost connection')
-  }
+  
   // console.log(data, 'daaaat')
   
 }
@@ -99,11 +92,11 @@ function* workerAddSpec(action) {
 function* workerGetUsers() {
   try {
     const resGet = yield call(getData)
-    yield put({type: 'GET_USERS_SUCCESS', payload: resGet})
+    yield put({ type: 'GET_USERS_SUCCESS', payload: resGet })
   }
-  catch (err) {console.log(err)}
-
-
+  catch (err) {
+    yield put({ type: 'GET_USERS_ERROR', payload: err })
+  }
 }
 
 function* workerGetUserById(action) {
