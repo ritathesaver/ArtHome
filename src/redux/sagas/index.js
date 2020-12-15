@@ -5,6 +5,7 @@ import {
   watchEditAvatar,
   watchAddSpec,
   watchGetUserById,
+  watchEditAbout,
 } from './userSagas'
 import {watchGetCategories} from './caterogiesSagas'
 import {
@@ -31,6 +32,7 @@ export function* rootSaga() {
     watchGetUserById(),
     watchAddLike(),
     watchDeleteLike(),
-    watchGetLikes()
+    watchGetLikes(),
+    watchEditAbout()
   ])
 }

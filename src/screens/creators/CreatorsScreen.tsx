@@ -26,7 +26,7 @@ export const CreatorsScreen: FunctionComponent = () => {
   const dispatch: AppDispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getUsers())
+      dispatch(getUsers())
   }, [dispatch])
 
   const searchedUsers  = useSelector((state: RootState) =>

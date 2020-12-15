@@ -42,11 +42,12 @@ export const RegisterScreen: FunctionComponent = () => {
       password: '',
       confirmedPassword: '',
       name: '',
+      location: '',
     },
     onSubmit: async () => {
       //const token = await axios.post('http://localhost:3000/register', body)
       dispatch(signUp(formik.values.email, formik.values.password))
-      dispatch(createUser(formik.values.email, formik.values.name))
+      dispatch(createUser(formik.values.email, formik.values.name, formik.values.location))
 
       //await AsyncStorage.setItem('token', token.data.accessToken)
     },
@@ -81,6 +82,17 @@ export const RegisterScreen: FunctionComponent = () => {
                 {formik.errors.email}
               </Text>
             )}
+          </View>
+          <View style={styles.inputWrapper}>
+            <Text style={styles.labelText}>Where are you from?</Text>
+            <TextInput
+              placeholderTextColor="#cfcfcf"
+              onChangeText={formik.handleChange('location')}
+              onBlur={formik.handleBlur('location')}
+              value={formik.values.location}
+              style={styles.input}
+              placeholder="Enter your location"
+            />
           </View>
           <View style={styles.inputWrapper}>
             <Text style={styles.labelText}>Email</Text>

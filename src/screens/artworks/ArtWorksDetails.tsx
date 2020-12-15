@@ -82,10 +82,10 @@ export const ArtworksDetails: FunctionComponent<IDetailsProps> = ({route}) => {
       {loading ? (
         <ActivityIndicator size="large" color="#af6b58" />
       ) : (
-        <FlatList
-          data={column}
-          renderItem={({ item }) => (
-            <TouchableOpacity onPress={() => navigation.navigate('Cart', item)}>
+          <FlatList
+            data={column}
+            renderItem={({ item }) => (
+              <TouchableOpacity onPress={() => { clearSearch(); navigation.navigate('Cart', item)}}>
               <View
                 style={{
                   flex: 1,

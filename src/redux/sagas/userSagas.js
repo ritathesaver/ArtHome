@@ -1,48 +1,93 @@
 import {call, put, takeLatest} from 'redux-saga/effects'
 import axios from 'axios'
+import { Alert} from 'react-native'
 
 async function getData() {
-  const {data} = await axios.get('http://localhost:3000/creators')
-  return data
+  try {
+    const { data } = await axios.get('http://localhost:3000/creators')
+    return data
+  }
+   catch (err) {
+    Alert.alert(`${err}`, 'Lost connection')
+  }
+
 }
 
 async function getUser(body) {
   // console.log(body)
-  const {data} = await axios.get(`http://localhost:3000/creators/${body.id}`)
+  try {
+    const { data } = await axios.get(`http://localhost:3000/creators/${body.id}`)
+    return data
+  }
+   catch (err) {
+    Alert.alert(`${err}`, 'Lost connection')
+  }
   // console.log(data, 'daaaat')
-  return data
+  
 }
 
 async function editAvatarData(body) {
-  const {data} = await axios.put(
-    `http://localhost:3000/creators/${body.body.id}`,
-    {
-      ...body.body,
-      avatarUri: body.avatarUri,
-    },
-  )
-  // console.log(data, 'editAvatarData')
-  return data
+  try {
+    const { data } = await axios.put(
+      `http://localhost:3000/creators/${body.body.id}`,
+      {
+        ...body.body,
+        avatarUri: body.avatarUri,
+      },
+    )
+    return data
+  }
+  catch (err) {
+    Alert.alert(`${err}`, 'Lost connection')
+  } 
 }
 
+async function editAboutData(body) {
+  try {
+    const { data } = await axios.put(
+      `http://localhost:3000/creators/${body.body.id}`,
+      {
+        ...body.body,
+        about: body.aboutText,
+      },
+    )
+    return data
+  }
+  catch (err) {
+    Alert.alert(`${err}`, 'Lost connection')
+  } 
+}
+
+
 async function editSpecializationData(body) {
-  const {data} = await axios.put(
-    `http://localhost:3000/creators/${body.body.id}`,
-    {
-      ...body.body,
-      specialization: [
-        ...body.body.specialization,
-        body.specialization.map((specialization) => specialization),
-      ],
-    },
-  )
-  return data
+  try {
+    const { data } = await axios.put(
+      `http://localhost:3000/creators/${body.body.id}`,
+      {
+        ...body.body,
+        specialization: [
+          ...body.body.specialization,
+          body.specialization.map((specialization) => specialization),
+        ],
+      },
+    )
+    return data
+  }
+  catch (err) {
+    Alert.alert(`${err}`, 'Lost connection')
+  }  
 }
 
 function* workerEditAvatar(action) {
   const resGet = yield call(editAvatarData, action.payload)
 
   yield put({type: 'EDIT_AVATAR_SUCCESS', payload: resGet})
+}
+
+function* workerEditAbout(action) {
+  const resGet = yield call(editAboutData, action.payload)
+
+  yield put({type: 'EDIT_ABOUT_SUCCESS', payload: resGet})
 }
 
 function* workerAddSpec(action) {
@@ -52,9 +97,13 @@ function* workerAddSpec(action) {
 }
 
 function* workerGetUsers() {
-  const resGet = yield call(getData)
+  try {
+    const resGet = yield call(getData)
+    yield put({type: 'GET_USERS_SUCCESS', payload: resGet})
+  }
+  catch (err) {console.log(err)}
 
-  yield put({type: 'GET_USERS_SUCCESS', payload: resGet})
+
 }
 
 function* workerGetUserById(action) {
@@ -75,4 +124,7 @@ export function* watchEditAvatar() {
 }
 export function* watchAddSpec() {
   yield takeLatest('EDIT_USER_SPECIALIZATION', workerAddSpec)
+}
+export function* watchEditAbout() {
+  yield takeLatest('EDIT_USER_ABOUT', workerEditAbout)
 }

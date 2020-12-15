@@ -46,30 +46,31 @@ export const styles = StyleSheet.create({
 
 export const pageStyles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
    infoWrapper: {
     flexDirection: 'row',
-    margin: 10,
+     margin: 10,
+    
   },
    imageContainer: {
-    width: 300,
-    height: 300
+    width: 320,
+    height: 320,
+    alignItems: 'center'
   },
   image: {
    width: '100%',
    height: '100%',
    overflow: "hidden",
    alignItems: "center",
-   borderBottomLeftRadius: 170,
-   borderTopRightRadius: 170,
-   borderBottomRightRadius: 170
+   borderRadius: 175
   },
    	line: {
-		borderBottomWidth: 2,
+		borderBottomWidth: 1,
 		borderBottomColor: '#af6b58',
 		marginVertical: 10,
-		width: '100%'
+        width: '100%',
+    alignSelf: 'center',
   },
     aboutWrapper: {
     flex: 1,

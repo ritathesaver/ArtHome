@@ -35,8 +35,9 @@ export const AboutCreatorScreen: FunctionComponent<ICreatorPageProps> = ({
         </View>
       </View>
       <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-        {route.specialization.map((item: any) => (
+        {route.specialization.map((item: any, index: number) => (
           <View
+            key={index}
             style={{
               borderRadius: 10,
               borderWidth: 1,

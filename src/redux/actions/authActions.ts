@@ -23,14 +23,14 @@ export const signUp = createCustomAction(
 export const signOut = createCustomAction('SIGN_OUT')
 export const createUser = createCustomAction(
   'ADD_USER',
-  (email: string, name: string) => ({
+  (email: string, name: string, location: string) => ({
     payload: {
       id: id,
       userId: id,
       email: email,
       name: name,
       about: 'Nothing to say yet',
-      address: 'none',
+      address: location,
       avatarUri:
         'https://us.123rf.com/450wm/2nix/2nix1408/2nix140800099/30818272-anonymous-avatar-profile-icon-vector-.jpg?ver=6',
       phone: 'none',

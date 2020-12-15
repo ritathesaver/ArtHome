@@ -3,6 +3,7 @@ import {useNavigation} from '@react-navigation/native'
 import invert from 'invert-color'
 import React, {FunctionComponent, useEffect, useState} from 'react'
 import {
+  Alert,
   Dimensions,
   FlatList,
   Image,
@@ -28,7 +29,8 @@ export const ArtworksScreen: FunctionComponent = () => {
 	}
 
   useEffect(() => {
-    dispatch(getCategories())
+      dispatch(getCategories())
+
   }, [dispatch])
 
   const searchedCategories = useSelector((state: RootState) =>

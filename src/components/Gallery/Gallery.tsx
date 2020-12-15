@@ -4,6 +4,7 @@ import {
   ActivityIndicator,
   FlatList,
   Image,
+  RefreshControl,
   SafeAreaView,
   TouchableOpacity,
   View,
@@ -19,6 +20,9 @@ import {useDispatch, useSelector} from 'react-redux'
 import {AppDispatch} from '../../App'
 import {deleteLike, getLikes, putLike} from '../../redux/actions/likesActions'
 import {RootState} from '../../redux/rootReducer'
+import { Text } from 'react-native'
+import { getUserById } from '../../redux/actions/usersActions'
+import { useNavigation } from '@react-navigation/native'
 
 interface IDetailsProps {
   picturesArray: IPictures[]
@@ -40,6 +44,7 @@ export const Gallery: FunctionComponent<IDetailsProps> = (picturesArray) => {
   const likes = useSelector((state: RootState) => state.likes.likes)
   const [loading, setLoading] = useState(true)
   const [showModal, setShowModal] = useState(false)
+  const navigation = useNavigation()
 
   const [currentItem, setCurrentItem] = useState<IImageWithSize | undefined>()
 
@@ -47,9 +52,11 @@ export const Gallery: FunctionComponent<IDetailsProps> = (picturesArray) => {
     dispatch(getLikes())
   }, [dispatch])
 
-  //const usersLike = useSelector((state: RootState) => state.likes.likes.map(user => user.creatorId))
-  //const picsLike= useSelector((state: RootState) => state.likes.likes.map(pic => pic.pictureId))
-  console.log(likes.length, 'LIKES')
+  const getCreator = useCallback((id) => dispatch(getUserById(id)), [dispatch])
+
+  const userName = useSelector(
+    (state: RootState) => state.users.users.map((user) => user.name)[0],
+  )
 
   const onLike = useCallback(
     (id) => {
@@ -63,7 +70,7 @@ export const Gallery: FunctionComponent<IDetailsProps> = (picturesArray) => {
       console.log('deleteLike', likeId)
       dispatch(deleteLike(likeId))
     },
-    [dispatch],
+    [dispatch, authId],
   )
 
   const [columns, setColumns] = useState<Array<Array<IImageWithSize>>>([[], []])
@@ -72,7 +79,7 @@ export const Gallery: FunctionComponent<IDetailsProps> = (picturesArray) => {
     (async () => {
       let cleanupFunction = false
       const imagesWithSize: IImageWithSize[] = await Promise.all(
-        picturesArray.picturesArray.map(async (item: IPictures) => {
+        picturesArray?.picturesArray.map(async (item: IPictures) => {
           const result: IImageSize = await new Promise((resolve) => {
             Image.getSize(item.uri, (width, height) =>
               resolve({
@@ -132,6 +139,7 @@ export const Gallery: FunctionComponent<IDetailsProps> = (picturesArray) => {
               onPress={() => {
                 setShowModal(true)
                 setCurrentItem(item)
+                getCreator(item.creatorId)
               }}>
               <FastImage
                 onLoadStart={() => {
@@ -167,13 +175,21 @@ export const Gallery: FunctionComponent<IDetailsProps> = (picturesArray) => {
                   style={{
                     width: Dimensions.get('window').width * 0.9,
                     height:
+                      // @ts-ignore: Object is possibly undefined
                       currentItem?.ratio * Dimensions.get('window').width * 0.9,
                     margin: 1,
+                    justifyContent: 'flex-end'
                   }}
                   source={{
                     uri: `${currentItem?.uri}`,
                   }}
-                />
+                ><View style={{ backgroundColor: 'black', flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <Text style={{ color: 'white', padding: 5 }}>by @{userName}</Text>
+                    <TouchableOpacity onPress={() => { setShowModal(false); navigation.navigate('Cart', currentItem) }}>
+                      <Text style={{ color: 'white', padding: 5 }}>See more...</Text>
+                    </TouchableOpacity>
+                  </View>
+                </FastImage>
               </View>
             </Modal>
           </>

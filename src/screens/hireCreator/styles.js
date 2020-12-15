@@ -36,7 +36,6 @@ export const styles = StyleSheet.create({
   },
   title: {
     color: "black",
-    textAlign: "center",
     fontSize: 15,
     margin: 5,
     fontWeight: '500'

@@ -1,9 +1,15 @@
 import {call, put, takeLatest} from 'redux-saga/effects'
 import axios from 'axios'
+import { Alert} from 'react-native'
 
 async function getData() {
-  const {data} = await axios.get('http://localhost:3000/likes')
-  return data
+  try {
+    const { data } = await axios.get('http://localhost:3000/likes')
+    return data
+  }
+  catch (err) {
+    Alert.alert(`${err}`, 'Lost connection')
+  }
 }
 
 async function addData(body) {

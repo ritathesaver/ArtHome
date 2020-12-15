@@ -19,6 +19,7 @@ import {IUsers} from '../../redux/reducers/usersReducer'
 import {signOut} from '../../redux/actions/authActions'
 import {AppDispatch} from '../../App'
 import {
+  addAboutText,
   addSpecialization,
   editUserAvatar,
   getUsers,
@@ -29,11 +30,13 @@ export const ProfileScreen: FunctionComponent = () => {
   const dispatch: AppDispatch = useDispatch()
   const authId = useSelector((state: RootState) => state.auth.id)
   const [text, setText] = useState('')
+  const [about, setAbout] = useState('')
   const [inputActive, setInputActive] = useState(false)
+  const [inputActiveAbout, setInputActiveAbout] = useState(false)
 
   useEffect(() => {
     dispatch(getUsers())
-  }, [dispatch])
+  }, [dispatch, about])
 
   const currentUser = useSelector(
     (state: RootState) =>
@@ -65,12 +68,23 @@ export const ProfileScreen: FunctionComponent = () => {
       const newArr = currentUser.specialization.concat(text)
       dispatch(addSpecialization(newArr, currentUser))
     }
+    setInputActive(false)
 
     setText('')
   }, [currentUser, dispatch, text])
 
+  const onChangeAbout = useCallback(() => {
+    console.log(about)
+    if (about) {
+      dispatch(addAboutText(about, currentUser))
+    }
+    setAbout('')
+    setInputActiveAbout(false)
+  }, [currentUser, dispatch, about])
+
   return (
     <View style={pageStyles.container}>
+      <View style={{alignItems: 'center'}}>
       <TouchableOpacity
         onPress={() => launchImageLibrary()}
         style={pageStyles.imageContainer}>
@@ -78,7 +92,8 @@ export const ProfileScreen: FunctionComponent = () => {
           style={pageStyles.image}
           source={{uri: currentUser?.avatarUri}}
         />
-      </TouchableOpacity>
+        </TouchableOpacity>
+     </View>
       <Text style={pageStyles.title}> {currentUser?.name}</Text>
 
       <View style={{justifyContent: 'center', marginLeft: 15}}>
@@ -105,6 +120,7 @@ export const ProfileScreen: FunctionComponent = () => {
           }}>
           {currentUser?.specialization.map((item: string) => (
             <View
+              key={item}
               style={{
                 borderRadius: 10,
                 borderWidth: 1,
@@ -115,7 +131,24 @@ export const ProfileScreen: FunctionComponent = () => {
               <Text>{item}</Text>
             </View>
           ))}
-          <TouchableOpacity
+             {inputActive && (
+            <TextInput
+              style={{
+                borderRadius: 10,
+                borderWidth: 1,
+                margin: 15,
+                padding: 10,
+                borderColor: '#af6b58',
+                width: '30%',
+              }}
+              onChangeText={setText}
+              defaultValue={text}
+              placeholder=""
+              onSubmitEditing={onAdd}
+                />
+
+          )}
+            <TouchableOpacity
             onPress={() => {
               setInputActive(true)
             }}>
@@ -131,7 +164,8 @@ export const ProfileScreen: FunctionComponent = () => {
             <AddSvg />
           </TouchableOpacity>
           <Text>Add your specializations</Text>
-          {inputActive && (
+            {inputActive && (
+          <View style={{flex: 1}}>
             <TextInput
               style={{
                 borderRadius: 10,
@@ -140,22 +174,56 @@ export const ProfileScreen: FunctionComponent = () => {
                 padding: 10,
                 borderColor: '#af6b58',
                 width: '30%',
-              }}
+                  }}
+              maxLength={15}
               onChangeText={setText}
-              defaultValue={text}
+              value={text}
               placeholder=""
               onSubmitEditing={onAdd}
-            />
+                />
+         
+           </View>
           )}
         </View>
       )}
 
       <View style={pageStyles.aboutWrapper}>
-        <View>
+         <View>
+   
           <View style={pageStyles.line} />
-          <Text style={pageStyles.title}>ABOUT ME</Text>
-          <Text style={pageStyles.aboutText}>{currentUser?.about}</Text>
+        
         </View>
+        
+          <Text style={pageStyles.title} >ABOUT ME</Text>
+          <TouchableOpacity onPress={() => {
+              setInputActiveAbout(true)
+            }}>
+          <Text style={pageStyles.aboutText} >{currentUser?.about}</Text>
+        </TouchableOpacity>
+        {inputActiveAbout && (
+          <View  style={{flex: 1}}>
+          <TextInput
+            multiline
+            maxLength={50}
+            numberOfLines={4}
+            onChangeText={setAbout}
+            value={about}
+            placeholder="Write smthing about you..."
+            onSubmitEditing={onChangeAbout}
+            style={{
+              borderBottomColor: '#000000',
+              borderBottomWidth: 1,
+              margin: 15,
+            }}
+          >
+            </TextInput>
+            <TouchableOpacity onPress={onChangeAbout}>
+              <AddSvg style={{alignSelf:'flex-end'}}/>
+            </TouchableOpacity>
+          </View>)
+        }
+          
+
       </View>
       <Button
         color="black"

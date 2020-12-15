@@ -1,5 +1,5 @@
 import React, {FunctionComponent, useEffect} from 'react'
-import { ActivityIndicator, View } from 'react-native'
+import { ActivityIndicator, View, Alert } from 'react-native'
 import {useDispatch, useSelector} from 'react-redux'
 import {AppDispatch} from '../../App'
 import {Gallery} from '../../components/Gallery/Gallery'
@@ -10,7 +10,12 @@ export const GalleryAll: FunctionComponent = () => {
   const dispatch: AppDispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getPictures())
+    try {
+      dispatch(getPictures())
+    }
+    catch {
+      Alert.alert('Error while loading', 'Check your internet connection')
+    }
   }, [dispatch])
 
   const loading = useSelector((state: RootState) => state.pictures.loading)

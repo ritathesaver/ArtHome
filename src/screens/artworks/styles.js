@@ -29,6 +29,7 @@ export const styles = StyleSheet.create({
 
 export const detailStyles = StyleSheet.create({
   container: {
+    flex: 1,
     justifyContent: 'center'
   },
   image: {

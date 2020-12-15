@@ -1,6 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {FunctionComponent, useEffect, useState} from 'react'
 import {
+  Alert,
   Dimensions,
   FlatList,
   Image,
@@ -29,7 +30,7 @@ export const HireCreatorScreen: FunctionComponent = () => {
 	}
 
   useEffect(() => {
-    dispatch(getUsers())
+      dispatch(getUsers())
   }, [dispatch])
 
   const searchedUsers = useSelector((state: RootState) =>

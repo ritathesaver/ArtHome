@@ -13,6 +13,12 @@ export const addSpecialization = createCustomAction(
     payload: {body, specialization},
   }),
 )
+export const addAboutText = createCustomAction(
+  'EDIT_USER_ABOUT',
+  (aboutText: string, body: Object) => ({
+    payload: {body, aboutText},
+  }),
+)
 export const getUserById = createCustomAction(
   'GET_USER_BY_ID',
   (id: string) => ({

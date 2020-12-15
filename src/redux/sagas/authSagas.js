@@ -1,17 +1,28 @@
 import {call, put, takeLatest} from 'redux-saga/effects'
 import axios from 'axios'
+import { Alert} from 'react-native'
 
 async function getTokenUp(body) {
   // console.log(body, 'body')
-  const {data} = await axios.post('http://localhost:3000/register', body)
-  return data
+  try {
+    const { data } = await axios.post('http://localhost:3000/register', body)
+    return data
+  }
+  catch (err) {
+     Alert.alert(`${err}`, 'Lost connection')
+  }
 }
 
 async function addUser(id) {
   // console.log(id, 'idddd')
-  const {data} = await axios.post('http://localhost:3000/creators', id)
+  try {
+    const { data } = await axios.post('http://localhost:3000/creators', id)
+    return data
+  }
   // console.log(data)
-  return data
+  catch (err) {
+     Alert.alert(`${err}`, 'Lost connection')
+  }
 }
 
 export function* watchAddUser() {
