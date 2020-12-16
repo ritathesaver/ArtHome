@@ -7,6 +7,7 @@ export interface IAuthState {
   isSignout: boolean
   userToken: string | null
   id: string
+  error: Error | null
 }
 
 const INITIAL_STATE: IAuthState = {
@@ -14,12 +15,13 @@ const INITIAL_STATE: IAuthState = {
   isSignout: false,
   userToken: '',
   id: '',
+  error: null,
 }
 
 export const authReducer = createReducer(INITIAL_STATE)
   .handleAction(
     restoreToken,
-    (state: IAuthState, action: { type: string; payload: any }) => {
+    (state: IAuthState, action: {type: string; payload: any}) => {
       const id = parseJwt(action.payload)
       return {
         ...state,
@@ -57,6 +59,22 @@ export const authReducer = createReducer(INITIAL_STATE)
         isSignout: false,
         userToken: action.payload.userToken,
         id: id.sub,
+      }
+    },
+)
+  .handleType(
+    'SIGN_IN_FAILURE',
+    (state: IAuthState, action: {type: string; payload: any}) => {
+      //const token = action.payload.userToken
+      // console.log(token, 'token')
+
+      //const id = parseJwt(token)
+      // console.log(id, 'id')
+      //console.log('HEREHEREHRHEHREHHREHERHHREHEHHREHEHREHREH: ', action.payload, 'rr');
+      return {
+        ...state,
+        isSignout: true,
+        error: action.payload,
       }
     },
   )

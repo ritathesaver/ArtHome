@@ -1,27 +1,25 @@
 import {call, put, takeLatest} from 'redux-saga/effects'
 import axios from 'axios'
-import { Alert} from 'react-native'
+import {Alert} from 'react-native'
 
 async function getTokenUp(body) {
   // console.log(body, 'body')
   try {
-    const { data } = await axios.post('http://localhost:3000/register', body)
+    const {data} = await axios.post('http://localhost:3000/register', body)
     return data
-  }
-  catch (err) {
-     Alert.alert(`${err}`, 'Lost connection')
+  } catch (err) {
+    Alert.alert(`${err}`, 'Lost connection')
   }
 }
 
 async function addUser(id) {
   // console.log(id, 'idddd')
   try {
-    const { data } = await axios.post('http://localhost:3000/creators', id)
+    const {data} = await axios.post('http://localhost:3000/creators', id)
     return data
-  }
-  // console.log(data)
-  catch (err) {
-     Alert.alert(`${err}`, 'Lost connection')
+  } catch (err) {
+    // console.log(data)
+    Alert.alert(`${err}`, 'Lost connection')
   }
 }
 
@@ -58,13 +56,19 @@ async function getTokenIn(body) {
 }
 
 function* workerSignIn(action) {
-  const resGet = yield call(getTokenIn, {
-    email: action.payload.email,
-    password: action.payload.password,
-  })
+  try {
+    const resGet = yield call(getTokenIn, {
+      email: action.payload.email,
+      password: action.payload.password,
+    })
+    yield put({
+      type: 'SIGN_IN_SUCCESS',
+      payload: {userToken: resGet.accessToken},
+    })
+  } catch (err) {
+    yield put({type: 'SIGN_IN_FAILURE', payload: {err}})
+  }
   // console.log(resGet, 'token')
-
-  yield put({type: 'SIGN_IN_SUCCESS', payload: {userToken: resGet.accessToken}})
 }
 
 export function* watchSignIn() {

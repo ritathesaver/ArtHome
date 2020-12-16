@@ -23,71 +23,68 @@ export const ArtworksScreen: FunctionComponent = () => {
   const navigation = useNavigation()
   const dispatch: AppDispatch = useDispatch()
   const [search, setSearch] = useState('')
-  
-  const clearSearch = () => {
-		setSearch('')
-  }
-  
 
-    const error = useSelector((state: RootState) =>
-      state.categories.error)
+  const clearSearch = () => {
+    setSearch('')
+  }
+
+  const error = useSelector((state: RootState) => state.categories.error)
 
   useEffect(() => {
-      dispatch(getCategories())
-
+    dispatch(getCategories())
   }, [dispatch])
 
-    const searchedCategories = useSelector((state: RootState) =>
-    state.categories.categories.filter((category) => category.title.toLowerCase().includes(search.toLowerCase())).map((category) => category),
-    )
-
-  
+  const searchedCategories = useSelector((state: RootState) =>
+    state.categories.categories
+      .filter((category) =>
+        category.title.toLowerCase().includes(search.toLowerCase()),
+      )
+      .map((category) => category),
+  )
 
   return (
     <>
-      {error ?
-        (Alert.alert(`${error}`, 'Lost connection')) :
-
-        (
-          <SafeAreaView style={styles.container}>
-            <SearchBox setSearch={setSearch} search={search} />
-            <FlatList
-              data={searchedCategories}
-              renderItem={({ item }) => (
-                <TouchableOpacity
+      {error ? (
+        Alert.alert(`${error}`, 'Lost connection')
+      ) : (
+        <SafeAreaView style={styles.container}>
+          <SearchBox setSearch={setSearch} search={search} />
+          <FlatList
+            data={searchedCategories}
+            renderItem={({item}) => (
+              <TouchableOpacity
+                style={{
+                  flex: 1,
+                  flexDirection: 'column',
+                  marginVertical: 15,
+                  marginHorizontal: 5,
+                  width: Dimensions.get('window').width / 2,
+                  height: 140,
+                }}
+                onPress={() => {
+                  clearSearch()
+                  navigation.navigate('ArtworksDetails', {id: item.id})
+                }}>
+                <Image style={styles.image} source={{uri: item.coverUri}} />
+                <View
                   style={{
-                    flex: 1,
-                    flexDirection: 'column',
-                    marginVertical: 15,
-                    marginHorizontal: 5,
-                    width: Dimensions.get('window').width / 2,
-                    height: 140,
-                  }}
-                  onPress={() => {
-                    clearSearch()
-                    navigation.navigate('ArtworksDetails', { id: item.id })
+                    backgroundColor: item.overlayColor,
+                    height: 45,
                   }}>
-                  <Image style={styles.image} source={{ uri: item.coverUri }} />
-                  <View
+                  <Text
                     style={{
-                      backgroundColor: item.overlayColor,
-                      height: 45,
+                      ...styles.title,
+                      color: `${invert(item.overlayColor, true)}`,
                     }}>
-                    <Text
-                      style={{
-                        ...styles.title,
-                        color: `${invert(item.overlayColor, true)}`,
-                      }}>
-                      {item.title}
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-              )}
-              numColumns={2}
-            />
-           </SafeAreaView>
-        )
-        }
-      </>
+                    {item.title}
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            )}
+            numColumns={2}
+          />
+        </SafeAreaView>
+      )}
+    </>
   )
 }

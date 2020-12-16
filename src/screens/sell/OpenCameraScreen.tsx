@@ -1,5 +1,4 @@
 /* eslint-disable react-native/no-inline-styles */
-
 import React, {FunctionComponent, useEffect, useState} from 'react'
 import {
   Text,
@@ -19,8 +18,13 @@ import {IImageSize} from '../creators/CreatorDetails'
 import axios from 'axios'
 
 import FastImage from 'react-native-fast-image'
+import {AppDispatch} from '../../App'
+import {useDispatch} from 'react-redux'
+import {setSellState} from '../../redux/actions/sellAction'
 
 export const OpenCameraScreen: FunctionComponent = () => {
+  const dispatch: AppDispatch = useDispatch()
+
   const navigation = useNavigation()
 
   const [camera, setCamera] = useState<RNCamera | null>(null)
@@ -30,6 +34,10 @@ export const OpenCameraScreen: FunctionComponent = () => {
   const [size, setSize] = useState({ratio: 0})
 
   const [lastPhoto, setLastPhoto] = useState<CameraRoll.PhotoIdentifiersPage>()
+
+  useEffect(() => {
+    dispatch(setSellState(true))
+  }, [dispatch])
 
   const launchImageLibrary = () => {
     let options = {
@@ -48,12 +56,9 @@ export const OpenCameraScreen: FunctionComponent = () => {
       } else {
         //setFileData(response.uri)
         cloudinaryUpload(response.uri)
-
       }
     })
   }
-
-
 
   const onBackToCamera = () => {
     setFileData('')
@@ -62,7 +67,11 @@ export const OpenCameraScreen: FunctionComponent = () => {
   const cloudinaryUpload = async (dataUri: string) => {
     const data = new FormData()
     console.log(dataUri)
-    data.append('file', {uri: dataUri, type: 'image/jpeg;base64', name: Date.now() +'.jpg'})
+    data.append('file', {
+      uri: dataUri,
+      type: 'image/jpeg;base64',
+      name: Date.now() + '.jpg',
+    })
     data.append('upload_preset', 'dwucj2mkl')
     data.append('cloud_name', 'dwucj2mkl')
     // console.log(data)
@@ -154,7 +163,7 @@ export const OpenCameraScreen: FunctionComponent = () => {
             backgroundColor: 'black',
 
             justifyContent: 'center',
-            }}>
+          }}>
           <RNCamera
             ref={(ref) => {
               setCamera(ref)

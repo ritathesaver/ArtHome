@@ -1,4 +1,4 @@
-import React, {FunctionComponent, useEffect, useState} from 'react'
+import React, {FunctionComponent, useEffect} from 'react'
 import {WelcomeScreen} from './screens/onBoarding/WelcomeScreen'
 import {NavigationContainer} from '@react-navigation/native'
 import {createStackNavigator} from '@react-navigation/stack'
@@ -20,12 +20,12 @@ import {store} from './redux'
 
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import {SellStackScreen} from './navigators/SellNavigator'
-import { ProfileScreen } from './screens/profile/ProfileScreen'
+import {ProfileScreen} from './screens/profile/ProfileScreen'
 import {Saved} from './screens/galleries/Saved'
 import {RootState} from './redux/rootReducer'
 import AsyncStorage from '@react-native-community/async-storage'
-import { restoreToken} from './redux/actions/authActions'
-import { CartDetails } from './screens/cart/ComingSoon'
+import {restoreToken} from './redux/actions/authActions'
+import {CartDetails} from './screens/cart/ComingSoon'
 
 Icon.loadFont()
 
@@ -38,7 +38,8 @@ const App: FunctionComponent = () => {
   const signOut = useSelector((state: RootState) => state.auth.isSignout)
 
   useEffect(() => {
-    (async () => {
+    // eslint-disable-next-line no-extra-semi
+    ;(async () => {
       console.log(authToken)
       if (authToken) {
         await AsyncStorage.setItem('userToken', authToken)
@@ -50,10 +51,11 @@ const App: FunctionComponent = () => {
       }
 
       const userToken = await AsyncStorage.getItem('userToken')
-      if (userToken)
-          dispatch(restoreToken(userToken))  
+      if (userToken) {
+        dispatch(restoreToken(userToken))
+      }
     })()
-  }, [authToken])
+  }, [authToken, dispatch, signOut])
 
   // console.log(token)
 
@@ -74,7 +76,7 @@ const App: FunctionComponent = () => {
             options={{
               tabBarLabel: 'Home',
 
-              tabBarIcon: ({ focused }) =>
+              tabBarIcon: ({focused}) =>
                 focused ? <HomeActiveSvg /> : <HomeSvg />,
             }}
           />
@@ -83,7 +85,7 @@ const App: FunctionComponent = () => {
             component={CartDetails}
             options={{
               tabBarLabel: 'Cart',
-              tabBarIcon: ({ focused }) =>
+              tabBarIcon: ({focused}) =>
                 focused ? <CartActiveSvg /> : <CartSvg />,
             }}
           />
@@ -92,7 +94,7 @@ const App: FunctionComponent = () => {
             component={Saved}
             options={{
               tabBarLabel: 'Saved',
-              tabBarIcon: ({ focused }) =>
+              tabBarIcon: ({focused}) =>
                 focused ? <LikeActiveSvg /> : <LikeSvg />,
             }}
           />
@@ -102,7 +104,7 @@ const App: FunctionComponent = () => {
             options={{
               tabBarVisible: false,
               tabBarLabel: 'Sell',
-              tabBarIcon: ({ focused }) =>
+              tabBarIcon: ({focused}) =>
                 focused ? <CameraActiveSvg /> : <CameraSvg />,
             }}
           />
@@ -111,17 +113,17 @@ const App: FunctionComponent = () => {
             component={ProfileScreen}
             options={{
               tabBarLabel: 'Profile',
-              tabBarIcon: ({ focused }) =>
+              tabBarIcon: ({focused}) =>
                 focused ? <ProfileActiveSvg /> : <ProfileSvg />,
             }}
           />
         </Tab.Navigator>
       ) : (
-          <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
-            <Stack.Screen name="AuthScreen" component={AuthStackScreen} />
-          </Stack.Navigator>
-        )}
+        <Stack.Navigator screenOptions={{headerShown: false}}>
+          <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
+          <Stack.Screen name="AuthScreen" component={AuthStackScreen} />
+        </Stack.Navigator>
+      )}
     </NavigationContainer>
   )
 }

@@ -4,7 +4,6 @@ import {
   ActivityIndicator,
   FlatList,
   Image,
-  RefreshControl,
   SafeAreaView,
   TouchableOpacity,
   View,
@@ -20,9 +19,10 @@ import {useDispatch, useSelector} from 'react-redux'
 import {AppDispatch} from '../../App'
 import {deleteLike, getLikes, putLike} from '../../redux/actions/likesActions'
 import {RootState} from '../../redux/rootReducer'
-import { Text } from 'react-native'
-import { getUserById } from '../../redux/actions/usersActions'
-import { useNavigation } from '@react-navigation/native'
+import {Text} from 'react-native'
+import {getUserById} from '../../redux/actions/usersActions'
+import {useNavigation} from '@react-navigation/native'
+import MoreIcon from '../../assets/icons/next copy 2.svg'
 
 interface IDetailsProps {
   picturesArray: IPictures[]
@@ -70,7 +70,7 @@ export const Gallery: FunctionComponent<IDetailsProps> = (picturesArray) => {
       console.log('deleteLike', likeId)
       dispatch(deleteLike(likeId))
     },
-    [dispatch, authId],
+    [dispatch],
   )
 
   const [columns, setColumns] = useState<Array<Array<IImageWithSize>>>([[], []])
@@ -178,15 +178,30 @@ export const Gallery: FunctionComponent<IDetailsProps> = (picturesArray) => {
                       // @ts-ignore: Object is possibly undefined
                       currentItem?.ratio * Dimensions.get('window').width * 0.9,
                     margin: 1,
-                    justifyContent: 'flex-end'
+                    justifyContent: 'flex-end',
                   }}
                   source={{
                     uri: `${currentItem?.uri}`,
-                  }}
-                ><View style={{ backgroundColor: 'black', flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <Text style={{ color: 'white', padding: 5 }}>by @{userName}</Text>
-                    <TouchableOpacity onPress={() => { setShowModal(false); navigation.navigate('Cart', currentItem) }}>
-                      <Text style={{ color: 'white', padding: 5 }}>See more...</Text>
+                  }}>
+                  <View
+                    style={{
+                      backgroundColor: 'black',
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                    }}>
+                    <Text style={{color: 'white', padding: 5}}>
+                      by @{userName}
+                    </Text>
+                    <TouchableOpacity
+                      onPress={() => {
+                        setShowModal(false)
+                        navigation.navigate('Cart', currentItem)
+                      }}>
+                      <View
+                        style={{flexDirection: 'row', alignItems: 'center'}}>
+                        <Text style={{color: 'white', padding: 5}}>More</Text>
+                        <MoreIcon />
+                      </View>
                     </TouchableOpacity>
                   </View>
                 </FastImage>

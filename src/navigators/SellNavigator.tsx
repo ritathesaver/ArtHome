@@ -7,6 +7,7 @@ import {Button} from 'react-native'
 import {CategoriesListScreen} from '../screens/sell/CaterogiesListScreen'
 import {AddDetailsScreen} from '../screens/sell/AddDetailsScreen'
 import MapScreen from '../components/MapScreen'
+import {StackActions} from '@react-navigation/native'
 
 const screenStyle = {
   headerStyle: {
@@ -38,7 +39,10 @@ export const SellStackScreen = () => {
             <Button
               color="white"
               title="Cancel"
-              onPress={() => navigation.navigate('Home')}
+              onPress={() => {
+                navigation.dispatch(StackActions.popToTop())
+                navigation.navigate('Home')
+              }}
             />
           ),
         })}
@@ -60,7 +64,10 @@ export const SellStackScreen = () => {
             <Button
               color="white"
               title="Cancel"
-              onPress={() => navigation.navigate('Home')}
+              onPress={() => {
+                navigation.dispatch(StackActions.popToTop())
+                navigation.navigate('Home')
+              }}
             />
           ),
         })}
@@ -75,7 +82,10 @@ export const SellStackScreen = () => {
             <Button
               color="white"
               title="Cancel"
-              onPress={() => navigation.navigate('Home')}
+              onPress={() => {
+                navigation.dispatch(StackActions.popToTop())
+                navigation.navigate('Home')
+              }}
             />
           ),
         }}
@@ -90,7 +100,10 @@ export const SellStackScreen = () => {
             <Button
               color="white"
               title="Cancel"
-              onPress={() => navigation.navigate('Home')}
+              onPress={() => {
+                navigation.dispatch(StackActions.popToTop())
+                navigation.navigate('Home')
+              }}
             />
           ),
         }}

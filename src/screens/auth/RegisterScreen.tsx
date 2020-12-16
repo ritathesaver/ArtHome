@@ -30,6 +30,8 @@ const SignupSchema = Yup.object().shape({
 
     .oneOf([Yup.ref('password')], 'Passwords do not match')
     .required('Confirm password is required'),
+
+  name: Yup.string().required('Name is required'),
 })
 
 export const RegisterScreen: FunctionComponent = () => {
@@ -47,7 +49,13 @@ export const RegisterScreen: FunctionComponent = () => {
     onSubmit: async () => {
       //const token = await axios.post('http://localhost:3000/register', body)
       dispatch(signUp(formik.values.email, formik.values.password))
-      dispatch(createUser(formik.values.email, formik.values.name, formik.values.location))
+      dispatch(
+        createUser(
+          formik.values.email,
+          formik.values.name,
+          formik.values.location,
+        ),
+      )
 
       //await AsyncStorage.setItem('token', token.data.accessToken)
     },
@@ -77,9 +85,9 @@ export const RegisterScreen: FunctionComponent = () => {
               style={styles.input}
               placeholder="Enter your name"
             />
-            {formik.errors.email && formik.touched.email && (
+            {formik.errors.name && formik.touched.name && (
               <Text style={{fontSize: 10, color: 'red', marginBottom: 10}}>
-                {formik.errors.email}
+                Name is required
               </Text>
             )}
           </View>
@@ -143,6 +151,12 @@ export const RegisterScreen: FunctionComponent = () => {
               autoCorrect={false}
               textContentType={'oneTimeCode'}
             />
+            {formik.errors.confirmedPassword &&
+              formik.touched.confirmedPassword && (
+                <Text style={{fontSize: 10, color: 'red', marginBottom: 10}}>
+                  passwords didn't match
+                </Text>
+              )}
           </View>
           <TouchableOpacity
             style={styles.submitButton}

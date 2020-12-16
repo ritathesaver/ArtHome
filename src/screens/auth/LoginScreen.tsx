@@ -11,9 +11,10 @@ import {
 import {styles} from './styles'
 import {useNavigation} from '@react-navigation/native'
 import {useFormik} from 'formik'
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {AppDispatch} from '../../App'
 import {signIn} from '../../redux/actions/authActions'
+import {RootState} from '../../redux/rootReducer'
 
 export const LoginScreen: FunctionComponent = () => {
   const navigation = useNavigation()
@@ -28,6 +29,8 @@ export const LoginScreen: FunctionComponent = () => {
       dispatch(signIn(formik.values.email, formik.values.password))
     },
   })
+
+  const error = useSelector((state: RootState) => state.auth.error)
 
   return (
     <ImageBackground
@@ -64,6 +67,17 @@ export const LoginScreen: FunctionComponent = () => {
               secureTextEntry={true}
               placeholder="Enter password"
             />
+            {error && (
+              <Text
+                style={{
+                  fontSize: 15,
+                  color: 'red',
+                  marginBottom: 10,
+                  alignItems: 'center',
+                }}>
+                Incorrect email or password
+              </Text>
+            )}
           </View>
           <TouchableOpacity
             style={styles.submitButton}

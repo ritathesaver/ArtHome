@@ -1,5 +1,8 @@
 import {createReducer} from 'typesafe-actions'
-import { getPicturesAsync, getPicturesByCategoryAsync } from '../actions/picturesActions'
+import {
+  getPicturesAsync,
+  getPicturesByCategoryAsync,
+} from '../actions/picturesActions'
 
 export interface IPictures {
   creatorId: number
@@ -36,28 +39,12 @@ export const picturesReducer = createReducer(INITIAL_STATE)
         pictures: [...state.pictures, action.payload],
       }
     },
-)
+  )
   .handleType(
     'GET_PICTURE_SUCCESS',
     (state: IPicturesState, action: {type: string; payload: any}) => {
       // console.log(action.payload, 'payload')
 
-        return {
-        ...state,
-        loading: false,
-        pictures: action.payload,
-      }
-    },
-)
-  .handleAction(getPicturesByCategoryAsync.request, (state: IPicturesState) => ({
-		...state,
-		loading: true
-    }))
-  .handleAction(getPicturesByCategoryAsync.failure, (state: IPicturesState, action: { type: string; payload: any })  => ({
-		...state,
-		error: action.payload.error
-  }))
-  .handleAction(getPicturesByCategoryAsync.success, (state: IPicturesState, action: {type: string; payload: any}) => {
       return {
         ...state,
         loading: false,
@@ -65,15 +52,44 @@ export const picturesReducer = createReducer(INITIAL_STATE)
       }
     },
   )
-  	.handleAction(getPicturesAsync.request, (state: IPicturesState) => ({
-		...state,
-		loading: true
-    }))
-  .handleAction(getPicturesAsync.failure, (state: IPicturesState, action: { type: string; payload: any })  => ({
-		...state,
-		error: action.payload.error
+  .handleAction(
+    getPicturesByCategoryAsync.request,
+    (state: IPicturesState) => ({
+      ...state,
+      loading: true,
+    }),
+  )
+  .handleAction(
+    getPicturesByCategoryAsync.failure,
+    (state: IPicturesState, action: {type: string; payload: any}) => ({
+      ...state,
+      error: action.payload.error,
+    }),
+  )
+  .handleAction(
+    getPicturesByCategoryAsync.success,
+    (state: IPicturesState, action: {type: string; payload: any}) => {
+      return {
+        ...state,
+        loading: false,
+        pictures: action.payload,
+      }
+    },
+  )
+  .handleAction(getPicturesAsync.request, (state: IPicturesState) => ({
+    ...state,
+    loading: true,
   }))
-  .handleAction(getPicturesAsync.success, (state: IPicturesState, action: {type: string; payload: any}) => {
+  .handleAction(
+    getPicturesAsync.failure,
+    (state: IPicturesState, action: {type: string; payload: any}) => ({
+      ...state,
+      error: action.payload.error,
+    }),
+  )
+  .handleAction(
+    getPicturesAsync.success,
+    (state: IPicturesState, action: {type: string; payload: any}) => {
       return {
         ...state,
         loading: false,

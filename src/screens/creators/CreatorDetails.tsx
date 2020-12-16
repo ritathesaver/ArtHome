@@ -11,7 +11,7 @@ import {detailStyles} from './styles'
 import {Dimensions} from 'react-native'
 import FastImage from 'react-native-fast-image'
 import LikeActiveSvg from '../../assets/icons/heart (2).svg'
-import { IPictures } from '../../redux/reducers/picturesReducer'
+import {IPictures} from '../../redux/reducers/picturesReducer'
 
 interface IDetailsProps {
   route: any
@@ -84,7 +84,7 @@ export const CreatorDetails: FunctionComponent<IDetailsProps> = ({route}) => {
               margin: 1,
             }}
             source={{
-              uri: `${item.url}`,
+              uri: `${item.uri}`,
             }}>
             <TouchableOpacity>
               <LikeActiveSvg

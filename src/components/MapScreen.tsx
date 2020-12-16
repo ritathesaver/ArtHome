@@ -33,16 +33,16 @@ const Map: FunctionComponent = () => {
         })
       },
       (error) => {
-        // console.log(error.code, error.message)
+        console.log(error.code, error.message)
       },
       {enableHighAccuracy: true, timeout: 15000},
     )
     // console.log('START', location)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
-    (async () => {
+    // eslint-disable-next-line no-extra-semi
+    ;(async () => {
       const data = await Geocoder.from(location)
 
       const addressComponent = data.results[2].formatted_address

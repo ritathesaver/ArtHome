@@ -19,20 +19,22 @@ const INITIAL_STATE: ICategoriesState = {
   error: null,
 }
 
-export const categoriesReducer = createReducer(INITIAL_STATE).handleType(
-  'GET_CATEGORIES_SUCCESS',
-  (state: ICategoriesState, action: {type: string; payload: any}) => {
-    return {
-      ...state,
-      categories: action.payload,
-    }
-  },
-).handleType(
-  'GET_CATEGORIES_FAILURE',
-  (state: ICategoriesState, action: {type: string; payload: any}) => {
-    return {
+export const categoriesReducer = createReducer(INITIAL_STATE)
+  .handleType(
+    'GET_CATEGORIES_SUCCESS',
+    (state: ICategoriesState, action: {type: string; payload: any}) => {
+      return {
         ...state,
-        error: action.payload
-    }
-  },
-)
+        categories: action.payload,
+      }
+    },
+  )
+  .handleType(
+    'GET_CATEGORIES_FAILURE',
+    (state: ICategoriesState, action: {type: string; payload: any}) => {
+      return {
+        ...state,
+        error: action.payload,
+      }
+    },
+  )
