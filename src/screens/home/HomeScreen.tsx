@@ -22,8 +22,6 @@ import {AppDispatch} from '../../App'
 import {RootState} from '../../redux/rootReducer'
 import {getPictures} from '../../redux/actions/picturesActions'
 import FastImage from 'react-native-fast-image'
-import {IPictures} from '../../redux/reducers/picturesReducer'
-import {IImageWithSize, IImageSize} from '../creators/CreatorDetails'
 
 export const HomeScreen: FunctionComponent = () => {
   const navigation = useNavigation()
@@ -47,31 +45,6 @@ export const HomeScreen: FunctionComponent = () => {
       pic.title.toLowerCase().includes(search.toLowerCase()),
     ),
   )
-
-  //const [column, setColumn] = useState<Array<IImageWithSize>>([])
-
-  // useEffect(() => {
-  //   // eslint-disable-next-line prettier/prettier
-  //   (async () => {
-  //     const imagesWithSize: IImageWithSize[] = await Promise.all(
-  //       searchedPictures.map(async (item: IPictures) => {
-  //         // console.log(item)
-  //         const result: IImageSize = await new Promise((resolve) => {
-  //           Image.getSize(item.uri, (width, height) =>
-  //             resolve({
-  //               height,
-  //               width,
-  //               ratio: height / width,
-  //             }),
-  //           )
-  //         })
-  //         return {...result, ...item}
-  //       }),
-  //     )
-  //     // console.log(imagesWithSize)
-  //     setColumn(imagesWithSize)
-  //   })()
-  // }, [searchedPictures])
 
   return (
     <KeyboardAvoidingView

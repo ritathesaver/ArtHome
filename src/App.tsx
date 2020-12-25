@@ -75,7 +75,7 @@ const App: FunctionComponent = () => {
       </View>
     )
   }
-  
+
   if (showWelcome && !signOut && !authToken) {
     return <WelcomeScreen onFinish={() => setShowWelcome(false)} />
   }

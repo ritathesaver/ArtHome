@@ -9,7 +9,13 @@ const ConnectionError: FunctionComponent = () => {
 
   useEffect(() => {
     const unsubscribe = addEventListener((state) => {
-      if (!state.isConnected) {
+      if (state.isInternetReachable === null) {
+        return
+      }
+      if (!state.isInternetReachable) {
+        setTimeout(() => {
+          setShowError(false)
+        }, 5000)
         setShowError(true)
       }
     })
@@ -26,6 +32,10 @@ const ConnectionError: FunctionComponent = () => {
         alignItems: 'center',
         paddingBottom: 5,
         height: 65,
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
       }}>
       <Text style={{color: 'white'}}>No internet connection</Text>
     </View>
