@@ -37,38 +37,52 @@ const App: FunctionComponent = () => {
   const authToken = useSelector((state: RootState) => state.auth.userToken)
   const dispatch: AppDispatch = useDispatch()
   const signOut = useSelector((state: RootState) => state.auth.isSignout)
-  //const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
+
+  const [showWelcome, setShowWelcome] = useState(true)
 
   useEffect(() => {
     // eslint-disable-next-line no-extra-semi
+    setLoading(true)
     ;(async () => {
       console.log(authToken)
       if (authToken) {
         await AsyncStorage.setItem('userToken', authToken)
-        //setLoading(false)
+        setLoading(false)
         return
       }
 
       if (signOut) {
         await AsyncStorage.removeItem('userToken')
-        //setLoading(false)
+        setLoading(false)
         return
       }
 
       const userToken = await AsyncStorage.getItem('userToken')
+      setLoading(false)
+
       if (userToken) {
         dispatch(restoreToken(userToken))
-        //setLoading(false)
       }
     })()
   }, [authToken, dispatch, signOut])
 
   // console.log(token)
+  if (loading) {
+    return (
+      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+        <ActivityIndicator size="large" color="black" />
+      </View>
+    )
+  }
+  
+  if (showWelcome && !signOut && !authToken) {
+    return <WelcomeScreen onFinish={() => setShowWelcome(false)} />
+  }
 
   return (
     <NavigationContainer>
       {authToken ? (
-
         <Tab.Navigator
           tabBarOptions={{
             activeTintColor: 'white',
@@ -127,7 +141,6 @@ const App: FunctionComponent = () => {
         </Tab.Navigator>
       ) : (
         <Stack.Navigator screenOptions={{headerShown: false}}>
-          <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
           <Stack.Screen name="AuthScreen" component={AuthStackScreen} />
         </Stack.Navigator>
       )}

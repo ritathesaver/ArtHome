@@ -6,15 +6,8 @@ import {RegisterScreen} from '../auth/RegisterScreen'
 import {slides} from '../../assets/onBoarding/slides'
 import {styles} from './styles'
 
-export const WelcomeScreen: FunctionComponent = () => {
-  const [showRealApp, setShowRealApp] = useState(false)
+export const WelcomeScreen: FunctionComponent = ({onFinish}) => {
 
-  const onDone = () => {
-    setShowRealApp(true)
-  }
-  const onSkip = () => {
-    setShowRealApp(true)
-  }
 
   const _renderNextButton = () => {
     return (
@@ -73,28 +66,22 @@ export const WelcomeScreen: FunctionComponent = () => {
   }
 
   return (
-    <>
-      {showRealApp ? (
-        <RegisterScreen />
-      ) : (
-        <View style={{flex: 1, marginTop: 15}}>
-          <AppIntroSlider
-            data={slides}
-            renderItem={RenderItem}
-            onDone={onDone}
-            bottomButton={true}
-            renderNextButton={_renderNextButton}
-            renderDoneButton={_renderDoneButton}
-            activeDotStyle={{backgroundColor: '#af6b58'}}
-            dotStyle={{backgroundColor: 'white'}}
-          />
-          <TouchableOpacity
-            style={{position: 'absolute', top: 40, right: 25}}
-            onPress={onSkip}>
-            <Text style={{color: '#af6b58', fontSize: 18}}>Skip</Text>
-          </TouchableOpacity>
-        </View>
-      )}
-    </>
+    <View style={{flex: 1, marginTop: 15}}>
+      <AppIntroSlider
+        data={slides}
+        renderItem={RenderItem}
+        onDone={onFinish}
+        bottomButton
+        renderNextButton={_renderNextButton}
+        renderDoneButton={_renderDoneButton}
+        activeDotStyle={{backgroundColor: '#af6b58'}}
+        dotStyle={{backgroundColor: 'white'}}
+      />
+      <TouchableOpacity
+        style={{position: 'absolute', top: 40, right: 25}}
+        onPress={onFinish}>
+        <Text style={{color: '#af6b58', fontSize: 18}}>Skip</Text>
+      </TouchableOpacity>
+    </View>
   )
 }
