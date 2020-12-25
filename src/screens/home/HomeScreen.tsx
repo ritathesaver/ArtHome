@@ -51,22 +51,26 @@ export const HomeScreen: FunctionComponent = () => {
       behavior="padding"
       keyboardVerticalOffset={120}
       style={styles.container}>
-      <View style={styles.searchContainer}>
-        <View style={styles.searchBox}>
-          <SearchIcon />
-          <TextInput
-            onSubmitEditing={() => setIsFocused(false)}
-            style={{flex: 1, marginHorizontal: 5}}
-            underlineColorAndroid="transparent"
-            placeholder="Search..."
-            onFocus={() => setIsFocused(true)}
-            onChangeText={setSearch}
-            value={search}
-          />
-        </View>
-      </View>
       {isFocused ? (
         <>
+          <View style={styles.searchContainer}>
+            <View style={{...styles.searchBox, width: '90%'}}>
+              <SearchIcon />
+              <TextInput
+                style={{flex: 1, marginHorizontal: 5}}
+                underlineColorAndroid="transparent"
+                placeholder="Search..."
+                onFocus={() => setIsFocused(true)}
+                onChangeText={setSearch}
+                value={search}
+              />
+            </View>
+            <TouchableOpacity onPress={() => setIsFocused(false)}>
+              <Text style={{fontSize: 16, color: 'white', marginHorizontal: 3}}>
+                Close
+              </Text>
+            </TouchableOpacity>
+          </View>
           <FlatList
             data={searchedPictures}
             keyExtractor={(item) => item.id}
@@ -102,7 +106,7 @@ export const HomeScreen: FunctionComponent = () => {
             renderItem={({item}) => (
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate('Cart', { id: item.id })
+                  navigation.navigate('Cart', {id: item.id})
                 }}
                 style={{
                   paddingHorizontal: 16,
@@ -130,39 +134,54 @@ export const HomeScreen: FunctionComponent = () => {
           />
         </>
       ) : (
-        <FlatList
-          data={categories}
-          key={'#'}
-          keyExtractor={(item) => '#' + item.key}
-          renderItem={({item}) => (
-            <TouchableOpacity
-              style={{
-                flex: 1,
-                flexDirection: 'column',
-                margin: 3,
-                width: Dimensions.get('window').width / 2,
-                height: 200,
-                alignItems: 'center',
-              }}
-              onPress={() => navigation.navigate(`${item.screen}`)}>
-              <Image style={styles.image} source={{uri: item.image.uri}} />
-              <View
-                style={{
-                  ...styles.overlayBoxWhite,
-                  backgroundColor: item.overlayColor,
-                }}
+        <>
+          <View style={styles.searchContainer}>
+            <View style={{...styles.searchBox, width: '100%'}}>
+              <SearchIcon />
+              <TextInput
+                style={{flex: 1, marginHorizontal: 5}}
+                underlineColorAndroid="transparent"
+                placeholder="Search..."
+                onFocus={() => setIsFocused(true)}
+                onChangeText={setSearch}
+                value={search}
               />
-              <Text
+            </View>
+          </View>
+          <FlatList
+            data={categories}
+            key={'#'}
+            keyExtractor={(item) => '#' + item.key}
+            renderItem={({item}) => (
+              <TouchableOpacity
                 style={{
-                  ...styles.title,
-                  color: `${invert(item.overlayColor, true)}`,
-                }}>
-                {item.title}
-              </Text>
-            </TouchableOpacity>
-          )}
-          numColumns={2}
-        />
+                  flex: 1,
+                  flexDirection: 'column',
+                  margin: 3,
+                  width: Dimensions.get('window').width / 2,
+                  height: 200,
+                  alignItems: 'center',
+                }}
+                onPress={() => navigation.navigate(`${item.screen}`)}>
+                <Image style={styles.image} source={{uri: item.image.uri}} />
+                <View
+                  style={{
+                    ...styles.overlayBoxWhite,
+                    backgroundColor: item.overlayColor,
+                  }}
+                />
+                <Text
+                  style={{
+                    ...styles.title,
+                    color: `${invert(item.overlayColor, true)}`,
+                  }}>
+                  {item.title}
+                </Text>
+              </TouchableOpacity>
+            )}
+            numColumns={2}
+          />
+        </>
       )}
     </KeyboardAvoidingView>
   )

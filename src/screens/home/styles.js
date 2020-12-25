@@ -1,13 +1,14 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native'
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   searchContainer: {
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     backgroundColor: '#202122',
     paddingHorizontal: 20,
     paddingVertical: 10,
@@ -23,34 +24,33 @@ export const styles = StyleSheet.create({
     borderRadius: 25,
     padding: 10,
   },
-   box: {
+  box: {
     width: 180,
     height: 200,
-    
   },
   overlayBoxWhite: {
-     ...StyleSheet.absoluteFillObject,
-            opacity: 0.6
+    ...StyleSheet.absoluteFillObject,
+    opacity: 0.6,
   },
 
   image: {
     width: '100%',
     height: '100%',
-    overflow: "hidden",
-    alignItems: "center"
+    overflow: 'hidden',
+    alignItems: 'center',
   },
   wrapper: {
     marginVertical: 10,
     alignItems: 'center',
-    width: 200
+    width: 200,
   },
   title: {
     position: 'absolute',
     top: 75,
-    color: "white",
-    textAlign: "center",
+    color: 'white',
+    textAlign: 'center',
     fontSize: 20,
     margin: 20,
-    fontWeight: '600'
-  }
+    fontWeight: '600',
+  },
 })

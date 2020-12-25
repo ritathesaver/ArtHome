@@ -18,6 +18,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {AppDispatch} from '../../App'
 import {RootState} from '../../redux/rootReducer'
 import {useState} from 'react'
+import {IPictures} from '../../redux/reducers/picturesReducer'
 
 interface ICartProps {
   route: any
@@ -26,11 +27,9 @@ interface ICartProps {
 export const CartScreen: FunctionComponent<ICartProps> = ({route}) => {
   // console.log(route.params)
   const dispatch: AppDispatch = useDispatch()
-  const picture = useSelector(
+  const picture: IPictures | undefined = useSelector(
     (state: RootState) =>
-      state.pictures.pictures.find(
-        (picture) => picture.id === route.params.id,
-      ) || {},
+      state.pictures.pictures.filter((pic) => pic.id === route.params.id)[0],
   )
 
   useEffect(() => {

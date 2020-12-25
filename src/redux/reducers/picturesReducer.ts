@@ -5,7 +5,7 @@ import {
 } from '../actions/picturesActions'
 
 export interface IPictures {
-  creatorId: number
+  creatorId: string
   id: string
   title: string
   description: string

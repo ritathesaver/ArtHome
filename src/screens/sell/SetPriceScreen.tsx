@@ -22,6 +22,10 @@ export const SetPriceScreen: FunctionComponent<ISetPriceProps> = ({route}) => {
   const navigation = useNavigation()
   const [price, setPrice] = useState('')
 
+  navigation.addListener('blur', () => {
+    setPrice('')
+  })
+
   useEffect(() => {
     navigation.setParams({
       uri: route.params.uri,

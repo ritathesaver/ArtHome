@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {FunctionComponent, useEffect, useState} from 'react'
 import {WelcomeScreen} from './screens/onBoarding/WelcomeScreen'
 import {NavigationContainer} from '@react-navigation/native'
@@ -42,7 +43,6 @@ const App: FunctionComponent = () => {
   const [showWelcome, setShowWelcome] = useState(true)
 
   useEffect(() => {
-    // eslint-disable-next-line no-extra-semi
     setLoading(true)
     ;(async () => {
       console.log(authToken)

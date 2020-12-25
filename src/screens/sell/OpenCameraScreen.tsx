@@ -20,8 +20,6 @@ import axios from 'axios'
 import FastImage from 'react-native-fast-image'
 
 export const OpenCameraScreen: FunctionComponent = () => {
-  const navigation = useNavigation()
-
   const [camera, setCamera] = useState<RNCamera | null>(null)
 
   const [fileData, setFileData] = useState('')
@@ -29,6 +27,12 @@ export const OpenCameraScreen: FunctionComponent = () => {
   const [size, setSize] = useState({ratio: 0})
 
   const [lastPhoto, setLastPhoto] = useState<CameraRoll.PhotoIdentifiersPage>()
+
+  const navigation = useNavigation()
+
+  navigation.addListener('blur', () => {
+    setFileData('')
+  })
 
   const launchImageLibrary = () => {
     let options = {

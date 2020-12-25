@@ -3,7 +3,7 @@ import {createStackNavigator} from '@react-navigation/stack'
 import {OpenCameraScreen} from '../screens/sell/OpenCameraScreen'
 import {SetPriceScreen} from '../screens/sell/SetPriceScreen'
 import {useNavigation} from '@react-navigation/native'
-import {Button} from 'react-native'
+import {Alert, Button} from 'react-native'
 import {CategoriesListScreen} from '../screens/sell/CaterogiesListScreen'
 import {AddDetailsScreen} from '../screens/sell/AddDetailsScreen'
 import MapScreen from '../components/MapScreen'
@@ -32,7 +32,13 @@ export const SellStackScreen = () => {
             <Button
               color="white"
               title="Done"
-              onPress={() => navigation.navigate('SetPrice', route.params)}
+              onPress={() => {
+                if (!route.params) {
+                  Alert.alert('Please, select picture')
+                  return
+                }
+                navigation.navigate('SetPrice', route.params)
+              }}
             />
           ),
           headerLeft: () => (

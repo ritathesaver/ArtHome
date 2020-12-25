@@ -5,7 +5,13 @@ import {View, Text, Image, TouchableOpacity} from 'react-native'
 import {slides} from '../../assets/onBoarding/slides'
 import {styles} from './styles'
 
-export const WelcomeScreen: FunctionComponent = ({onFinish}) => {
+interface IWelcomeScreenProps {
+  onFinish: () => void
+}
+
+export const WelcomeScreen: FunctionComponent<IWelcomeScreenProps> = ({
+  onFinish,
+}) => {
   const _renderNextButton = () => {
     return (
       <View style={styles.buttonNextContainer}>

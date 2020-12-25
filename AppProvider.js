@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react'
 import {Provider} from 'react-redux'
 import {store} from './src/redux'
@@ -9,9 +10,8 @@ const AppProvider = () => {
   return (
     <Provider store={store}>
       <View style={{flex: 1}}>
-      
         <App />
-          <ConnectionError />
+        <ConnectionError />
       </View>
     </Provider>
   )
