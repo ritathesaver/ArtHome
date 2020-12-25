@@ -1,48 +1,61 @@
 import {call, put, takeLatest} from 'redux-saga/effects'
 import axios from 'axios'
-import { Alert} from 'react-native'
+import {Alert} from 'react-native'
 
 async function getData() {
-  try {
-    const { data } = await axios.get('http://localhost:3000/likes')
-    return data
-  }
-  catch (err) {
-    Alert.alert(`${err}`, 'Lost connection')
-  }
+  const {data} = await axios.get('http://localhost:3000/likes')
+  return data
 }
 
 async function addData(body) {
   console.log(body)
-  const {data} = await axios.post(`http://localhost:3000/likes`, body)
+  const {data} = await axios.post('http://localhost:3000/likes', body)
   console.log(data, 'ddaat')
   return data
 }
 async function deleteData(body) {
   // console.log(body)
-  const {data} = await axios.delete(`http://localhost:3000/likes/${body.likeId}`)
+  const {data} = await axios.delete(
+    `http://localhost:3000/likes/${body.likeId}`,
+  )
   // console.log(data, 'ddaat')
   return data
 }
 
 function* workerGetLikes() {
-  const resGet = yield call(getData)
-  // console.log(resGet, 'ddaat')
-
-  yield put({type: 'GET_LIKES_SUCCESS', payload: resGet})
+  try {
+    const resGet = yield call(getData)
+    yield put({type: 'GET_LIKES_SUCCESS', payload: resGet})
+  } catch (err) {
+    Alert.alert(`${err}`, 'Lost connection')
+  }
 }
 
-
 function* workerAddLike(action) {
-  const resGet = yield call(addData, action.payload)
+  try {
+    const resGet = yield call(addData, action.payload)
 
-  yield put({type: 'PUT_LIKE_SUCCESS', payload: {id: resGet.id, pictureId:resGet.pictureId, creatorId: action.payload.creatorId}})
+    yield put({
+      type: 'PUT_LIKE_SUCCESS',
+      payload: {
+        id: resGet.id,
+        pictureId: resGet.pictureId,
+        creatorId: action.payload.creatorId,
+      },
+    })
+  } catch (err) {
+    Alert.alert(`${err}`, 'Lost connection')
+  }
 }
 
 function* workerDeleteLike(action) {
-  const resGet = yield call(deleteData, action.payload)
+  try {
+    yield call(deleteData, action.payload)
 
-  yield put({type: 'DELETE_LIKE_SUCCESS', payload: action.payload.likeId})
+    yield put({type: 'DELETE_LIKE_SUCCESS', payload: action.payload.likeId})
+  } catch (err) {
+    Alert.alert(`${err}`, 'Lost connection')
+  }
 }
 
 export function* watchGetLikes() {

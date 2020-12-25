@@ -33,8 +33,10 @@ export const ArtworksDetails: FunctionComponent<IDetailsProps> = ({route}) => {
   const [search, setSearch] = useState('')
 
   const clearSearch = () => {
-		setSearch('')
-	}
+    setSearch('')
+  }
+
+  console.log(route.params, 'dddd')
 
   useEffect(() => {
     dispatch(getPicturesByCategory(route.params.id))
@@ -42,15 +44,15 @@ export const ArtworksDetails: FunctionComponent<IDetailsProps> = ({route}) => {
 
   const loading = useSelector((state: RootState) => state.pictures.loading)
 
-  const pictures = useSelector((state: RootState) => state.pictures.pictures.filter(((pic) => pic.title.toLowerCase().includes(search.toLowerCase()))))
-
-
+  const pictures = useSelector((state: RootState) =>
+    state.pictures.pictures.filter((pic) =>
+      pic.title.toLowerCase().includes(search.toLowerCase()),
+    ),
+  )
 
   // console.log(pictures, 'dddd')
 
   const [column, setColumn] = useState<Array<IImageWithSize>>([])
-
-
 
   useEffect(() => {
     // eslint-disable-next-line prettier/prettier
@@ -75,17 +77,20 @@ export const ArtworksDetails: FunctionComponent<IDetailsProps> = ({route}) => {
     })()
   }, [pictures, route.params])
 
-
   return (
     <SafeAreaView style={detailStyles.container}>
       <SearchBox setSearch={setSearch} search={search} />
       {loading ? (
         <ActivityIndicator size="large" color="#af6b58" />
       ) : (
-          <FlatList
-            data={column}
-            renderItem={({ item }) => (
-              <TouchableOpacity onPress={() => { clearSearch(); navigation.navigate('Cart', item)}}>
+        <FlatList
+          data={column}
+          renderItem={({item}) => (
+            <TouchableOpacity
+              onPress={() => {
+                clearSearch()
+                navigation.navigate('Cart', {id: item.id})
+              }}>
               <View
                 style={{
                   flex: 1,
@@ -100,10 +105,10 @@ export const ArtworksDetails: FunctionComponent<IDetailsProps> = ({route}) => {
                     height: item.ratio * columnWidth,
                     margin: 1,
                   }}
-                  source={{ uri: item.uri }}>
+                  source={{uri: item.uri}}>
                   <TouchableOpacity>
                     <LikeActiveSvg
-                      style={{ position: 'absolute', top: 10, right: 10 }}
+                      style={{position: 'absolute', top: 10, right: 10}}
                     />
                   </TouchableOpacity>
                 </FastImage>

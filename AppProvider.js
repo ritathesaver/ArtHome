@@ -7,7 +7,7 @@ import ConnectionError from './src/components/ConnectionError'
 const AppProvider = () => {
   return (
     <Provider store={store}>
-      <ConnectionError/>
+
       <App />
     </Provider>
   )

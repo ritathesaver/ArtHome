@@ -2,6 +2,7 @@
 import React, {FunctionComponent, useEffect} from 'react'
 import {
   Dimensions,
+  Image,
   SafeAreaView,
   ScrollView,
   Text,
@@ -16,6 +17,7 @@ import {getUserById} from '../../redux/actions/usersActions'
 import {useDispatch, useSelector} from 'react-redux'
 import {AppDispatch} from '../../App'
 import {RootState} from '../../redux/rootReducer'
+import {useState} from 'react'
 
 interface ICartProps {
   route: any
@@ -24,15 +26,36 @@ interface ICartProps {
 export const CartScreen: FunctionComponent<ICartProps> = ({route}) => {
   // console.log(route.params)
   const dispatch: AppDispatch = useDispatch()
+  const picture = useSelector(
+    (state: RootState) =>
+      state.pictures.pictures.find(
+        (picture) => picture.id === route.params.id,
+      ) || {},
+  )
 
   useEffect(() => {
-    dispatch(getUserById(route.params.creatorId))
-  }, [dispatch, route.params.creatorId])
+    dispatch(getUserById(picture.creatorId))
+  }, [dispatch, picture.creatorId])
 
   const userName = useSelector(
     (state: RootState) => state.users.users.map((user) => user.name)[0],
   )
-  // console.log(userName)
+
+  const [size, setSize] = useState({height: 0, width: 0, ratio: 0})
+
+  useEffect(() => {
+    Image.getSize(picture.uri, (width, height) =>
+      setSize({
+        height,
+        width,
+        ratio: height / width,
+      }),
+    )
+    //setSize(result)
+  }, [picture.uri])
+
+  console.log(size, 'size')
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView
@@ -41,9 +64,9 @@ export const CartScreen: FunctionComponent<ICartProps> = ({route}) => {
         <FastImage
           style={{
             width: Dimensions.get('window').width * 0.85,
-            height: Dimensions.get('window').width * route.params.ratio * 0.85,
+            height: Dimensions.get('window').width * size.ratio * 0.85,
           }}
-          source={{uri: route.params.uri}}>
+          source={{uri: picture.uri}}>
           <LikeActiveSvg style={{position: 'absolute', top: 10, right: 10}} />
         </FastImage>
         <View
@@ -56,14 +79,14 @@ export const CartScreen: FunctionComponent<ICartProps> = ({route}) => {
           <Text>by {userName}</Text>
           <View style={{alignItems: 'flex-end'}}>
             <Text>
-              Size - {route.params.width} x {route.params.height}
+              Size - {size.width} x {size.height}
             </Text>
-            <Text style={styles.price}>Price: {route.params.price} BYN</Text>
+            <Text style={styles.price}>Price: {picture.price} BYN</Text>
           </View>
         </View>
 
         <View>
-          <Text style={styles.description}>{route.params.description}</Text>
+          <Text style={styles.description}>{picture.description}</Text>
         </View>
         <TouchableOpacity
           style={styles.submitButton}

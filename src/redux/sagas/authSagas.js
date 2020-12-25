@@ -4,23 +4,14 @@ import {Alert} from 'react-native'
 
 async function getTokenUp(body) {
   // console.log(body, 'body')
-  try {
-    const {data} = await axios.post('http://localhost:3000/register', body)
-    return data
-  } catch (err) {
-    Alert.alert(`${err}`, 'Lost connection')
-  }
+  const {data} = await axios.post('http://localhost:3000/register', body)
+  return data
 }
 
 async function addUser(id) {
   // console.log(id, 'idddd')
-  try {
-    const {data} = await axios.post('http://localhost:3000/creators', id)
-    return data
-  } catch (err) {
-    // console.log(data)
-    Alert.alert(`${err}`, 'Lost connection')
-  }
+  const {data} = await axios.post('http://localhost:3000/creators', id)
+  return data
 }
 
 export function* watchAddUser() {
@@ -30,19 +21,20 @@ export function* watchAddUser() {
 function* workerAddUser(action) {
   const resGet = yield call(addUser, action.payload)
 
-  // console.log(resGet)
-
   yield put({type: 'ADD_USER_SUCCESS', payload: resGet})
 }
 
 function* workerSignUp(action) {
-  const resGet = yield call(getTokenUp, action.payload)
-  // console.log(resGet, 'token')
+  try {
+    const resGet = yield call(getTokenUp, action.payload)
 
-  yield put({
-    type: 'SIGN_UP_SUCCESS',
-    payload: {id: action.payload.id, userToken: resGet.accessToken},
-  })
+    yield put({
+      type: 'SIGN_UP_SUCCESS',
+      payload: {id: action.payload.id, userToken: resGet.accessToken},
+    })
+  } catch (err) {
+    Alert.alert(`${err}`, 'Lost connection')
+  }
 }
 
 export function* watchSignUp() {
@@ -67,6 +59,7 @@ function* workerSignIn(action) {
     })
   } catch (err) {
     yield put({type: 'SIGN_IN_FAILURE', payload: {err}})
+    Alert.alert(`${err}`, 'Lost connection')
   }
   // console.log(resGet, 'token')
 }

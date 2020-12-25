@@ -22,8 +22,8 @@ import {AppDispatch} from '../../App'
 import {RootState} from '../../redux/rootReducer'
 import {getPictures} from '../../redux/actions/picturesActions'
 import FastImage from 'react-native-fast-image'
+import {IImageSize, IImageWithSize} from '../creators/CreatorDetails'
 import {IPictures} from '../../redux/reducers/picturesReducer'
-import {IImageWithSize, IImageSize} from '../creators/CreatorDetails'
 
 export const HomeScreen: FunctionComponent = () => {
   const navigation = useNavigation()
@@ -48,30 +48,30 @@ export const HomeScreen: FunctionComponent = () => {
     ),
   )
 
-  //const [column, setColumn] = useState<Array<IImageWithSize>>([])
+  const [column, setColumn] = useState<Array<IImageWithSize>>([])
 
-  // useEffect(() => {
-  //   // eslint-disable-next-line prettier/prettier
-  //   (async () => {
-  //     const imagesWithSize: IImageWithSize[] = await Promise.all(
-  //       searchedPictures.map(async (item: IPictures) => {
-  //         // console.log(item)
-  //         const result: IImageSize = await new Promise((resolve) => {
-  //           Image.getSize(item.uri, (width, height) =>
-  //             resolve({
-  //               height,
-  //               width,
-  //               ratio: height / width,
-  //             }),
-  //           )
-  //         })
-  //         return {...result, ...item}
-  //       }),
-  //     )
-  //     // console.log(imagesWithSize)
-  //     setColumn(imagesWithSize)
-  //   })()
-  // }, [searchedPictures])
+  useEffect(() => {
+    // eslint-disable-next-line prettier/prettier
+    (async () => {
+      const imagesWithSize: IImageWithSize[] = await Promise.all(
+        searchedPictures.map(async (item: IPictures) => {
+          // console.log(item)
+          const result: IImageSize = await new Promise((resolve) => {
+            Image.getSize(item.uri, (width, height) =>
+              resolve({
+                height,
+                width,
+                ratio: height / width,
+              }),
+            )
+          })
+          return {...result, ...item}
+        }),
+      )
+      // console.log(imagesWithSize)
+      setColumn(imagesWithSize)
+    })()
+  }, [searchedPictures])
 
   return (
     <KeyboardAvoidingView
@@ -95,7 +95,7 @@ export const HomeScreen: FunctionComponent = () => {
       {isFocused ? (
         <>
           <FlatList
-            data={searchedPictures}
+            data={column}
             keyExtractor={(item) => item.id}
             showsHorizontalScrollIndicator={false}
             numColumns={1}
@@ -129,7 +129,7 @@ export const HomeScreen: FunctionComponent = () => {
             renderItem={({item}) => (
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate('Cart', { id: item.id })
+                  navigation.navigate('Cart', item)
                 }}
                 style={{
                   paddingHorizontal: 16,

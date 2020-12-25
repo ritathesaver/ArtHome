@@ -3,7 +3,6 @@ import {useNavigation} from '@react-navigation/native'
 import invert from 'invert-color'
 import React, {FunctionComponent, useEffect, useState} from 'react'
 import {
-  Alert,
   Dimensions,
   FlatList,
   Image,
@@ -28,8 +27,6 @@ export const ArtworksScreen: FunctionComponent = () => {
     setSearch('')
   }
 
-  const error = useSelector((state: RootState) => state.categories.error)
-
   useEffect(() => {
     dispatch(getCategories())
   }, [dispatch])
@@ -43,48 +40,42 @@ export const ArtworksScreen: FunctionComponent = () => {
   )
 
   return (
-    <>
-      {error ? (
-        Alert.alert(`${error}`, 'Lost connection')
-      ) : (
-        <SafeAreaView style={styles.container}>
-          <SearchBox setSearch={setSearch} search={search} />
-          <FlatList
-            data={searchedCategories}
-            renderItem={({item}) => (
-              <TouchableOpacity
+    <SafeAreaView style={styles.container}>
+      <SearchBox setSearch={setSearch} search={search} />
+      <FlatList
+        data={searchedCategories}
+        renderItem={({item}) => (
+          <TouchableOpacity
+            style={{
+              flex: 1,
+              flexDirection: 'column',
+              marginVertical: 15,
+              marginHorizontal: 5,
+              width: Dimensions.get('window').width / 2,
+              height: 140,
+            }}
+            onPress={() => {
+              clearSearch()
+              navigation.navigate('ArtworksDetails', {id: item.id})
+            }}>
+            <Image style={styles.image} source={{uri: item.coverUri}} />
+            <View
+              style={{
+                backgroundColor: item.overlayColor,
+                height: 45,
+              }}>
+              <Text
                 style={{
-                  flex: 1,
-                  flexDirection: 'column',
-                  marginVertical: 15,
-                  marginHorizontal: 5,
-                  width: Dimensions.get('window').width / 2,
-                  height: 140,
-                }}
-                onPress={() => {
-                  clearSearch()
-                  navigation.navigate('ArtworksDetails', {id: item.id})
+                  ...styles.title,
+                  color: `${invert(item.overlayColor, true)}`,
                 }}>
-                <Image style={styles.image} source={{uri: item.coverUri}} />
-                <View
-                  style={{
-                    backgroundColor: item.overlayColor,
-                    height: 45,
-                  }}>
-                  <Text
-                    style={{
-                      ...styles.title,
-                      color: `${invert(item.overlayColor, true)}`,
-                    }}>
-                    {item.title}
-                  </Text>
-                </View>
-              </TouchableOpacity>
-            )}
-            numColumns={2}
-          />
-        </SafeAreaView>
-      )}
-    </>
+                {item.title}
+              </Text>
+            </View>
+          </TouchableOpacity>
+        )}
+        numColumns={2}
+      />
+    </SafeAreaView>
   )
 }

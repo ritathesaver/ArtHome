@@ -1,86 +1,75 @@
 import {call, put, takeLatest} from 'redux-saga/effects'
 import axios from 'axios'
-import { Alert} from 'react-native'
+import {Alert} from 'react-native'
 
 async function getData() {
-
-    const { data } = await axios.get('http://localhost:3000/creators')
-    return data
-
-  }
+  const {data} = await axios.get('http://localhost:3000/creators')
+  return data
+}
 
 async function getUser(body) {
   // console.log(body)
 
-    const { data } = await axios.get(`http://localhost:3000/creators/${body.id}`)
-    return data
-  
+  const {data} = await axios.get(`http://localhost:3000/creators/${body.id}`)
+  return data
+
   // console.log(data, 'daaaat')
-  
 }
 
 async function editAvatarData(body) {
-  try {
-    const { data } = await axios.put(
-      `http://localhost:3000/creators/${body.body.id}`,
-      {
-        ...body.body,
-        avatarUri: body.avatarUri,
-      },
-    )
-    return data
-  }
-  catch (err) {
-    Alert.alert(`${err}`, 'Lost connection')
-  } 
+  const {data} = await axios.put(
+    `http://localhost:3000/creators/${body.body.id}`,
+    {
+      ...body.body,
+      avatarUri: body.avatarUri,
+    },
+  )
+  return data
 }
 
 async function editAboutData(body) {
-  try {
-    const { data } = await axios.put(
-      `http://localhost:3000/creators/${body.body.id}`,
-      {
-        ...body.body,
-        about: body.aboutText,
-      },
-    )
-    return data
-  }
-  catch (err) {
-    Alert.alert(`${err}`, 'Lost connection')
-  } 
+  const {data} = await axios.put(
+    `http://localhost:3000/creators/${body.body.id}`,
+    {
+      ...body.body,
+      about: body.aboutText,
+    },
+  )
+  return data
 }
 
-
 async function editSpecializationData(body) {
-  try {
-    const { data } = await axios.put(
-      `http://localhost:3000/creators/${body.body.id}`,
-      {
-        ...body.body,
-        specialization: [
-          ...body.body.specialization,
-          body.specialization.map((specialization) => specialization),
-        ],
-      },
-    )
-    return data
-  }
-  catch (err) {
-    Alert.alert(`${err}`, 'Lost connection')
-  }  
+  const {data} = await axios.put(
+    `http://localhost:3000/creators/${body.body.id}`,
+    {
+      ...body.body,
+      specialization: [
+        ...body.body.specialization,
+        body.specialization.map((specialization) => specialization),
+      ],
+    },
+  )
+  return data
 }
 
 function* workerEditAvatar(action) {
-  const resGet = yield call(editAvatarData, action.payload)
+  try {
+    const resGet = yield call(editAvatarData, action.payload)
 
-  yield put({type: 'EDIT_AVATAR_SUCCESS', payload: resGet})
+    yield put({type: 'EDIT_AVATAR_SUCCESS', payload: resGet})
+  } catch (err) {
+    Alert.alert(`${err}`, 'Lost connection')
+  }
 }
 
 function* workerEditAbout(action) {
-  const resGet = yield call(editAboutData, action.payload)
+  try {
+    const resGet = yield call(editAboutData, action.payload)
 
-  yield put({type: 'EDIT_ABOUT_SUCCESS', payload: resGet})
+    yield put({type: 'EDIT_ABOUT_SUCCESS', payload: resGet})
+  } catch (err) {
+    Alert.alert(`${err}`, 'Lost connection')
+  }
 }
 
 function* workerAddSpec(action) {
@@ -92,17 +81,21 @@ function* workerAddSpec(action) {
 function* workerGetUsers() {
   try {
     const resGet = yield call(getData)
-    yield put({ type: 'GET_USERS_SUCCESS', payload: resGet })
-  }
-  catch (err) {
-    yield put({ type: 'GET_USERS_ERROR', payload: err })
+    yield put({type: 'GET_USERS_SUCCESS', payload: resGet})
+  } catch (err) {
+    yield put({type: 'GET_USERS_ERROR', payload: err})
+    Alert.alert(`${err}`, 'Lost connection')
   }
 }
 
 function* workerGetUserById(action) {
-  const resGet = yield call(getUser, action.payload)
+  try {
+    const resGet = yield call(getUser, action.payload)
 
-  yield put({type: 'GET_USERS_SUCCESS', payload: [resGet]})
+    yield put({type: 'GET_USERS_SUCCESS', payload: [resGet]})
+  } catch (err) {
+    Alert.alert(`${err}`, 'Lost connection')
+  }
 }
 
 export function* watchGetUsers() {

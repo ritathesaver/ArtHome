@@ -1,16 +1,14 @@
 import {call, put, takeLatest} from 'redux-saga/effects'
 import axios from 'axios'
-import { getPicturesByCategoryAsync, getPicturesAsync } from '../actions/picturesActions'
-import { Alert} from 'react-native'
+import {
+  getPicturesByCategoryAsync,
+  getPicturesAsync,
+} from '../actions/picturesActions'
+import {Alert} from 'react-native'
 
 async function getData() {
-  try {
-    const { data } = await axios.get('http://localhost:3000/pictures')
-    return data
-  }
-  catch (err) {
-     Alert.alert(`${err}`, 'Lost connection')
-  }
+  const {data} = await axios.get('http://localhost:3000/pictures')
+  return data
 }
 
 async function getDataByUser(body) {
@@ -38,36 +36,46 @@ async function addData(body) {
 function* workerGetPictures() {
   yield put(getPicturesAsync.request())
   try {
-		const resGet = yield call(getData)
+    const resGet = yield call(getData)
 
     yield put(getPicturesAsync.success(resGet))
-	} catch (err) {
-		yield put(getPicturesAsync.failure(err))
-	}
+  } catch (err) {
+    yield put(getPicturesAsync.failure(err))
+    Alert.alert(`${err}`, 'Lost connection')
+  }
 }
 
 function* workerGetPicturesBy(action) {
-  const resGet = yield call(getDataByUser, action.payload)
+  try {
+    const resGet = yield call(getDataByUser, action.payload)
 
-  yield put({type: 'GET_PICTURES_SUCCESS', payload: resGet})
+    yield put({type: 'GET_PICTURES_SUCCESS', payload: resGet})
+  } catch (err) {
+    Alert.alert(`${err}`, 'Lost connection')
+  }
 }
 
 function* workerAddPicture(action) {
-  const resGet = yield call(addData, action.payload)
+  try {
+    const resGet = yield call(addData, action.payload)
 
-  yield put({type: 'ADD_PICTURE_SUCCESS', payload: resGet})
+    yield put({type: 'ADD_PICTURE_SUCCESS', payload: resGet})
+  } catch (err) {
+    Alert.alert(`${err}`, 'Lost connection')
+  }
 }
 
 function* workerGetPicturesByCategory(action) {
   yield put(getPicturesByCategoryAsync.request())
 
-	try {
-		const resGet = yield call(getDataByCategory, action.payload)
+  try {
+    const resGet = yield call(getDataByCategory, action.payload)
 
     yield put(getPicturesByCategoryAsync.success(resGet))
-	} catch (err) {
-		yield put(getPicturesByCategoryAsync.failure(err))
-	}
+  } catch (err) {
+    yield put(getPicturesByCategoryAsync.failure(err))
+    Alert.alert(`${err}`, 'Lost connection')
+  }
 }
 
 export function* watchGetPictures() {

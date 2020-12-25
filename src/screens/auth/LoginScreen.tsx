@@ -26,6 +26,7 @@ export const LoginScreen: FunctionComponent = () => {
       password: '',
     },
     onSubmit: async () => {
+      console.log('signIn')
       dispatch(signIn(formik.values.email, formik.values.password))
     },
   })

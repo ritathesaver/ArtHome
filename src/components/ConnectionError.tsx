@@ -1,34 +1,35 @@
-import { useNetInfo } from "@react-native-community/netinfo"
-import React, { memo } from "react"
-import { useState, useEffect, FunctionComponent } from "react"
-import { Text, View } from "react-native"
+/* eslint-disable react-native/no-inline-styles */
+import {addEventListener} from '@react-native-community/netinfo'
+import React, {memo} from 'react'
+import {useState, useEffect, FunctionComponent} from 'react'
+import {Text, View} from 'react-native'
 
 const ConnectionError: FunctionComponent = () => {
-
-  const netInfo = useNetInfo()
-  const [errorText, setErrorText] = useState<string | null>(null)
+  const [showError, setShowError] = useState<boolean | null>(false)
 
   useEffect(() => {
-    if (netInfo.isConnected) {
-      console.log('inet est')
-      setErrorText(null)
-    } else {
-      setErrorText('common.noConnection')
+    const unsubscribe = addEventListener((state) => {
+      if (!state.isConnected) {
+        setShowError(true)
+      }
+    })
+    return () => {
+      unsubscribe()
     }
-  }, [netInfo])
+  }, [])
 
-  console.log(errorText)
-
-  
-  return (
-    
-    <>{errorText ?
-     (<View style={{ backgroundColor: 'red', justifyContent: 'flex-end', alignItems: 'center', paddingBottom:5, height: 65 }}>
-       <Text style={{ color: 'white'}}>No internet connection</Text>
-     </View>) : (<></>)
-    }
-    </>
-  )
+  return showError ? (
+    <View
+      style={{
+        backgroundColor: 'red',
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        paddingBottom: 5,
+        height: 65,
+      }}>
+      <Text style={{color: 'white'}}>No internet connection</Text>
+    </View>
+  ) : null
 }
 
 export default memo(ConnectionError)

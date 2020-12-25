@@ -18,13 +18,8 @@ import {IImageSize} from '../creators/CreatorDetails'
 import axios from 'axios'
 
 import FastImage from 'react-native-fast-image'
-import {AppDispatch} from '../../App'
-import {useDispatch} from 'react-redux'
-import {setSellState} from '../../redux/actions/sellAction'
 
 export const OpenCameraScreen: FunctionComponent = () => {
-  const dispatch: AppDispatch = useDispatch()
-
   const navigation = useNavigation()
 
   const [camera, setCamera] = useState<RNCamera | null>(null)
@@ -34,10 +29,6 @@ export const OpenCameraScreen: FunctionComponent = () => {
   const [size, setSize] = useState({ratio: 0})
 
   const [lastPhoto, setLastPhoto] = useState<CameraRoll.PhotoIdentifiersPage>()
-
-  useEffect(() => {
-    dispatch(setSellState(true))
-  }, [dispatch])
 
   const launchImageLibrary = () => {
     let options = {

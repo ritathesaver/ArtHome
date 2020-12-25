@@ -1,4 +1,4 @@
-import React, {FunctionComponent, useEffect} from 'react'
+import React, {FunctionComponent, useEffect, useState} from 'react'
 import {WelcomeScreen} from './screens/onBoarding/WelcomeScreen'
 import {NavigationContainer} from '@react-navigation/native'
 import {createStackNavigator} from '@react-navigation/stack'
@@ -26,6 +26,7 @@ import {RootState} from './redux/rootReducer'
 import AsyncStorage from '@react-native-community/async-storage'
 import {restoreToken} from './redux/actions/authActions'
 import {CartDetails} from './screens/cart/ComingSoon'
+import {ActivityIndicator, View} from 'react-native'
 
 Icon.loadFont()
 
@@ -36,6 +37,7 @@ const App: FunctionComponent = () => {
   const authToken = useSelector((state: RootState) => state.auth.userToken)
   const dispatch: AppDispatch = useDispatch()
   const signOut = useSelector((state: RootState) => state.auth.isSignout)
+  //const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     // eslint-disable-next-line no-extra-semi
@@ -43,16 +45,20 @@ const App: FunctionComponent = () => {
       console.log(authToken)
       if (authToken) {
         await AsyncStorage.setItem('userToken', authToken)
+        //setLoading(false)
         return
       }
 
       if (signOut) {
-        return await AsyncStorage.removeItem('userToken')
+        await AsyncStorage.removeItem('userToken')
+        //setLoading(false)
+        return
       }
 
       const userToken = await AsyncStorage.getItem('userToken')
       if (userToken) {
         dispatch(restoreToken(userToken))
+        //setLoading(false)
       }
     })()
   }, [authToken, dispatch, signOut])
@@ -62,6 +68,7 @@ const App: FunctionComponent = () => {
   return (
     <NavigationContainer>
       {authToken ? (
+
         <Tab.Navigator
           tabBarOptions={{
             activeTintColor: 'white',

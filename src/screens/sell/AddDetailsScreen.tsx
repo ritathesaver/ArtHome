@@ -14,7 +14,6 @@ import {AppDispatch} from '../../App'
 import NextIcon from '../../assets/icons/next.svg'
 import {RootState} from '../../redux/rootReducer'
 import {addPicture} from '../../redux/actions/picturesActions'
-import {setSellState} from '../../redux/actions/sellAction'
 
 interface IAddDetailsProps {
   route: any
@@ -52,7 +51,6 @@ export const AddDetailsScreen: FunctionComponent<IAddDetailsProps> = ({
           route.params.res,
         ),
       )
-      dispatch(setSellState(false))
       navigation.navigate('Home')
     } else {
       return <Text>All fields are required</Text>

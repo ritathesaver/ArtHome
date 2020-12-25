@@ -4,7 +4,6 @@ import {IAuthState} from './reducers/authReducer'
 import {categoriesReducer, ICategoriesState} from './reducers/categoriesReducer'
 import {ILikesState, likesReducer} from './reducers/likesReducer'
 import {IPicturesState, picturesReducer} from './reducers/picturesReducer'
-import {ISellState, sellReducer} from './reducers/sellReducer'
 import {IUsersState} from './reducers/usersReducer'
 
 export interface RootState {
@@ -13,7 +12,6 @@ export interface RootState {
   auth: IAuthState
   categories: ICategoriesState
   likes: ILikesState
-  sellState: ISellState
 }
 
 export default combineReducers({
@@ -22,5 +20,4 @@ export default combineReducers({
   auth: authReducer,
   categories: categoriesReducer,
   likes: likesReducer,
-  sellState: sellReducer,
 })

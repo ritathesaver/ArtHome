@@ -1,7 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {FunctionComponent, useEffect, useState} from 'react'
 import {
-  Alert,
   FlatList,
   Image,
   SafeAreaView,
@@ -21,30 +20,24 @@ export const CreatorsScreen: FunctionComponent = () => {
   const navigation = useNavigation()
   const [search, setSearch] = useState('')
   const clearSearch = () => {
-		setSearch('')
-	}
+    setSearch('')
+  }
 
   const dispatch: AppDispatch = useDispatch()
 
-  
-
-    const error = useSelector((state: RootState) =>
-      state.users.error)
-  
-      useEffect(() => {
-      dispatch(getUsers())
+  useEffect(() => {
+    dispatch(getUsers())
   }, [dispatch])
 
-  const searchedUsers  = useSelector((state: RootState) =>
-    state.users.users.filter((users) => users.name.toLowerCase().includes(search.toLowerCase())).map((name) => name),
+  const searchedUsers = useSelector((state: RootState) =>
+    state.users.users
+      .filter((users) =>
+        users.name.toLowerCase().includes(search.toLowerCase()),
+      )
+      .map((name) => name),
   )
 
   return (
-     <>
-      {error ?
-        (Alert.alert(`${error}`, 'Lost connection')) :
-
-        (
     <SafeAreaView style={styles.container}>
       <SearchBox setSearch={setSearch} search={search} />
 
@@ -56,8 +49,7 @@ export const CreatorsScreen: FunctionComponent = () => {
             onPress={() => {
               clearSearch()
               navigation.navigate('Details', item)
-             }
-            }
+            }}
             style={{
               flexDirection: 'column',
               margin: 20,
@@ -71,9 +63,6 @@ export const CreatorsScreen: FunctionComponent = () => {
         )}
         numColumns={3}
       />
-          </SafeAreaView>
-        )
-        }
-      </>
+    </SafeAreaView>
   )
 }
