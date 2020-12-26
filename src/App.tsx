@@ -22,12 +22,12 @@ import {store} from './redux'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import {SellStackScreen} from './navigators/SellNavigator'
 import {ProfileScreen} from './screens/profile/ProfileScreen'
-import {Saved} from './screens/galleries/Saved'
 import {RootState} from './redux/rootReducer'
 import AsyncStorage from '@react-native-community/async-storage'
 import {restoreToken} from './redux/actions/authActions'
 import {CartDetails} from './screens/cart/ComingSoon'
 import {ActivityIndicator, View} from 'react-native'
+import {SavedStackScreen} from './navigators/SavedNavigator'
 
 Icon.loadFont()
 
@@ -120,7 +120,7 @@ const App: FunctionComponent = () => {
           />
           <Tab.Screen
             name="Saved"
-            component={Saved}
+            component={SavedStackScreen}
             options={{
               tabBarLabel: 'Saved',
               tabBarIcon: ({focused}) =>

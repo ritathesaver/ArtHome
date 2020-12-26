@@ -11,10 +11,9 @@ import {
 import {styles} from './styles'
 import {useNavigation} from '@react-navigation/native'
 import {useFormik} from 'formik'
-import {useDispatch, useSelector} from 'react-redux'
+import {useDispatch} from 'react-redux'
 import {AppDispatch} from '../../App'
 import {signIn} from '../../redux/actions/authActions'
-import {RootState} from '../../redux/rootReducer'
 import * as Yup from 'yup'
 
 const SigninSchema = Yup.object().shape({
@@ -38,8 +37,6 @@ export const LoginScreen: FunctionComponent = () => {
     },
     validationSchema: SigninSchema,
   })
-
-  const error = useSelector((state: RootState) => state.auth.error)
 
   return (
     <ImageBackground
@@ -109,17 +106,6 @@ export const LoginScreen: FunctionComponent = () => {
                 {formik.errors.password}
               </Text>
             ) : null}
-            {error && (
-              <Text
-                style={{
-                  fontSize: 15,
-                  color: 'red',
-                  marginBottom: 10,
-                  alignItems: 'center',
-                }}>
-                Incorrect email or password
-              </Text>
-            )}
           </View>
           <TouchableOpacity
             style={styles.submitButton}
