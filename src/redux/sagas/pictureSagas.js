@@ -41,7 +41,7 @@ function* workerGetPictures() {
     yield put(getPicturesAsync.success(resGet))
   } catch (err) {
     yield put(getPicturesAsync.failure(err))
-    Alert.alert(`${err}`, 'Lost connection')
+    Alert.alert('Ooops!', 'Something went wrong')
   }
 }
 
@@ -51,7 +51,7 @@ function* workerGetPicturesBy(action) {
 
     yield put({type: 'GET_PICTURES_SUCCESS', payload: resGet})
   } catch (err) {
-    Alert.alert(`${err}`, 'Lost connection')
+    Alert.alert('Ooops!', 'Something went wrong')
   }
 }
 
@@ -61,7 +61,7 @@ function* workerAddPicture(action) {
 
     yield put({type: 'ADD_PICTURE_SUCCESS', payload: resGet})
   } catch (err) {
-    Alert.alert(`${err}`, 'Lost connection')
+    Alert.alert('Ooops!', 'Something went wrong')
   }
 }
 
@@ -74,7 +74,7 @@ function* workerGetPicturesByCategory(action) {
     yield put(getPicturesByCategoryAsync.success(resGet))
   } catch (err) {
     yield put(getPicturesByCategoryAsync.failure(err))
-    Alert.alert(`${err}`, 'Lost connection')
+    Alert.alert('Ooops!', 'Something went wrong')
   }
 }
 

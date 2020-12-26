@@ -33,7 +33,7 @@ function* workerSignUp(action) {
       payload: {id: action.payload.id, userToken: resGet.accessToken},
     })
   } catch (err) {
-    Alert.alert(`${err}`, 'Lost connection')
+    Alert.alert('Ooops!', 'Something went wrong')
   }
 }
 
@@ -59,7 +59,7 @@ function* workerSignIn(action) {
     })
   } catch (err) {
     yield put({type: 'SIGN_IN_FAILURE', payload: {err}})
-    Alert.alert(`${err}`, 'Lost connection')
+    Alert.alert('Ooops!', 'Incorrect email or password')
   }
   // console.log(resGet, 'token')
 }

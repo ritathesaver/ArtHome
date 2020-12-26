@@ -27,7 +27,7 @@ function* workerGetLikes() {
     const resGet = yield call(getData)
     yield put({type: 'GET_LIKES_SUCCESS', payload: resGet})
   } catch (err) {
-    Alert.alert(`${err}`, 'Lost connection')
+    Alert.alert('Ooops!', 'Something went wrong')
   }
 }
 
@@ -44,7 +44,7 @@ function* workerAddLike(action) {
       },
     })
   } catch (err) {
-    Alert.alert(`${err}`, 'Lost connection')
+    Alert.alert('Ooops!', 'Something went wrong')
   }
 }
 
@@ -54,7 +54,7 @@ function* workerDeleteLike(action) {
 
     yield put({type: 'DELETE_LIKE_SUCCESS', payload: action.payload.likeId})
   } catch (err) {
-    Alert.alert(`${err}`, 'Lost connection')
+    Alert.alert('Ooops!', 'Something went wrong')
   }
 }
 

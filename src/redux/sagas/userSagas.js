@@ -58,7 +58,7 @@ function* workerEditAvatar(action) {
 
     yield put({type: 'EDIT_AVATAR_SUCCESS', payload: resGet})
   } catch (err) {
-    Alert.alert(`${err}`, 'Lost connection')
+    Alert.alert('Ooops!', 'Something went wrong')
   }
 }
 
@@ -68,7 +68,7 @@ function* workerEditAbout(action) {
 
     yield put({type: 'EDIT_ABOUT_SUCCESS', payload: resGet})
   } catch (err) {
-    Alert.alert(`${err}`, 'Lost connection')
+    Alert.alert('Ooops!', 'Something went wrong')
   }
 }
 
@@ -84,7 +84,7 @@ function* workerGetUsers() {
     yield put({type: 'GET_USERS_SUCCESS', payload: resGet})
   } catch (err) {
     yield put({type: 'GET_USERS_ERROR', payload: err})
-    Alert.alert(`${err}`, 'Lost connection')
+    Alert.alert('Ooops!', 'Something went wrong')
   }
 }
 
@@ -94,7 +94,7 @@ function* workerGetUserById(action) {
 
     yield put({type: 'GET_USERS_SUCCESS', payload: [resGet]})
   } catch (err) {
-    Alert.alert(`${err}`, 'Lost connection')
+    Alert.alert('Ooops!', 'Something went wrong')
   }
 }
 

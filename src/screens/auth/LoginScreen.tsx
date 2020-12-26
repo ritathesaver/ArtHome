@@ -15,6 +15,13 @@ import {useDispatch, useSelector} from 'react-redux'
 import {AppDispatch} from '../../App'
 import {signIn} from '../../redux/actions/authActions'
 import {RootState} from '../../redux/rootReducer'
+import * as Yup from 'yup'
+
+const SigninSchema = Yup.object().shape({
+  email: Yup.string().required('Required'),
+
+  password: Yup.string().required('Required'),
+})
 
 export const LoginScreen: FunctionComponent = () => {
   const navigation = useNavigation()
@@ -29,6 +36,7 @@ export const LoginScreen: FunctionComponent = () => {
       console.log('signIn')
       dispatch(signIn(formik.values.email, formik.values.password))
     },
+    validationSchema: SigninSchema,
   })
 
   const error = useSelector((state: RootState) => state.auth.error)
@@ -63,9 +71,19 @@ export const LoginScreen: FunctionComponent = () => {
               onChangeText={formik.handleChange('email')}
               onBlur={formik.handleBlur('email')}
               value={formik.values.email}
-              style={styles.input}
+              style={[styles.input, !formik.errors.email && {marginBottom: 14}]}
               placeholder="Enter email"
             />
+            {formik.errors.email && formik.touched.email ? (
+              <Text
+                style={{
+                  paddingTop: 2,
+                  fontSize: 12,
+                  color: 'red',
+                }}>
+                {formik.errors.email}
+              </Text>
+            ) : null}
           </View>
           <View style={styles.inputWrapper}>
             <Text style={styles.labelText}>Password</Text>
@@ -74,10 +92,23 @@ export const LoginScreen: FunctionComponent = () => {
               onChangeText={formik.handleChange('password')}
               onBlur={formik.handleBlur('password')}
               value={formik.values.password}
-              style={styles.input}
+              style={[
+                styles.input,
+                !formik.errors.password && {marginBottom: 14},
+              ]}
               secureTextEntry={true}
               placeholder="Enter password"
             />
+            {formik.errors.password && formik.touched.password ? (
+              <Text
+                style={{
+                  paddingTop: 2,
+                  fontSize: 12,
+                  color: 'red',
+                }}>
+                {formik.errors.password}
+              </Text>
+            ) : null}
             {error && (
               <Text
                 style={{

@@ -13,7 +13,7 @@ function* workerGetCategories() {
     yield put({type: 'GET_CATEGORIES_SUCCESS', payload: resGet})
   } catch (err) {
     yield put({type: 'GET_CATEGORIES_FAILURE', payload: err})
-    Alert.alert(`${err}`, 'Lost connection')
+    Alert.alert('Ooops!', 'Something went wrong')
   }
 }
 
