@@ -131,7 +131,7 @@ export const Gallery: FunctionComponent<IDetailsProps> = (picturesArray) => {
   }
 
   const imagesColumns = columns.map((column, index) => (
-    <View key={index} style={{width: '49%', marginRight: 5}}>
+    <View key={index} style={{width: '49%'}}>
       {column.map((item: IImageWithSize) => {
         return (
           <>
@@ -152,7 +152,6 @@ export const Gallery: FunctionComponent<IDetailsProps> = (picturesArray) => {
                 style={{
                   width: columnWidth,
                   height: item.ratio * columnWidth,
-                  margin: 1,
                 }}
                 source={{
                   uri: `${item.uri}`,
@@ -238,7 +237,7 @@ export const Gallery: FunctionComponent<IDetailsProps> = (picturesArray) => {
               flexWrap: 'wrap',
               alignItems: 'flex-start',
             }}>
-            <View style={{width: '49%', marginRight: 5}}>{item}</View>
+            <View style={{width: '49%'}}>{item}</View>
           </View>
         )}
         numColumns={2}

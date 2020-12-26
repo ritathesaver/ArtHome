@@ -59,7 +59,8 @@ export const priceStyles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    marginTop: 15,
+    paddingTop: 15,
+    backgroundColor: '#202122',
   },
   headerWrapper: {
     marginBottom: 10,
@@ -69,6 +70,7 @@ export const priceStyles = StyleSheet.create({
   header: {
     fontSize: 22,
     textAlign: 'center',
+    color: '#f7f7f7',
   },
   inputWrapper: {
     flexDirection: 'row',
@@ -79,13 +81,14 @@ export const priceStyles = StyleSheet.create({
   priceText: {
     fontSize: 20,
     marginHorizontal: 3,
+    color: '#f7f7f7',
   },
   priceInput: {
     width: '30%',
     padding: 3,
     borderColor: 'black',
     borderBottomWidth: 1,
-    color: 'black',
+    color: '#f7f7f7',
     fontSize: 20,
   },
 })

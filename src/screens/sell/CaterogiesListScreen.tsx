@@ -27,7 +27,7 @@ export const CategoriesListScreen: FunctionComponent<ISetCategoryProps> = ({
   )
 
   return (
-    <View style={{flex: 1, marginHorizontal: 10, backgroundColor: 'white'}}>
+    <View style={{flex: 1, paddingHorizontal: 10, backgroundColor: '#202122'}}>
       <FlatList
         keyExtractor={(item, index) => index.toString()}
         data={categories}
@@ -43,8 +43,9 @@ export const CategoriesListScreen: FunctionComponent<ISetCategoryProps> = ({
                   price: route.params.price,
                 })
               }}>
-              <View style={{backgroundColor: 'white'}}>
-                <Text style={{fontSize: 20, marginVertical: 15}}>
+              <View style={{backgroundColor: '#202122'}}>
+                <Text
+                  style={{fontSize: 20, paddingVertical: 15, color: '#f7f7f7'}}>
                   {item.title}
                 </Text>
               </View>

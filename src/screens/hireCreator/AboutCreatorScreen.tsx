@@ -15,8 +15,10 @@ export const AboutCreatorScreen: FunctionComponent<ICreatorPageProps> = ({
 }) => {
   return (
     <View style={pageStyles.container}>
-      <View style={pageStyles.imageContainer}>
-        <Image style={pageStyles.image} source={{uri: route.avatarUri}} />
+      <View style={{alignItems: 'center', width: '100%'}}>
+        <View style={pageStyles.imageContainer}>
+          <Image style={pageStyles.image} source={{uri: route.avatarUri}} />
+        </View>
       </View>
       <Text style={pageStyles.title}> {route.name}</Text>
 
@@ -45,7 +47,7 @@ export const AboutCreatorScreen: FunctionComponent<ICreatorPageProps> = ({
               padding: 10,
               borderColor: '#af6b58',
             }}>
-            <Text>{item}</Text>
+            <Text style={{color: '#f7f7f7'}}>{item}</Text>
           </View>
         ))}
       </View>

@@ -75,9 +75,9 @@ export const CartScreen: FunctionComponent<ICartProps> = ({route}) => {
             width: '100%',
             marginTop: 10,
           }}>
-          <Text>by {userName}</Text>
+          <Text style={{color: '#f7f7f7'}}>by {userName}</Text>
           <View style={{alignItems: 'flex-end'}}>
-            <Text>
+            <Text style={{color: '#f7f7f7'}}>
               Size - {size.width} x {size.height}
             </Text>
             <Text style={styles.price}>Price: {picture.price} BYN</Text>

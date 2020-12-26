@@ -47,10 +47,7 @@ export const HomeScreen: FunctionComponent = () => {
   )
 
   return (
-    <KeyboardAvoidingView
-      behavior="padding"
-      keyboardVerticalOffset={120}
-      style={styles.container}>
+    <KeyboardAvoidingView behavior="padding" style={styles.container}>
       {isFocused ? (
         <>
           <View style={styles.searchContainer}>
@@ -78,7 +75,9 @@ export const HomeScreen: FunctionComponent = () => {
             numColumns={1}
             ListHeaderComponent={
               <>
-                <Text style={{fontSize: 20, margin: 15}}>Creators:</Text>
+                <Text style={{fontSize: 20, margin: 15, color: '#f7f7f7'}}>
+                  Creators:
+                </Text>
                 <FlatList
                   data={searchedUsers}
                   key={'_'}
@@ -96,11 +95,13 @@ export const HomeScreen: FunctionComponent = () => {
                         style={{width: 70, height: 70, borderRadius: 35}}
                         source={{uri: item.avatarUri}}
                       />
-                      <Text>{item.name}</Text>
+                      <Text style={{color: '#f7f7f7'}}>{item.name}</Text>
                     </TouchableOpacity>
                   )}
                 />
-                <Text style={{fontSize: 20, margin: 15}}>Artworks:</Text>
+                <Text style={{fontSize: 20, margin: 15, color: '#f7f7f7'}}>
+                  Artworks:
+                </Text>
               </>
             }
             renderItem={({item}) => (
@@ -124,10 +125,15 @@ export const HomeScreen: FunctionComponent = () => {
                     padding: 10,
                     justifyContent: 'space-evenly',
                   }}>
-                  <Text style={{fontSize: 18, fontWeight: 'bold'}}>
+                  <Text
+                    style={{
+                      fontSize: 18,
+                      fontWeight: 'bold',
+                      color: '#f7f7f7',
+                    }}>
                     {item.title}
                   </Text>
-                  <Text>{item.description}</Text>
+                  <Text style={{color: '#f7f7f7'}}>{item.description}</Text>
                 </View>
               </TouchableOpacity>
             )}

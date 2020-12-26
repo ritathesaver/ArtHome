@@ -85,15 +85,15 @@ export const ProfileScreen: FunctionComponent = () => {
   return (
     <View style={pageStyles.container}>
       <View style={{alignItems: 'center'}}>
-      <TouchableOpacity
-        onPress={() => launchImageLibrary()}
-        style={pageStyles.imageContainer}>
-        <Image
-          style={pageStyles.image}
-          source={{uri: currentUser?.avatarUri}}
-        />
+        <TouchableOpacity
+          onPress={() => launchImageLibrary()}
+          style={pageStyles.imageContainer}>
+          <Image
+            style={pageStyles.image}
+            source={{uri: currentUser?.avatarUri}}
+          />
         </TouchableOpacity>
-     </View>
+      </View>
       <Text style={pageStyles.title}> {currentUser?.name}</Text>
 
       <View style={{justifyContent: 'center', marginLeft: 15}}>
@@ -128,10 +128,10 @@ export const ProfileScreen: FunctionComponent = () => {
                 padding: 10,
                 borderColor: '#af6b58',
               }}>
-              <Text>{item}</Text>
+              <Text style={{color: '#f7f7f7'}}>{item}</Text>
             </View>
           ))}
-             {inputActive && (
+          {inputActive && (
             <TextInput
               style={{
                 borderRadius: 10,
@@ -140,15 +140,15 @@ export const ProfileScreen: FunctionComponent = () => {
                 padding: 10,
                 borderColor: '#af6b58',
                 width: '30%',
+                color: '#f7f7f7',
               }}
               onChangeText={setText}
               defaultValue={text}
               placeholder=""
               onSubmitEditing={onAdd}
-                />
-
+            />
           )}
-            <TouchableOpacity
+          <TouchableOpacity
             onPress={() => {
               setInputActive(true)
             }}>
@@ -164,66 +164,61 @@ export const ProfileScreen: FunctionComponent = () => {
             <AddSvg />
           </TouchableOpacity>
           <Text>Add your specializations</Text>
-            {inputActive && (
-          <View style={{flex: 1}}>
-            <TextInput
-              style={{
-                borderRadius: 10,
-                borderWidth: 1,
-                margin: 15,
-                padding: 10,
-                borderColor: '#af6b58',
-                width: '30%',
-                  }}
-              maxLength={15}
-              onChangeText={setText}
-              value={text}
-              placeholder=""
-              onSubmitEditing={onAdd}
-                />
-         
-           </View>
+          {inputActive && (
+            <View style={{flex: 1}}>
+              <TextInput
+                style={{
+                  borderRadius: 10,
+                  borderWidth: 1,
+                  margin: 15,
+                  padding: 10,
+                  borderColor: '#af6b58',
+                  width: '30%',
+                }}
+                maxLength={15}
+                onChangeText={setText}
+                value={text}
+                placeholder=""
+                onSubmitEditing={onAdd}
+              />
+            </View>
           )}
         </View>
       )}
 
       <View style={pageStyles.aboutWrapper}>
-         <View>
-   
+        <View>
           <View style={pageStyles.line} />
-        
         </View>
-        
-          <Text style={pageStyles.title} >ABOUT ME</Text>
-          <TouchableOpacity onPress={() => {
-              setInputActiveAbout(true)
-            }}>
-          <Text style={pageStyles.aboutText} >{currentUser?.about}</Text>
+
+        <Text style={pageStyles.title}>ABOUT ME</Text>
+        <TouchableOpacity
+          onPress={() => {
+            setInputActiveAbout(true)
+          }}>
+          <Text style={pageStyles.aboutText}>{currentUser?.about}</Text>
         </TouchableOpacity>
         {inputActiveAbout && (
-          <View  style={{flex: 1}}>
-          <TextInput
-            multiline
-            maxLength={50}
-            numberOfLines={4}
-            onChangeText={setAbout}
-            value={about}
-            placeholder="Write smthing about you..."
-            onSubmitEditing={onChangeAbout}
-            style={{
-              borderBottomColor: '#000000',
-              borderBottomWidth: 1,
-              margin: 15,
-            }}
-          >
-            </TextInput>
+          <View style={{flex: 1}}>
+            <TextInput
+              multiline
+              maxLength={50}
+              numberOfLines={4}
+              onChangeText={setAbout}
+              value={about}
+              placeholder="Write smthing about you..."
+              onSubmitEditing={onChangeAbout}
+              style={{
+                borderBottomColor: '#000000',
+                borderBottomWidth: 1,
+                margin: 15,
+              }}
+            />
             <TouchableOpacity onPress={onChangeAbout}>
-              <AddSvg style={{alignSelf:'flex-end'}}/>
+              <AddSvg style={{alignSelf: 'flex-end'}} />
             </TouchableOpacity>
-          </View>)
-        }
-          
-
+          </View>
+        )}
       </View>
       <Button
         color="black"

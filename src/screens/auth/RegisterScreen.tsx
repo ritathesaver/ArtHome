@@ -67,7 +67,7 @@ export const RegisterScreen: FunctionComponent = () => {
       blurRadius={15}
       source={{
         uri:
-          'https://images.pexels.com/photos/2776892/pexels-photo-2776892.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+          'https://images.pexels.com/photos/1711323/pexels-photo-1711323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
       }}
       style={{
         flex: 1,

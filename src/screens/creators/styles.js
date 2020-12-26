@@ -4,6 +4,7 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
+    backgroundColor: '#202122',
   },
   image: {
     width: '100%',
@@ -13,7 +14,7 @@ export const styles = StyleSheet.create({
     borderRadius: 50,
   },
   title: {
-    color: 'black',
+    color: '#f7f7f7',
     textAlign: 'center',
     fontSize: 10,
     margin: 10,
@@ -26,9 +27,10 @@ export const detailStyles = StyleSheet.create({
     justifyContent: 'center',
     flex: 1,
     flexDirection: 'column',
+    backgroundColor: '#202122',
   },
   wrapper: {
     flex: 1,
-    width: '100%'
+    width: '100%',
   },
 })
