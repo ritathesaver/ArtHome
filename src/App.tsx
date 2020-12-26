@@ -91,10 +91,12 @@ const App: FunctionComponent = () => {
       {authToken ? (
         <Tab.Navigator
           tabBarOptions={{
-            activeTintColor: 'white',
-            inactiveTintColor: '#cccccc',
+            activeTintColor: '#9ea1a3',
+            inactiveTintColor: '#9ea1a3',
+            showLabel: false,
             style: {
-              backgroundColor: '#202122',
+              backgroundColor: '#161718',
+              borderTopColor: '#202122',
             },
           }}>
           <Tab.Screen

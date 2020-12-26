@@ -11,7 +11,7 @@ import {StackActions} from '@react-navigation/native'
 
 const screenStyle = {
   headerStyle: {
-    backgroundColor: '#111110',
+    backgroundColor: '#161718',
     height: 100,
   },
   headerTintColor: 'white',

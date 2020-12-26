@@ -14,7 +14,7 @@ import {TrendingScreen} from '../screens/galleries/TrendingScreen'
 
 const screenStyle = {
   headerStyle: {
-    backgroundColor: '#111110',
+    backgroundColor: '#161718',
     height: 80,
     shadowColor: 'transparent',
   },
