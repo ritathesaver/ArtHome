@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {FunctionComponent, useEffect, useState} from 'react'
+import React, {createRef, FunctionComponent, useEffect, useState} from 'react'
 import {
   Dimensions,
   FlatList,
@@ -28,6 +28,7 @@ export const HomeScreen: FunctionComponent = () => {
   const dispatch: AppDispatch = useDispatch()
   const [isFocused, setIsFocused] = useState(false)
   const [search, setSearch] = useState('')
+  const textInputRef = createRef<TextInput>()
 
   useEffect(() => {
     dispatch(getUsers())
@@ -60,10 +61,16 @@ export const HomeScreen: FunctionComponent = () => {
                 onFocus={() => setIsFocused(true)}
                 onChangeText={setSearch}
                 value={search}
+                ref={textInputRef}
               />
             </View>
-            <TouchableOpacity onPress={() => setIsFocused(false)}>
-              <Text style={{fontSize: 16, color: 'white', marginHorizontal: 3}}>
+            <TouchableOpacity
+              onPress={() => {
+                setSearch('')
+                setIsFocused(false)
+                textInputRef.current?.blur()
+              }}>
+              <Text style={{fontSize: 16, color: 'white', marginLeft: 10}}>
                 Close
               </Text>
             </TouchableOpacity>
