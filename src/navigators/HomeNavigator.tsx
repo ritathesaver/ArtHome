@@ -2,7 +2,6 @@ import React from 'react'
 import {createStackNavigator} from '@react-navigation/stack'
 import {HomeScreen} from '../screens/home/HomeScreen'
 import {CreatorsScreen} from '../screens/creators/CreatorsScreen'
-import {CreatorDetails} from '../screens/creators/CreatorDetails'
 import {ArtworksScreen} from '../screens/artworks/ArtworksScreen'
 import {HireCreatorScreen} from '../screens/hireCreator/HireCreatorScreen'
 import {ArtworksDetails} from '../screens/artworks/ArtWorksDetails'
@@ -10,12 +9,12 @@ import {CartScreen} from '../screens/cart/CartScreen'
 import {CreatorPageScreen} from './CreatorPageNavigator'
 import {GalleryAll} from '../screens/galleries/GalleryAll'
 import {MyGallery} from '../screens/galleries/MyGallery'
-import { GalleryCreator } from '../screens/galleries/GalleryCreator'
-import { TrendingScreen } from '../screens/galleries/TrendingScreen'
+import {GalleryCreator} from '../screens/galleries/GalleryCreator'
+import {TrendingScreen} from '../screens/galleries/TrendingScreen'
 
 const screenStyle = {
   headerStyle: {
-    backgroundColor: '#202122',
+    backgroundColor: '#111110',
     height: 80,
     shadowColor: 'transparent',
   },
@@ -115,7 +114,7 @@ export const HomeStackScreen = () => {
         name="MyGallery"
         component={MyGallery}
       />
-       <HomeStack.Screen
+      <HomeStack.Screen
         options={{
           ...screenStyle,
           headerBackTitleVisible: false,

@@ -1,5 +1,6 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {FunctionComponent, useEffect} from 'react'
-import { ActivityIndicator, View, Alert } from 'react-native'
+import {ActivityIndicator, View, Alert} from 'react-native'
 import {useDispatch, useSelector} from 'react-redux'
 import {AppDispatch} from '../../App'
 import {Gallery} from '../../components/Gallery/Gallery'
@@ -12,8 +13,7 @@ export const GalleryAll: FunctionComponent = () => {
   useEffect(() => {
     try {
       dispatch(getPictures())
-    }
-    catch {
+    } catch {
       Alert.alert('Error while loading', 'Check your internet connection')
     }
   }, [dispatch])
@@ -23,12 +23,16 @@ export const GalleryAll: FunctionComponent = () => {
   const pictures = useSelector((state: RootState) => state.pictures.pictures)
   //console.log(pictures)
   if (loading) {
-    return <View style={{flex:1 }}><ActivityIndicator size="large" color="#f8b500" /></View>
-	}
+    return (
+      <View style={{flex: 1}}>
+        <ActivityIndicator size="large" color="#af6b58" />
+      </View>
+    )
+  }
 
   return (
     <>
-     <Gallery picturesArray={pictures} />
+      <Gallery picturesArray={pictures} />
     </>
   )
 }

@@ -223,7 +223,7 @@ export const Gallery: FunctionComponent<IDetailsProps> = (picturesArray) => {
           top: 0,
         }}
         size="large"
-        color="black"
+        color="#af6b58"
         animating={loading}
       />
       <FlatList

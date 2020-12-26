@@ -163,7 +163,7 @@ export const ProfileScreen: FunctionComponent = () => {
             }}>
             <AddSvg />
           </TouchableOpacity>
-          <Text>Add your specializations</Text>
+          <Text style={{color: '#f7f7f7'}}>Add your specializations</Text>
           {inputActive && (
             <View style={{flex: 1}}>
               <TextInput
@@ -221,7 +221,7 @@ export const ProfileScreen: FunctionComponent = () => {
         )}
       </View>
       <Button
-        color="black"
+        color="#f7f7f7"
         title="LOGOUT"
         onPress={() => dispatch(signOut())}
       />

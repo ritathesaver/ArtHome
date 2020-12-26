@@ -24,18 +24,16 @@ export const styles = StyleSheet.create({
   },
   input: {
     width: '100%',
-    marginTop: 10,
-    marginBottom: 3,
-    padding: 3,
+    paddingVertical: 8,
     borderColor: '#fbf7f0',
     borderBottomWidth: 1,
     color: '#fbf7f0',
   },
   submitButton: {
-    width: '85%',
+    width: '75%',
     marginVertical: 40,
     padding: 14,
-    borderRadius: 25,
+    borderRadius: 8,
     backgroundColor: '#fbf7f0',
   },
   submitButtonText: {
@@ -44,9 +42,8 @@ export const styles = StyleSheet.create({
     fontSize: 17,
   },
   labelText: {
-    width: '80%',
+    width: '75%',
     color: '#fbf7f0',
-    paddingHorizontal: 3,
   },
   textContainer: {
     width: '100%',

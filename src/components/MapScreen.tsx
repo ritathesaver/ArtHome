@@ -92,7 +92,7 @@ const Map: FunctionComponent = () => {
           </View>
         </>
       ) : (
-        <ActivityIndicator size="large" color="#00ff00" />
+        <ActivityIndicator size="large" color="black" />
       )}
     </>
   )

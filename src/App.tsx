@@ -70,8 +70,14 @@ const App: FunctionComponent = () => {
   // console.log(token)
   if (loading) {
     return (
-      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-        <ActivityIndicator size="large" color="black" />
+      <View
+        style={{
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: '#202122',
+        }}>
+        <ActivityIndicator size="large" color="#f7f7f7" />
       </View>
     )
   }

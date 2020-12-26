@@ -45,10 +45,20 @@ export const LoginScreen: FunctionComponent = () => {
         width: '100%',
       }}>
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
+        <Text
+          style={{
+            fontSize: 24,
+            color: 'white',
+            paddingVertical: 30,
+            fontStyle: 'italic',
+          }}>
+          ART<Text style={{fontWeight: 'bold', fontStyle: 'normal'}}>HOME</Text>
+        </Text>
         <View style={styles.formContainer}>
           <View style={styles.inputWrapper}>
-            <Text style={styles.labelText}>Username</Text>
+            <Text style={styles.labelText}>Email</Text>
             <TextInput
+              autoCapitalize="none"
               placeholderTextColor="#cfcfcf"
               onChangeText={formik.handleChange('email')}
               onBlur={formik.handleBlur('email')}

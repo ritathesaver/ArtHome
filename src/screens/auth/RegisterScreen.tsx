@@ -74,6 +74,15 @@ export const RegisterScreen: FunctionComponent = () => {
         width: '100%',
       }}>
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
+        <Text
+          style={{
+            fontSize: 24,
+            color: 'white',
+            paddingVertical: 30,
+            fontStyle: 'italic',
+          }}>
+          ART<Text style={{fontWeight: 'bold', fontStyle: 'normal'}}>HOME</Text>
+        </Text>
         <View style={styles.formContainer}>
           <View style={styles.inputWrapper}>
             <Text style={styles.labelText}>Full name</Text>
@@ -82,14 +91,19 @@ export const RegisterScreen: FunctionComponent = () => {
               onChangeText={formik.handleChange('name')}
               onBlur={formik.handleBlur('name')}
               value={formik.values.name}
-              style={styles.input}
+              style={[styles.input, !formik.errors.name && {marginBottom: 16}]}
               placeholder="Enter your name"
             />
-            {formik.errors.name && formik.touched.name && (
-              <Text style={{fontSize: 10, color: 'red', marginBottom: 10}}>
-                Name is required
+            {formik.errors.name && formik.touched.name ? (
+              <Text
+                style={{
+                  paddingTop: 2,
+                  fontSize: 12,
+                  color: 'red',
+                }}>
+                {formik.errors.name}
               </Text>
-            )}
+            ) : null}
           </View>
           <View style={styles.inputWrapper}>
             <Text style={styles.labelText}>Where are you from?</Text>
@@ -98,26 +112,32 @@ export const RegisterScreen: FunctionComponent = () => {
               onChangeText={formik.handleChange('location')}
               onBlur={formik.handleBlur('location')}
               value={formik.values.location}
-              style={styles.input}
+              style={{...styles.input, marginBottom: 16}}
               placeholder="Enter your location"
             />
           </View>
           <View style={styles.inputWrapper}>
             <Text style={styles.labelText}>Email</Text>
             <TextInput
+              autoCapitalize="none"
               placeholderTextColor="#cfcfcf"
               onChangeText={formik.handleChange('email')}
               onBlur={formik.handleBlur('email')}
               value={formik.values.email}
-              style={styles.input}
+              style={[styles.input, !formik.errors.email && {marginBottom: 14}]}
               placeholder="Enter email"
               keyboardType="email-address"
             />
-            {formik.errors.email && formik.touched.email && (
-              <Text style={{fontSize: 10, color: 'red', marginBottom: 10}}>
+            {formik.errors.email && formik.touched.email ? (
+              <Text
+                style={{
+                  paddingTop: 2,
+                  fontSize: 12,
+                  color: 'red',
+                }}>
                 {formik.errors.email}
               </Text>
-            )}
+            ) : null}
           </View>
           <View style={styles.inputWrapper}>
             <Text style={styles.labelText}>Password</Text>
@@ -126,17 +146,25 @@ export const RegisterScreen: FunctionComponent = () => {
               onChangeText={formik.handleChange('password')}
               onBlur={formik.handleBlur('password')}
               value={formik.values.password}
-              style={styles.input}
+              style={[
+                styles.input,
+                !formik.errors.password && {marginBottom: 14},
+              ]}
               secureTextEntry={true}
               placeholder="Enter password"
               autoCorrect={false}
               textContentType={'oneTimeCode'}
             />
-            {formik.errors.password && formik.touched.password && (
-              <Text style={{fontSize: 10, color: 'red', marginBottom: 10}}>
+            {formik.errors.password && formik.touched.password ? (
+              <Text
+                style={{
+                  paddingTop: 2,
+                  fontSize: 12,
+                  color: 'red',
+                }}>
                 {formik.errors.password}
               </Text>
-            )}
+            ) : null}
           </View>
           <View style={styles.inputWrapper}>
             <Text style={styles.labelText}>Confirm password</Text>
@@ -145,18 +173,26 @@ export const RegisterScreen: FunctionComponent = () => {
               onChangeText={formik.handleChange('confirmedPassword')}
               onBlur={formik.handleBlur('confirmedPassword')}
               value={formik.values.confirmedPassword}
-              style={styles.input}
+              style={[
+                styles.input,
+                !formik.errors.confirmedPassword && {marginBottom: 14},
+              ]}
               secureTextEntry={true}
               placeholder="Confirm password"
               autoCorrect={false}
               textContentType={'oneTimeCode'}
             />
             {formik.errors.confirmedPassword &&
-              formik.touched.confirmedPassword && (
-                <Text style={{fontSize: 10, color: 'red', marginBottom: 10}}>
-                  passwords didn't match
-                </Text>
-              )}
+            formik.touched.confirmedPassword ? (
+              <Text
+                style={{
+                  paddingTop: 2,
+                  fontSize: 12,
+                  color: 'red',
+                }}>
+                {formik.errors.confirmedPassword}
+              </Text>
+            ) : null}
           </View>
           <TouchableOpacity
             style={styles.submitButton}
