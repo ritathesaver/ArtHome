@@ -18,7 +18,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {AppDispatch} from '../../App'
 import {getPicturesByCategory} from '../../redux/actions/picturesActions'
 import {RootState} from '../../redux/rootReducer'
-import { getUsers } from '../../redux/actions/usersActions'
+import {getUsers} from '../../redux/actions/usersActions'
 import LikeSvg from '../../assets/icons/like (1).svg'
 import {deleteLike, getLikes, putLike} from '../../redux/actions/likesActions'
 

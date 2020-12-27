@@ -26,7 +26,6 @@ const getFn = async (path: string) => {
   } catch (error) {
     if (error.message.includes('401')) {
       store.dispatch(signOut())
-      return
     }
     throw error
   }
@@ -43,7 +42,6 @@ const postFn = async (path: string, data: any) => {
   } catch (error) {
     if (error.message.includes('401')) {
       store.dispatch(signOut())
-      return
     }
     throw error
   }
@@ -60,7 +58,6 @@ const putFn = async (path: string, data: any) => {
   } catch (error) {
     if (error.message.includes('401')) {
       store.dispatch(signOut())
-      return
     }
     throw error
   }
@@ -75,7 +72,6 @@ const deleteFn = async (path: string) => {
   } catch (error) {
     if (error.message.includes('401')) {
       store.dispatch(signOut())
-      return
     }
     throw error
   }
