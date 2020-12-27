@@ -2,7 +2,7 @@
 import {useNavigation} from '@react-navigation/native'
 import React, {FunctionComponent, useCallback} from 'react'
 import {useState} from 'react'
-import {View, Text, ImageBackground, Button} from 'react-native'
+import {View, Text, ImageBackground, KeyboardAvoidingView} from 'react-native'
 import {
   ScrollView,
   TextInput,
@@ -11,7 +11,7 @@ import {
 import RNPickerSelect from 'react-native-picker-select'
 import {useDispatch, useSelector} from 'react-redux'
 import {AppDispatch} from '../../App'
-import NextIcon from '../../assets/icons/next.svg'
+import NextIcon from '../../assets/icons/next copy 3.svg'
 import {RootState} from '../../redux/rootReducer'
 import {addPicture} from '../../redux/actions/picturesActions'
 
@@ -71,150 +71,195 @@ export const AddDetailsScreen: FunctionComponent<IAddDetailsProps> = ({
   ])
 
   return (
-    <ScrollView style={{flex: 1, backgroundColor: '#202122'}}>
-      <ImageBackground
-        blurRadius={50}
-        style={{
-          width: '100%',
-          height: 200,
-          alignItems: 'center',
-          justifyContent: 'center',
-          marginBottom: 20,
-        }}
-        source={{uri: route.params.uri}}>
-        <Text style={{color: 'white', fontSize: 30, backgroundColor: 'black'}}>
-          Things buyers want to know
+    <KeyboardAvoidingView
+      style={{flex: 1, backgroundColor: '#202122'}}
+      behavior="padding">
+      <ScrollView style={{flex: 1, backgroundColor: '#202122'}}>
+        <ImageBackground
+          blurRadius={50}
+          style={{
+            width: '100%',
+            height: 200,
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginBottom: 20,
+          }}
+          source={{uri: route.params.uri}}>
+          <Text
+            style={{color: 'white', fontSize: 30, backgroundColor: 'black'}}>
+            Things buyers want to know
+          </Text>
+        </ImageBackground>
+
+        <Text
+          style={{
+            fontSize: 17,
+            color: 'white',
+            marginHorizontal: 15,
+            marginBottom: 5,
+          }}>
+          SPECIFICATIONS
         </Text>
-      </ImageBackground>
+        <View
+          style={{
+            backgroundColor: 'white',
+            borderRadius: 8,
+            marginBottom: 40,
+            marginHorizontal: 15,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+          }}>
+          <Text style={{fontSize: 20, margin: 15}}>Category</Text>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <RNPickerSelect
+              placeholder={{
+                label: categoryTitle,
+                value: categoryTitle,
+              }}
+              style={{
+                inputIOS: {
+                  color: 'black',
+                  margin: 15,
+                  fontSize: 20,
+                  paddingRight: 15,
+                },
 
-      <Text
-        style={{
-          fontSize: 17,
-          color: 'white',
-          marginHorizontal: 15,
-          marginBottom: 5,
-        }}>
-        SPECIFICATIONS
-      </Text>
-      <View
-        style={{
-          backgroundColor: 'white',
-          marginBottom: 40,
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-        }}>
-        <Text style={{fontSize: 20, margin: 15}}>Category</Text>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <RNPickerSelect
-            placeholder={{
-              label: categoryTitle,
-              value: categoryTitle,
-            }}
-            style={{
-              inputIOS: {
-                color: 'black',
-                margin: 15,
-                fontSize: 20,
-                paddingRight: 15,
-              },
+                placeholder: {color: 'gray'},
+                iconContainer: {
+                  top: 15,
+                  right: 0,
+                },
+              }}
+              onValueChange={setCategoryTitle}
+              items={categoriesTitles.map((item) => ({
+                label: item,
+                value: item,
+              }))}
+              Icon={() => {
+                return <NextIcon />
+              }}
+            />
+          </View>
+        </View>
 
-              placeholder: {color: 'gray'},
-              iconContainer: {
-                top: 15,
-                right: 0,
-              },
-            }}
-            onValueChange={setCategoryTitle}
-            items={categoriesTitles.map((item) => ({label: item, value: item}))}
-            Icon={() => {
-              return <NextIcon />
-            }}
+        <Text
+          style={{
+            fontSize: 17,
+            color: 'white',
+            marginHorizontal: 15,
+            marginBottom: 5,
+          }}>
+          PRICE
+        </Text>
+        <View
+          style={{
+            backgroundColor: 'white',
+            borderRadius: 8,
+            marginBottom: 40,
+            marginHorizontal: 15,
+          }}>
+          <Text style={{fontSize: 20, margin: 15}}>
+            BYN: {route.params.price}
+          </Text>
+        </View>
+
+        <Text
+          style={{
+            fontSize: 17,
+            color: 'white',
+            marginHorizontal: 15,
+            marginBottom: 5,
+          }}>
+          TITLE
+        </Text>
+        <View
+          style={{
+            backgroundColor: 'white',
+            borderRadius: 8,
+            marginBottom: 40,
+            marginHorizontal: 15,
+          }}>
+          <TextInput
+            onChangeText={(text) => setTitleValue(text)}
+            value={titleValue}
+            placeholder="Additional informamtion"
+            style={{fontSize: 17, margin: 15}}
+            maxLength={17}
+            multiline
+            numberOfLines={2}
           />
         </View>
-      </View>
-
-      <Text
-        style={{
-          fontSize: 17,
-          color: 'white',
-          marginHorizontal: 15,
-          marginBottom: 5,
-        }}>
-        PRICE
-      </Text>
-      <View style={{backgroundColor: 'white', marginBottom: 40}}>
-        <Text style={{fontSize: 20, margin: 15}}>
-          BYN: {route.params.price}
-        </Text>
-      </View>
-
-      <Text
-        style={{
-          fontSize: 17,
-          color: 'white',
-          marginHorizontal: 15,
-          marginBottom: 5,
-        }}>
-        TITLE
-      </Text>
-      <View style={{backgroundColor: 'white', marginBottom: 40}}>
-        <TextInput
-          onChangeText={(text) => setTitleValue(text)}
-          value={titleValue}
-          placeholder="Additional informamtion"
-          style={{fontSize: 17, margin: 15}}
-          maxLength={17}
-          multiline
-          numberOfLines={2}
-        />
-      </View>
-      <Text
-        style={{
-          fontSize: 17,
-          color: 'white',
-          marginHorizontal: 15,
-          marginBottom: 5,
-        }}>
-        DESCRIPTION
-      </Text>
-      <View style={{backgroundColor: 'white', marginBottom: 40}}>
-        <TextInput
-          onChangeText={(text) => setDescriptionValue(text)}
-          value={descriptionValue}
-          placeholder="Additional informamtion"
-          style={{fontSize: 17, margin: 15}}
-          maxLength={50}
-          multiline
-          numberOfLines={3}
-        />
-      </View>
-      <Text
-        style={{
-          fontSize: 17,
-          color: 'white',
-          marginHorizontal: 15,
-          marginBottom: 5,
-        }}>
-        LOCATION
-      </Text>
-      <View
-        style={{
-          backgroundColor: 'white',
-          marginBottom: 40,
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-        }}>
-        <Text style={{fontSize: 20, margin: 15}}> {route.params.res}</Text>
-        <TouchableOpacity
-          style={{flexDirection: 'row', alignItems: 'center'}}
-          onPress={() => {
-            navigation.navigate('Map')
+        <Text
+          style={{
+            fontSize: 17,
+            color: 'white',
+            marginHorizontal: 15,
+            marginBottom: 5,
           }}>
-          <Text style={{fontSize: 20, margin: 15, color: 'gray'}}>Change</Text>
-          <NextIcon />
+          DESCRIPTION
+        </Text>
+        <View
+          style={{
+            backgroundColor: 'white',
+            borderRadius: 8,
+            marginBottom: 40,
+            marginHorizontal: 15,
+          }}>
+          <TextInput
+            onChangeText={(text) => setDescriptionValue(text)}
+            value={descriptionValue}
+            placeholder="Additional informamtion"
+            style={{fontSize: 17, margin: 15}}
+            maxLength={50}
+            multiline
+            numberOfLines={3}
+          />
+        </View>
+        <Text
+          style={{
+            fontSize: 17,
+            color: 'white',
+            marginHorizontal: 15,
+            marginBottom: 5,
+          }}>
+          LOCATION
+        </Text>
+        <View
+          style={{
+            backgroundColor: 'white',
+            borderRadius: 8,
+            marginBottom: 40,
+            marginHorizontal: 15,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+          }}>
+          <Text style={{fontSize: 20, margin: 15}}> {route.params.res}</Text>
+          <TouchableOpacity
+            style={{flexDirection: 'row', alignItems: 'center'}}
+            onPress={() => {
+              navigation.navigate('Map')
+            }}>
+            <Text style={{fontSize: 20, margin: 15, color: 'gray'}}>
+              Change
+            </Text>
+            <NextIcon />
+          </TouchableOpacity>
+        </View>
+        <TouchableOpacity
+          style={{
+            width: '25%',
+            marginVertical: 5,
+            padding: 14,
+            borderRadius: 8,
+            backgroundColor: '#fbf7f0',
+            alignSelf: 'center',
+          }}
+          onPress={() => onAdd()}>
+          <Text style={{color: 'black', fontSize: 17, textAlign: 'center'}}>
+            SUBMIT
+          </Text>
         </TouchableOpacity>
-      </View>
-      <Button title="SUBMIT" onPress={() => onAdd()} />
-    </ScrollView>
+      </ScrollView>
+    </KeyboardAvoidingView>
   )
 }

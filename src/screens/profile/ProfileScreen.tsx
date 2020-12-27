@@ -100,7 +100,7 @@ export const ProfileScreen: FunctionComponent = () => {
   }, [currentUser, dispatch, phone])
 
   return (
-    <KeyboardAvoidingView style={{flex: 1}} behavior="height">
+    <KeyboardAvoidingView style={{flex: 1, backgroundColor: '#202122'}} behavior="height">
       <ScrollView>
         <View style={pageStyles.container}>
           <View style={{alignItems: 'center'}}>
