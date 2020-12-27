@@ -30,14 +30,14 @@ export const usersReducer = createReducer(INITIAL_STATE)
         users: action.payload,
       }
     },
-)
-   .handleType(
+  )
+  .handleType(
     'GET_USERS_ERROR',
     (state: IUsersState, action: {type: string; payload: any}) => {
-       console.log(action.payload, 'aaaaaaaaaa')
+      console.log(action.payload, 'aaaaaaaaaa')
       return {
         ...state,
-        error: action.payload
+        error: action.payload,
       }
     },
   )
@@ -56,9 +56,10 @@ export const usersReducer = createReducer(INITIAL_STATE)
     },
   )
   .handleType(
-    'EDIT_AVATAR_SUCCESS',
+    'EDIT_USER_SUCCESS',
     (state: IUsersState, action: {type: string; payload: any}) => {
-      const {id, avatarUri} = action.payload
+      const {id, data} = action.payload
+      
 
       //console.log('HEREHEREHRHEHREHHREHERHHREHEHHREHEHREHREH: ', action.payload, 'rr');
       return {
@@ -68,24 +69,7 @@ export const usersReducer = createReducer(INITIAL_STATE)
             if (user.id !== id) {
               return user
             }
-            return {...user, avatarUri}
-          },
-        ),
-      }
-    },
-  )
-  .handleType(
-    'EDIT_SPEC_SUCCESS',
-    (state: IUsersState, action: {type: string; payload: any}) => {
-      const {id, specialization} = action.payload
-      return {
-        ...state,
-        users: state.users.map(
-          (user: IUsers): IUsers => {
-            if (user.id !== id) {
-              return user
-            }
-            return {...user, specialization}
+            return {...user, data}
           },
         ),
       }

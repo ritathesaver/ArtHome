@@ -16,57 +16,24 @@ async function getUser(body) {
   // console.log(data, 'daaaat')
 }
 
-async function editAvatarData(body) {
+async function editData(body) {
+  console.log(body.body, 'body')
   const {data} = await api.put(`creators/${body.body.id}`, {
     ...body.body,
-    avatarUri: body.avatarUri,
+    ...body.data,
   })
+  console.log(data)
   return data
 }
 
-async function editAboutData(body) {
-  const {data} = await api.put(`creators/${body.body.id}`, {
-    ...body.body,
-    about: body.aboutText,
-  })
-  return data
-}
-
-async function editSpecializationData(body) {
-  const {data} = await api.put(`creators/${body.body.id}`, {
-    ...body.body,
-    specialization: [
-      ...body.body.specialization,
-      body.specialization.map((specialization) => specialization),
-    ],
-  })
-  return data
-}
-
-function* workerEditAvatar(action) {
+function* workerEdit(action) {
   try {
-    const resGet = yield call(editAvatarData, action.payload)
+    const resGet = yield call(editData, action.payload)
 
-    yield put({type: 'EDIT_AVATAR_SUCCESS', payload: resGet})
+    yield put({type: 'EDIT_USER_SUCCESS', payload: resGet})
   } catch (err) {
     Alert.alert('Ooops!', 'Something went wrong')
   }
-}
-
-function* workerEditAbout(action) {
-  try {
-    const resGet = yield call(editAboutData, action.payload)
-
-    yield put({type: 'EDIT_ABOUT_SUCCESS', payload: resGet})
-  } catch (err) {
-    Alert.alert('Ooops!', 'Something went wrong')
-  }
-}
-
-function* workerAddSpec(action) {
-  const resGet = yield call(editSpecializationData, action.payload)
-
-  yield put({type: 'EDIT_SPEC_SUCCESS', payload: resGet})
 }
 
 function* workerGetUsers() {
@@ -96,12 +63,6 @@ export function* watchGetUsers() {
 export function* watchGetUserById() {
   yield takeLatest('GET_USER_BY_ID', workerGetUserById)
 }
-export function* watchEditAvatar() {
-  yield takeLatest('EDIT_USER_AVATAR', workerEditAvatar)
-}
-export function* watchAddSpec() {
-  yield takeLatest('EDIT_USER_SPECIALIZATION', workerAddSpec)
-}
-export function* watchEditAbout() {
-  yield takeLatest('EDIT_USER_ABOUT', workerEditAbout)
+export function* watchEdit() {
+  yield takeLatest('UPDATE_USER', workerEdit)
 }

@@ -18,12 +18,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {IUsers} from '../../redux/reducers/usersReducer'
 import {signOut} from '../../redux/actions/authActions'
 import {AppDispatch} from '../../App'
-import {
-  addAboutText,
-  addSpecialization,
-  editUserAvatar,
-  getUsers,
-} from '../../redux/actions/usersActions'
+import {editUser, getUsers} from '../../redux/actions/usersActions'
 import AddSvg from '../../assets/icons/add.svg'
 
 export const ProfileScreen: FunctionComponent = () => {
@@ -58,7 +53,7 @@ export const ProfileScreen: FunctionComponent = () => {
       } else if (response.error) {
         // console.log('ImagePicker Error: ', response.error)
       } else {
-        dispatch(editUserAvatar(response.uri, currentUser))
+        dispatch(editUser(response.uri, currentUser))
       }
     })
   }
@@ -66,7 +61,7 @@ export const ProfileScreen: FunctionComponent = () => {
   const onAdd = useCallback(() => {
     if (text) {
       const newArr = currentUser.specialization.concat(text)
-      dispatch(addSpecialization(newArr, currentUser))
+      dispatch(editUser(newArr, currentUser))
     }
     setInputActive(false)
 
@@ -76,7 +71,7 @@ export const ProfileScreen: FunctionComponent = () => {
   const onChangeAbout = useCallback(() => {
     console.log(about)
     if (about) {
-      dispatch(addAboutText(about, currentUser))
+      dispatch(editUser(about, currentUser))
     }
     setAbout('')
     setInputActiveAbout(false)
