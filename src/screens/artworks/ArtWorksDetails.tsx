@@ -1,10 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {FunctionComponent, useEffect, useState} from 'react'
+import React, {FunctionComponent, useCallback, useEffect, useState} from 'react'
 import {
   ActivityIndicator,
   Dimensions,
   FlatList,
-  Image,
   SafeAreaView,
   Text,
   TouchableOpacity,
@@ -12,7 +11,6 @@ import {
 } from 'react-native'
 import SearchBox from '../../components/SearchBox/SearchBox'
 import {detailStyles} from './styles'
-import {IImageWithSize, IImageSize} from '../creators/CreatorDetails'
 import LikeActiveSvg from '../../assets/icons/heart (2).svg'
 import FastImage from 'react-native-fast-image'
 import {useNavigation} from '@react-navigation/native'
@@ -20,23 +18,32 @@ import {useDispatch, useSelector} from 'react-redux'
 import {AppDispatch} from '../../App'
 import {getPicturesByCategory} from '../../redux/actions/picturesActions'
 import {RootState} from '../../redux/rootReducer'
-import {IPictures} from '../../redux/reducers/picturesReducer'
+import { getUsers } from '../../redux/actions/usersActions'
+import LikeSvg from '../../assets/icons/like (1).svg'
+import {deleteLike, getLikes, putLike} from '../../redux/actions/likesActions'
 
 interface IDetailsProps {
   route: any
 }
-const columnWidth: number = Dimensions.get('window').width * 0.75
+const columnWidth: number = Dimensions.get('window').width * 0.9
 
 export const ArtworksDetails: FunctionComponent<IDetailsProps> = ({route}) => {
   const navigation = useNavigation()
   const dispatch: AppDispatch = useDispatch()
   const [search, setSearch] = useState('')
+  const authId = useSelector((state: RootState) => state.auth.id)
 
   const clearSearch = () => {
     setSearch('')
   }
 
-  console.log(route.params, 'dddd')
+  useEffect(() => {
+    dispatch(getUsers())
+  }, [dispatch])
+
+  useEffect(() => {
+    dispatch(getLikes())
+  }, [dispatch])
 
   useEffect(() => {
     dispatch(getPicturesByCategory(route.params.id))
@@ -50,32 +57,45 @@ export const ArtworksDetails: FunctionComponent<IDetailsProps> = ({route}) => {
     ),
   )
 
+  const users = useSelector((state: RootState) =>
+    state.users.users.map((user) => user),
+  )
+
+  const likes = useSelector((state: RootState) => state.likes.likes)
+
+  const onLike = useCallback(
+    (id) => {
+      dispatch(putLike(id, authId))
+    },
+    [authId, dispatch],
+  )
+
+  const onDislike = useCallback(
+    (likeId) => {
+      console.log('deleteLike', likeId)
+      dispatch(deleteLike(likeId))
+    },
+    [dispatch],
+  )
+
+  const getLikeComponent = (itemId: string) => {
+    const like = likes.find(
+      (l) => l.creatorId === authId && l.pictureId === itemId,
+    )
+    return like ? (
+      <TouchableOpacity onPress={() => onDislike(like.id)}>
+        <LikeActiveSvg style={{position: 'absolute', top: 10, right: 10}} />
+      </TouchableOpacity>
+    ) : (
+      <TouchableOpacity
+        style={{position: 'absolute', top: 10, right: 10}}
+        onPress={() => onLike(itemId)}>
+        <LikeSvg />
+      </TouchableOpacity>
+    )
+  }
+
   // console.log(pictures, 'dddd')
-
-  const [column, setColumn] = useState<Array<IImageWithSize>>([])
-
-  useEffect(() => {
-    // eslint-disable-next-line prettier/prettier
-    (async () => {
-      const imagesWithSize: IImageWithSize[] = await Promise.all(
-        pictures.map(async (item: IPictures) => {
-          // console.log(item)
-          const result: IImageSize = await new Promise((resolve) => {
-            Image.getSize(item.uri, (width, height) =>
-              resolve({
-                height,
-                width,
-                ratio: height / width,
-              }),
-            )
-          })
-          return {...result, ...item}
-        }),
-      )
-      // console.log(imagesWithSize)
-      setColumn(imagesWithSize)
-    })()
-  }, [pictures, route.params])
 
   return (
     <SafeAreaView style={detailStyles.container}>
@@ -84,7 +104,7 @@ export const ArtworksDetails: FunctionComponent<IDetailsProps> = ({route}) => {
         <ActivityIndicator size="large" color="#af6b58" />
       ) : (
         <FlatList
-          data={column}
+          data={pictures}
           renderItem={({item}) => (
             <TouchableOpacity
               onPress={() => {
@@ -96,28 +116,42 @@ export const ArtworksDetails: FunctionComponent<IDetailsProps> = ({route}) => {
                   flex: 1,
                   flexDirection: 'column',
                   padding: 5,
-                  width: Dimensions.get('window').width,
+                  width: columnWidth,
                   alignItems: 'center',
                 }}>
                 <FastImage
                   style={{
                     width: columnWidth,
-                    height: item.ratio * columnWidth,
+                    height: columnWidth,
                     margin: 1,
                   }}
                   source={{uri: item.uri}}>
-                  <TouchableOpacity>
-                    <LikeActiveSvg
-                      style={{position: 'absolute', top: 10, right: 10}}
-                    />
-                  </TouchableOpacity>
+                  {getLikeComponent(item.id)}
                 </FastImage>
                 <View
                   style={{
-                    alignItems: 'center',
-                    width: Dimensions.get('window').width,
+                    flex: 1,
                   }}>
-                  <Text>{item.title}</Text>
+                  <Text
+                    numberOfLines={1}
+                    style={{
+                      color: '#f7f7f7',
+                      marginBottom: 2,
+                      paddingHorizontal: 16,
+                      textAlign: 'center',
+                    }}>
+                    {item.title}
+                  </Text>
+                  <Text
+                    numberOfLines={1}
+                    style={{
+                      color: '#f7f7f7',
+                      marginBottom: 2,
+                      paddingHorizontal: 16,
+                      textAlign: 'center',
+                    }}>
+                    by @{users.find((user) => user.id === item.creatorId)?.name}
+                  </Text>
                 </View>
               </View>
             </TouchableOpacity>

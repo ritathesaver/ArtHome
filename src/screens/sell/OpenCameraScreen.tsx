@@ -3,12 +3,12 @@ import React, {FunctionComponent, useEffect, useState} from 'react'
 import {
   Text,
   View,
-  Button,
   Image,
   Alert,
   TouchableOpacity,
   Dimensions,
   ActivityIndicator,
+  ScrollView,
 } from 'react-native'
 import ImagePicker from 'react-native-image-picker'
 import {RNCamera} from 'react-native-camera'
@@ -74,7 +74,6 @@ export const OpenCameraScreen: FunctionComponent = () => {
     data.append('upload_preset', 'dwucj2mkl')
     data.append('cloud_name', 'dwucj2mkl')
     // console.log(data)
-
 
     const res = await axios({
       url: 'https://api.cloudinary.com/v1_1/dwucj2mkl/image/upload',
@@ -144,31 +143,63 @@ export const OpenCameraScreen: FunctionComponent = () => {
         animating={isLoading}
       />
       {fileData ? (
-        <View style={styles.afterShootContainer}>
-          <View style={{width: Dimensions.get('window').width}}>
+        <ScrollView style={styles.afterShootContainer}>
+          <View
+            style={{
+              margin: 24,
+              width: Dimensions.get('window').width - 50,
+            }}>
             <FastImage
               onLoadEnd={() => setIsLoading(false)}
               style={{
-                width: Dimensions.get('window').width,
+                width: '100%',
                 height: Dimensions.get('window').width * size.ratio,
               }}
               source={{uri: fileData}}
             />
           </View>
-          <Button
-            title="Take one more shot"
-            color="white"
-            onPress={onBackToCamera}
-          />
+          <TouchableOpacity
+            style={{
+              marginVertical: 10,
+              width: '45%',
+              padding: 12,
+              borderRadius: 8,
+              backgroundColor: '#fbf7f0',
+              alignSelf: 'center',
+            }}
+            onPress={onBackToCamera}>
+            <Text
+              style={{
+                color: 'black',
+                textAlign: 'center',
+                fontSize: 17,
+              }}>
+              Take one more shot
+            </Text>
+          </TouchableOpacity>
           <View style={styles.choseContainer}>
             <Text style={{color: 'white'}}>or</Text>
           </View>
-          <Button
-            title="Choose from gallery"
-            color="white"
-            onPress={launchImageLibrary}
-          />
-        </View>
+          <TouchableOpacity
+            style={{
+              marginVertical: 10,
+              width: '45%',
+              padding: 12,
+              borderRadius: 8,
+              backgroundColor: '#fbf7f0',
+              alignSelf: 'center',
+            }}
+            onPress={launchImageLibrary}>
+            <Text
+              style={{
+                color: 'black',
+                textAlign: 'center',
+                fontSize: 17,
+              }}>
+              Choose from gallery
+            </Text>
+          </TouchableOpacity>
+        </ScrollView>
       ) : (
         <View
           style={{
