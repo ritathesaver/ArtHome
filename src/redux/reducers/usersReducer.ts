@@ -58,8 +58,7 @@ export const usersReducer = createReducer(INITIAL_STATE)
   .handleType(
     'EDIT_USER_SUCCESS',
     (state: IUsersState, action: {type: string; payload: any}) => {
-      const {id, data} = action.payload
-      
+      const {id} = action.payload
 
       //console.log('HEREHEREHRHEHREHHREHERHHREHEHHREHEHREHREH: ', action.payload, 'rr');
       return {
@@ -69,7 +68,7 @@ export const usersReducer = createReducer(INITIAL_STATE)
             if (user.id !== id) {
               return user
             }
-            return {...user, data}
+            return {...user, ...action.payload}
           },
         ),
       }

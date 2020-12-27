@@ -63,7 +63,7 @@ export const pageStyles = StyleSheet.create({
   },
   line: {
     borderBottomWidth: 1,
-    borderBottomColor: '#af6b58',
+    borderBottomColor: '#f7f7f7',
     marginVertical: 10,
     width: '100%',
     alignSelf: 'center',
@@ -81,12 +81,16 @@ export const pageStyles = StyleSheet.create({
   },
   aboutText: {
     fontSize: 17,
-    textAlign: 'center',
-    marginLeft: 4,
     color: '#f7f7f7',
+    margin: 3,
+  },
+  aboutTextTitle: {
+    fontSize: 15,
+    color: '#f7f7f7',
+    margin: 3,
   },
   box: {
-    flexDirection: 'row',
     marginBottom: 5,
+    width: '100%',
   },
 })
