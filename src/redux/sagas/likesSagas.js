@@ -1,23 +1,21 @@
 import {call, put, takeLatest} from 'redux-saga/effects'
-import axios from 'axios'
 import {Alert} from 'react-native'
+import api from '../../utilities/api'
 
 async function getData() {
-  const {data} = await axios.get('http://localhost:3000/likes')
+  const {data} = await api.get('likes')
   return data
 }
 
 async function addData(body) {
   console.log(body)
-  const {data} = await axios.post('http://localhost:3000/likes', body)
+  const {data} = await api.post('likes', body)
   console.log(data, 'ddaat')
   return data
 }
 async function deleteData(body) {
   // console.log(body)
-  const {data} = await axios.delete(
-    `http://localhost:3000/likes/${body.likeId}`,
-  )
+  const {data} = await api.delete(`likes/${body.likeId}`)
   // console.log(data, 'ddaat')
   return data
 }

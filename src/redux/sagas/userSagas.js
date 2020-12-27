@@ -1,54 +1,45 @@
 import {call, put, takeLatest} from 'redux-saga/effects'
-import axios from 'axios'
 import {Alert} from 'react-native'
+import api from '../../utilities/api'
 
 async function getData() {
-  const {data} = await axios.get('http://localhost:3000/creators')
+  const {data} = await api.get('creators')
   return data
 }
 
 async function getUser(body) {
   // console.log(body)
 
-  const {data} = await axios.get(`http://localhost:3000/creators/${body.id}`)
+  const {data} = await api.get(`creators/${body.id}`)
   return data
 
   // console.log(data, 'daaaat')
 }
 
 async function editAvatarData(body) {
-  const {data} = await axios.put(
-    `http://localhost:3000/creators/${body.body.id}`,
-    {
-      ...body.body,
-      avatarUri: body.avatarUri,
-    },
-  )
+  const {data} = await api.put(`creators/${body.body.id}`, {
+    ...body.body,
+    avatarUri: body.avatarUri,
+  })
   return data
 }
 
 async function editAboutData(body) {
-  const {data} = await axios.put(
-    `http://localhost:3000/creators/${body.body.id}`,
-    {
-      ...body.body,
-      about: body.aboutText,
-    },
-  )
+  const {data} = await api.put(`creators/${body.body.id}`, {
+    ...body.body,
+    about: body.aboutText,
+  })
   return data
 }
 
 async function editSpecializationData(body) {
-  const {data} = await axios.put(
-    `http://localhost:3000/creators/${body.body.id}`,
-    {
-      ...body.body,
-      specialization: [
-        ...body.body.specialization,
-        body.specialization.map((specialization) => specialization),
-      ],
-    },
-  )
+  const {data} = await api.put(`creators/${body.body.id}`, {
+    ...body.body,
+    specialization: [
+      ...body.body.specialization,
+      body.specialization.map((specialization) => specialization),
+    ],
+  })
   return data
 }
 

@@ -1,34 +1,30 @@
 import {call, put, takeLatest} from 'redux-saga/effects'
-import axios from 'axios'
 import {
   getPicturesByCategoryAsync,
   getPicturesAsync,
 } from '../actions/picturesActions'
 import {Alert} from 'react-native'
+import api from '../../utilities/api'
 
 async function getData() {
-  const {data} = await axios.get('http://localhost:3000/pictures')
+  const {data} = await api.get('pictures')
   return data
 }
 
 async function getDataByUser(body) {
   // console.log(data)
-  const {data} = await axios.get(
-    `http://localhost:3000/creators/${body.creatorId}/pictures`,
-  )
+  const {data} = await api.get(`creators/${body.creatorId}/pictures`)
   return data
 }
 
 async function getDataByCategory(body) {
   // console.log(data)
-  const {data} = await axios.get(
-    `http://localhost:3000/categories/${body.categoryId}/pictures`,
-  )
+  const {data} = await api.get(`categories/${body.categoryId}/pictures`)
   return data
 }
 
 async function addData(body) {
-  const {data} = await axios.post('http://localhost:3000/pictures', body)
+  const {data} = await api.post('pictures', body)
   // console.log(data, 'piicc')
   return data
 }

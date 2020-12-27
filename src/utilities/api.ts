@@ -81,4 +81,5 @@ const deleteFn = async (path: string) => {
   }
 }
 
-export default {get: getFn, post: postFn, put: putFn, delete: deleteFn}
+const api = {get: getFn, post: postFn, put: putFn, delete: deleteFn}
+export default api

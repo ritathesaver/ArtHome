@@ -1,9 +1,9 @@
 import {call, put, takeLatest} from 'redux-saga/effects'
-import axios from 'axios'
 import {Alert} from 'react-native'
+import api from '../../utilities/api'
 
 async function getData() {
-  const {data} = await axios.get('http://localhost:3000/categories')
+  const {data} = await api.get('categories')
   return data
 }
 
