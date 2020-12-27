@@ -8,6 +8,7 @@ import {
   Alert,
   TouchableOpacity,
   Dimensions,
+  ActivityIndicator,
 } from 'react-native'
 import ImagePicker from 'react-native-image-picker'
 import {RNCamera} from 'react-native-camera'
@@ -21,6 +22,8 @@ import FastImage from 'react-native-fast-image'
 
 export const OpenCameraScreen: FunctionComponent = () => {
   const [camera, setCamera] = useState<RNCamera | null>(null)
+
+  const [isLoading, setIsLoading] = useState(false)
 
   const [fileData, setFileData] = useState('')
 
@@ -50,6 +53,7 @@ export const OpenCameraScreen: FunctionComponent = () => {
         // console.log('ImagePicker Error: ', response.error)
       } else {
         //setFileData(response.uri)
+        setIsLoading(true)
         cloudinaryUpload(response.uri)
       }
     })
@@ -70,6 +74,7 @@ export const OpenCameraScreen: FunctionComponent = () => {
     data.append('upload_preset', 'dwucj2mkl')
     data.append('cloud_name', 'dwucj2mkl')
     // console.log(data)
+
 
     const res = await axios({
       url: 'https://api.cloudinary.com/v1_1/dwucj2mkl/image/upload',
@@ -127,10 +132,22 @@ export const OpenCameraScreen: FunctionComponent = () => {
 
   return (
     <View style={styles.container}>
+      <ActivityIndicator
+        style={{
+          position: 'absolute',
+          left: 0,
+          right: 0,
+          top: 25,
+        }}
+        size="large"
+        color="#af6b58"
+        animating={isLoading}
+      />
       {fileData ? (
         <View style={styles.afterShootContainer}>
           <View style={{width: Dimensions.get('window').width}}>
             <FastImage
+              onLoadEnd={() => setIsLoading(false)}
               style={{
                 width: Dimensions.get('window').width,
                 height: Dimensions.get('window').width * size.ratio,
@@ -155,7 +172,7 @@ export const OpenCameraScreen: FunctionComponent = () => {
       ) : (
         <View
           style={{
-            backgroundColor: 'black',
+            backgroundColor: '#202122',
 
             justifyContent: 'center',
           }}>

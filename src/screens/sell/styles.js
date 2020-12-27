@@ -3,7 +3,7 @@ import {Dimensions, StyleSheet} from 'react-native'
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
+    backgroundColor: '#202122',
   },
   cameraWrapper: {
     width: '100%',
@@ -86,7 +86,7 @@ export const priceStyles = StyleSheet.create({
   priceInput: {
     width: '30%',
     padding: 3,
-    borderColor: 'black',
+    borderColor: '#f7f7f7',
     borderBottomWidth: 1,
     color: '#f7f7f7',
     fontSize: 20,
