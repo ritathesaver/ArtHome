@@ -55,6 +55,7 @@ export const HomeStackScreen = () => {
       <HomeStack.Screen
         options={{
           ...screenStyle,
+          title: 'Creator',
           headerBackTitleVisible: false,
         }}
         name="CreatorPage"

@@ -50,8 +50,9 @@ export const pageStyles = StyleSheet.create({
     margin: 10,
   },
   imageContainer: {
-    width: 320,
-    height: 320,
+    marginTop: 16,
+    width: 280,
+    height: 280,
     alignItems: 'center',
   },
   image: {
@@ -80,17 +81,17 @@ export const pageStyles = StyleSheet.create({
     color: '#f7f7f7',
   },
   aboutText: {
-    fontSize: 17,
+    fontSize: 18,
     color: '#f7f7f7',
     margin: 3,
   },
   aboutTextTitle: {
-    fontSize: 15,
+    fontSize: 14,
     color: '#f7f7f7',
     margin: 3,
   },
   box: {
-    marginBottom: 5,
+    marginBottom: 16,
     width: '100%',
   },
 })

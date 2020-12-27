@@ -82,33 +82,33 @@ export const HomeScreen: FunctionComponent = () => {
             numColumns={1}
             ListHeaderComponent={
               <>
-                <Text style={{fontSize: 20, margin: 15, color: '#f7f7f7'}}>
-                  Creators:
-                </Text>
                 <FlatList
+                  style={{marginVertical: 16}}
                   data={searchedUsers}
-                  key={'_'}
                   keyExtractor={(item) => '_' + item.id}
                   horizontal={true}
                   showsHorizontalScrollIndicator={false}
                   numColumns={1}
+                  contentContainerStyle={{paddingHorizontal: 16}}
+                  ItemSeparatorComponent={() => <View style={{width: 32}} />}
                   renderItem={({item}) => (
                     <TouchableOpacity
                       onPress={() => {
                         navigation.navigate('CreatorPage', item)
                       }}
-                      style={{paddingHorizontal: 16, alignItems: 'center'}}>
+                      style={{alignItems: 'center', justifyContent: 'center'}}>
                       <FastImage
                         style={{width: 70, height: 70, borderRadius: 35}}
                         source={{uri: item.avatarUri}}
                       />
-                      <Text style={{color: '#f7f7f7'}}>{item.name}</Text>
+                      <Text
+                        numberOfLines={1}
+                        style={{color: '#f7f7f7', width: 70, paddingTop: 8}}>
+                        {item.name}
+                      </Text>
                     </TouchableOpacity>
                   )}
                 />
-                <Text style={{fontSize: 20, margin: 15, color: '#f7f7f7'}}>
-                  Artworks:
-                </Text>
               </>
             }
             renderItem={({item}) => (
@@ -118,30 +118,41 @@ export const HomeScreen: FunctionComponent = () => {
                 }}
                 style={{
                   paddingHorizontal: 16,
+                  paddingVertical: 8,
                   flexDirection: 'row',
                   alignItems: 'center',
                   marginVertical: 3,
                 }}>
                 <FastImage
-                  style={{width: 120, height: 120, borderRadius: 10}}
+                  style={{width: 120, height: 120, borderRadius: 8}}
                   source={{uri: item.uri}}
                 />
                 <View
                   style={{
                     flex: 1,
-                    padding: 10,
-                    justifyContent: 'space-evenly',
+                    paddingLeft: 16,
                   }}>
                   <Text
+                    numberOfLines={3}
                     style={{
                       fontSize: 18,
                       fontWeight: 'bold',
                       color: '#f7f7f7',
+                      paddingBottom: 6,
                     }}>
                     {item.title}
                   </Text>
                   <Text style={{color: '#f7f7f7'}}>{item.description}</Text>
                 </View>
+                <Text
+                  style={{
+                    fontSize: 18,
+                    fontWeight: 'bold',
+                    color: '#f7f7f7',
+                    paddingLeft: 16,
+                  }}>
+                  {`$${item.price}`}
+                </Text>
               </TouchableOpacity>
             )}
           />

@@ -80,7 +80,7 @@ export const CartScreen: FunctionComponent<ICartProps> = ({route}) => {
             <Text style={{color: '#f7f7f7'}}>
               Size - {size.width} x {size.height}
             </Text>
-            <Text style={styles.price}>Price: {picture.price} BYN</Text>
+            <Text style={styles.price}>Price: ${picture.price}</Text>
           </View>
         </View>
 

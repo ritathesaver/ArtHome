@@ -6,6 +6,7 @@ import {
 import {unionBy} from 'lodash'
 
 export interface IPictures {
+  [x: string]: any
   creatorId: string
   id: string
   title: string

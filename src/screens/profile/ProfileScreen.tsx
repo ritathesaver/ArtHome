@@ -9,6 +9,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  SafeAreaView,
 } from 'react-native'
 import {pageStyles} from './styles'
 import {RootState} from '../../redux/rootReducer'
@@ -77,7 +78,6 @@ export const ProfileScreen: FunctionComponent = () => {
     if (about) {
       dispatch(editUser({about}, currentUser))
     }
-    setAbout('')
     setInputActiveAbout(false)
   }, [currentUser, dispatch, about])
 
@@ -86,23 +86,22 @@ export const ProfileScreen: FunctionComponent = () => {
     if (address) {
       dispatch(editUser({address}, currentUser))
     }
-    setAddress('')
     setInputActiveAddress(false)
   }, [currentUser, dispatch, address])
 
   const onChangePhone = useCallback(() => {
-    console.log(phone)
     if (phone) {
       dispatch(editUser({phone}, currentUser))
     }
-    setPhone('')
     setInputActivePhone(false)
   }, [currentUser, dispatch, phone])
 
   return (
-    <KeyboardAvoidingView style={{flex: 1, backgroundColor: '#202122'}} behavior="height">
+    <KeyboardAvoidingView
+      style={{flex: 1, backgroundColor: '#202122'}}
+      behavior="height">
       <ScrollView>
-        <View style={pageStyles.container}>
+        <SafeAreaView style={pageStyles.container}>
           <View style={{alignItems: 'center'}}>
             <TouchableOpacity
               onPress={() => launchImageLibrary()}
@@ -120,47 +119,29 @@ export const ProfileScreen: FunctionComponent = () => {
               <Text style={pageStyles.aboutTextTitle}>Email:</Text>
               <Text style={pageStyles.aboutText}>{currentUser?.email}</Text>
             </View>
-            <View style={pageStyles.box}>
-              <Text style={pageStyles.aboutTextTitle}>Phone:</Text>
-            </View>
+
+            <Text style={pageStyles.aboutTextTitle}>Phone:</Text>
+
             {inputActivePhone ? (
               <View style={{flex: 1, margin: 3}}>
                 <TextInput
+                  autoFocus
                   multiline
                   maxLength={50}
                   numberOfLines={4}
                   onChangeText={setPhone}
-                  defaultValue={phone}
+                  value={phone}
                   placeholder={phone}
                   onSubmitEditing={onChangePhone}
                   style={{
                     borderBottomColor: '#f7f7f7',
                     borderBottomWidth: 1,
                     marginBottom: 20,
+                    fontSize: 17,
                     color: '#f7f7f7',
                     width: '95%',
                   }}
                 />
-                <TouchableOpacity
-                  style={{
-                    width: '25%',
-                    height: 40,
-                    borderRadius: 8,
-                    backgroundColor: '#f7f7f7',
-                    alignSelf: 'flex-end',
-                    marginRight: 15,
-                  }}
-                  onPress={onChangePhone}>
-                  <Text
-                    style={{
-                      color: 'black',
-                      textAlign: 'center',
-                      fontSize: 17,
-                      paddingVertical: 10,
-                    }}>
-                    Submit
-                  </Text>
-                </TouchableOpacity>
               </View>
             ) : (
               <View style={pageStyles.box}>
@@ -169,20 +150,18 @@ export const ProfileScreen: FunctionComponent = () => {
                     setInputActivePhone(true)
                   }}>
                   <Text style={pageStyles.aboutText}>
-                    {currentUser?.phone ? currentUser.phone : 'none'}
+                    {currentUser?.phone ? currentUser.phone : 'None'}
                   </Text>
                 </TouchableOpacity>
               </View>
             )}
 
-            <View style={pageStyles.box}>
-              <Text style={pageStyles.aboutTextTitle}>Address:</Text>
-            </View>
+            <Text style={pageStyles.aboutTextTitle}>Address:</Text>
 
             {inputActiveAddress ? (
               <View style={{flex: 1, margin: 3}}>
                 <TextInput
-                  multiline
+                  autoFocus
                   maxLength={50}
                   numberOfLines={4}
                   onChangeText={setAddress}
@@ -193,30 +172,11 @@ export const ProfileScreen: FunctionComponent = () => {
                     borderBottomColor: '#f7f7f7',
                     borderBottomWidth: 1,
                     marginBottom: 20,
+                    fontSize: 17,
                     color: '#f7f7f7',
                     width: '95%',
                   }}
                 />
-                <TouchableOpacity
-                  style={{
-                    width: '25%',
-                    height: 40,
-                    borderRadius: 8,
-                    backgroundColor: '#f7f7f7',
-                    alignSelf: 'flex-end',
-                    marginRight: 15,
-                  }}
-                  onPress={onChangeAddress}>
-                  <Text
-                    style={{
-                      color: 'black',
-                      textAlign: 'center',
-                      fontSize: 17,
-                      paddingVertical: 10,
-                    }}>
-                    Submit
-                  </Text>
-                </TouchableOpacity>
               </View>
             ) : (
               <View style={pageStyles.box}>
@@ -225,19 +185,18 @@ export const ProfileScreen: FunctionComponent = () => {
                     setInputActiveAddress(true)
                   }}>
                   <Text style={pageStyles.aboutText}>
-                    {currentUser?.address ? currentUser.address : 'none'}
+                    {currentUser?.address ? currentUser.address : 'None'}
                   </Text>
                 </TouchableOpacity>
               </View>
             )}
-            <View style={pageStyles.box}>
-              <Text style={pageStyles.aboutTextTitle}>About:</Text>
-            </View>
+
+            <Text style={pageStyles.aboutTextTitle}>About:</Text>
 
             {inputActiveAbout ? (
               <View style={{flex: 1, margin: 3}}>
                 <TextInput
-                  multiline
+                  autoFocus
                   maxLength={50}
                   numberOfLines={4}
                   onChangeText={setAbout}
@@ -248,30 +207,11 @@ export const ProfileScreen: FunctionComponent = () => {
                     borderBottomColor: '#f7f7f7',
                     borderBottomWidth: 1,
                     marginBottom: 20,
+                    fontSize: 17,
                     color: '#f7f7f7',
                     width: '95%',
                   }}
                 />
-                <TouchableOpacity
-                  style={{
-                    width: '25%',
-                    height: 40,
-                    borderRadius: 8,
-                    backgroundColor: '#f7f7f7',
-                    alignSelf: 'flex-end',
-                    marginRight: 15,
-                  }}
-                  onPress={onChangeAbout}>
-                  <Text
-                    style={{
-                      color: 'black',
-                      textAlign: 'center',
-                      fontSize: 17,
-                      paddingVertical: 10,
-                    }}>
-                    Submit
-                  </Text>
-                </TouchableOpacity>
               </View>
             ) : (
               <View style={pageStyles.box}>
@@ -291,7 +231,6 @@ export const ProfileScreen: FunctionComponent = () => {
                 flexDirection: 'row',
                 justifyContent: 'center',
                 alignItems: 'center',
-                marginTop: 65,
               }}>
               {currentUser?.specialization.map((item: string) => (
                 <View
@@ -299,7 +238,7 @@ export const ProfileScreen: FunctionComponent = () => {
                   style={{
                     borderRadius: 10,
                     borderWidth: 1,
-                    margin: 15,
+                    margin: 8,
                     padding: 10,
                     borderColor: '#f7f7f7',
                   }}>
@@ -308,11 +247,13 @@ export const ProfileScreen: FunctionComponent = () => {
               ))}
               {inputActive && (
                 <TextInput
+                  autoFocus
                   style={{
                     borderRadius: 10,
                     borderWidth: 1,
                     margin: 15,
                     padding: 10,
+                    fontSize: 17,
                     borderColor: '#f7f7f7',
                     width: '30%',
                     color: '#f7f7f7',
@@ -338,13 +279,17 @@ export const ProfileScreen: FunctionComponent = () => {
                 }}>
                 <AddSvg />
               </TouchableOpacity>
-              <Text style={{color: '#f7f7f7'}}>Add your specializations</Text>
+              <Text style={{color: '#f7f7f7', paddingTop: 16}}>
+                Add your specializations
+              </Text>
               {inputActive && (
                 <TextInput
+                  autoFocus
                   style={{
                     borderRadius: 10,
                     borderWidth: 1,
                     margin: 15,
+                    fontSize: 17,
                     padding: 10,
                     borderColor: '#f7f7f7',
                     width: '30%',
@@ -377,10 +322,10 @@ export const ProfileScreen: FunctionComponent = () => {
                 textAlign: 'center',
                 fontSize: 17,
               }}>
-              LOGOUT
+              Logout
             </Text>
           </TouchableOpacity>
-        </View>
+        </SafeAreaView>
       </ScrollView>
     </KeyboardAvoidingView>
   )

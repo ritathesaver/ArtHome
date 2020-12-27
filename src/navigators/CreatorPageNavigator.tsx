@@ -16,7 +16,9 @@ export const CreatorPageScreen: FunctionComponent<ICreatorPageProps> = ({
   return (
     <Tab.Navigator
       tabBarOptions={{
-        indicatorStyle: {backgroundColor: '#af6b58'},
+        indicatorContainerStyle: {backgroundColor: '#161718'},
+        indicatorStyle: {backgroundColor: '#f7f7f7'},
+        labelStyle: {color: '#f7f7f7'},
       }}>
       <Tab.Screen
         name="About"

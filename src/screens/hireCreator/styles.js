@@ -52,6 +52,7 @@ export const pageStyles = StyleSheet.create({
   imageContainer: {
     width: 300,
     height: 300,
+    marginTop: 20
   },
   image: {
     width: '100%',
@@ -61,31 +62,32 @@ export const pageStyles = StyleSheet.create({
     borderRadius: 170,
   },
   line: {
-    borderBottomWidth: 2,
-    borderBottomColor: '#af6b58',
+    borderBottomWidth: 1,
+    borderBottomColor: '#f7f7f7',
     marginVertical: 10,
     width: '100%',
   },
   aboutWrapper: {
     flex: 1,
-    margin: 10,
+    margin: 15,
   },
   title: {
-    fontSize: 20,
-    margin: 15,
-    textAlign: 'center',
+    fontSize: 18,
+    marginBottom: 15,
     fontWeight: '500',
     color: '#f7f7f7',
   },
+  nameTitle: {
+    fontSize: 18,
+    marginBottom: 15,
+    fontWeight: '500',
+    color: '#f7f7f7',
+    paddingHorizontal: 12
+  },
   aboutText: {
-    fontSize: 17,
-    textAlign: 'center',
-    marginLeft: 4,
     color: '#f7f7f7',
   },
   box: {
-    flexDirection: 'row',
-
     marginBottom: 5,
   },
 })

@@ -52,7 +52,7 @@ export const SetPriceScreen: FunctionComponent<ISetPriceProps> = ({route}) => {
           source={{uri: route.params.uri}}
         />
         <View style={priceStyles.inputWrapper}>
-          <Text style={priceStyles.priceText}>BYN:</Text>
+          <Text style={priceStyles.priceText}>$</Text>
           <TextInput
             defaultValue={price}
             onChangeText={setPrice}

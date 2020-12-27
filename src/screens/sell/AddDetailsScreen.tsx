@@ -159,7 +159,7 @@ export const AddDetailsScreen: FunctionComponent<IAddDetailsProps> = ({
             marginHorizontal: 15,
           }}>
           <Text style={{fontSize: 20, margin: 15}}>
-            BYN: {route.params.price}
+            ${route.params.price}
           </Text>
         </View>
 

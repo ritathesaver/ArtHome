@@ -54,7 +54,7 @@ export const CategoriesListScreen: FunctionComponent<ISetCategoryProps> = ({
               style={{
                 width: '100%',
                 borderBottomWidth: StyleSheet.hairlineWidth,
-                borderColor: '#af6b58',
+                borderColor: '#f7f7f7',
               }}
             />
           </>

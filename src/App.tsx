@@ -110,7 +110,7 @@ const App: FunctionComponent = () => {
             }}
           />
           <Tab.Screen
-            name="Cart"
+            name="CartList"
             component={CartDetails}
             options={{
               tabBarLabel: 'Cart',

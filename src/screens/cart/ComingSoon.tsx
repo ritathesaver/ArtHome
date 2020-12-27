@@ -3,7 +3,6 @@ import React, {FunctionComponent} from 'react'
 import {Text, View} from 'react-native'
 
 export const CartDetails: FunctionComponent = () => {
-
   //console.log(pictures)
 
   return (
