@@ -37,7 +37,7 @@ export const CartScreen: FunctionComponent<ICartProps> = ({route}) => {
   }, [dispatch, picture.creatorId])
 
   const userName = useSelector(
-    (state: RootState) => state.users.users.map((user) => user.name)[0],
+    (state: RootState) => state.users.users.find(u=> u.id === picture.creatorId)?.name,
   )
 
   const [size, setSize] = useState({height: 0, width: 0, ratio: 0})

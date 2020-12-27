@@ -54,8 +54,8 @@ export const Gallery: FunctionComponent<IDetailsProps> = (picturesArray) => {
 
   const getCreator = useCallback((id) => dispatch(getUserById(id)), [dispatch])
 
-  const userName = useSelector(
-    (state: RootState) => state.users.users.map((user) => user.name)[0],
+  const users = useSelector(
+    (state: RootState) => state.users.users,
   )
 
   const onLike = useCallback(
@@ -189,7 +189,7 @@ export const Gallery: FunctionComponent<IDetailsProps> = (picturesArray) => {
                       justifyContent: 'space-between',
                     }}>
                     <Text style={{color: 'white', padding: 5}}>
-                      by @{userName}
+                      by @{users.find(u => u.id === item.creatorId)?.name}
                     </Text>
                     <TouchableOpacity
                       onPress={() => {
