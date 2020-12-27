@@ -3,6 +3,7 @@ import {
   getPicturesAsync,
   getPicturesByCategoryAsync,
 } from '../actions/picturesActions'
+import {unionBy} from 'lodash'
 
 export interface IPictures {
   creatorId: string
@@ -48,7 +49,7 @@ export const picturesReducer = createReducer(INITIAL_STATE)
       return {
         ...state,
         loading: false,
-        pictures: action.payload,
+       pictures: unionBy([...state.pictures], action.payload, ({id}) => id),
       }
     },
   )
@@ -72,7 +73,7 @@ export const picturesReducer = createReducer(INITIAL_STATE)
       return {
         ...state,
         loading: false,
-        pictures: action.payload,
+        pictures: unionBy([...state.pictures], action.payload, ({id}) => id),
       }
     },
   )
@@ -93,7 +94,7 @@ export const picturesReducer = createReducer(INITIAL_STATE)
       return {
         ...state,
         loading: false,
-        pictures: action.payload,
+        pictures: unionBy([...state.pictures], action.payload, ({id}) => id),
       }
     },
   )

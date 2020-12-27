@@ -52,8 +52,10 @@ export const ArtworksDetails: FunctionComponent<IDetailsProps> = ({route}) => {
   const loading = useSelector((state: RootState) => state.pictures.loading)
 
   const pictures = useSelector((state: RootState) =>
-    state.pictures.pictures.filter((pic) =>
-      pic.title.toLowerCase().includes(search.toLowerCase()),
+    state.pictures.pictures.filter(
+      (pic) =>
+        pic.title.toLowerCase().includes(search.toLowerCase()) &&
+        pic.categoryId === route.params.id,
     ),
   )
 

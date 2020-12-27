@@ -30,6 +30,7 @@
     "formik": "^2.2.1",
     "invert-color": "^2.0.0",
     "json-server": "^0.16.3",
+    "lodash": "^4.17.20",
     "react": "16.13.1",
     "react-native": "0.63.3",
     "react-native-app-intro-slider": "^4.0.4",
@@ -86,7 +87,7 @@
   },
   "rnpm": {
     "assets": [
-   "./src/assets/fonts/"
+      "./src/assets/fonts/"
     ]
   }
 }

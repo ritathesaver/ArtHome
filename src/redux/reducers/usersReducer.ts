@@ -1,4 +1,5 @@
 import {createReducer} from 'typesafe-actions'
+import {unionBy} from 'lodash'
 
 export interface IUsers {
   id: string
@@ -27,7 +28,7 @@ export const usersReducer = createReducer(INITIAL_STATE)
       // console.log(action.payload, 'aaaaaaaaaa')
       return {
         ...state,
-        users: action.payload,
+        users: unionBy([...state.users], action.payload, ({id}) => id),
       }
     },
   )
