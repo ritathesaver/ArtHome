@@ -51,7 +51,10 @@ export const AddDetailsScreen: FunctionComponent<IAddDetailsProps> = ({
           route.params.res,
         ),
       )
-      navigation.navigate('Home')
+      navigation.reset({
+        index: 0,
+        routes: [{name: 'Home'}],
+      })
     } else {
       return <Text>All fields are required</Text>
     }

@@ -2,12 +2,10 @@ import React from 'react'
 import {createStackNavigator} from '@react-navigation/stack'
 import {OpenCameraScreen} from '../screens/sell/OpenCameraScreen'
 import {SetPriceScreen} from '../screens/sell/SetPriceScreen'
-import {useNavigation} from '@react-navigation/native'
 import {Alert, Button} from 'react-native'
 import {CategoriesListScreen} from '../screens/sell/CaterogiesListScreen'
 import {AddDetailsScreen} from '../screens/sell/AddDetailsScreen'
 import MapScreen from '../components/MapScreen'
-import {StackActions} from '@react-navigation/native'
 
 const screenStyle = {
   headerStyle: {
@@ -20,12 +18,10 @@ const screenStyle = {
 const SellStack = createStackNavigator()
 
 export const SellStackScreen = () => {
-  const navigation = useNavigation()
-
   return (
     <SellStack.Navigator>
       <SellStack.Screen
-        options={({route}) => ({
+        options={({route, navigation}) => ({
           ...screenStyle,
           title: 'Upload Image',
           headerRight: () => (
@@ -46,8 +42,10 @@ export const SellStackScreen = () => {
               color="white"
               title="Cancel"
               onPress={() => {
-                navigation.dispatch(StackActions.popToTop())
-                navigation.navigate('Home')
+                navigation.reset({
+                  index: 0,
+                  routes: [{name: 'Home'}],
+                })
               }}
             />
           ),
@@ -56,7 +54,7 @@ export const SellStackScreen = () => {
         component={OpenCameraScreen}
       />
       <SellStack.Screen
-        options={({route}) => ({
+        options={({route, navigation}) => ({
           ...screenStyle,
           title: 'Price',
           headerRight: () => (
@@ -71,8 +69,10 @@ export const SellStackScreen = () => {
               color="white"
               title="Cancel"
               onPress={() => {
-                navigation.dispatch(StackActions.popToTop())
-                navigation.navigate('Home')
+                navigation.reset({
+                  index: 0,
+                  routes: [{name: 'Home'}],
+                })
               }}
             />
           ),
@@ -81,7 +81,7 @@ export const SellStackScreen = () => {
         component={SetPriceScreen}
       />
       <SellStack.Screen
-        options={{
+        options={({navigation}) => ({
           ...screenStyle,
           title: 'Category',
           headerLeft: () => (
@@ -89,17 +89,19 @@ export const SellStackScreen = () => {
               color="white"
               title="Cancel"
               onPress={() => {
-                navigation.dispatch(StackActions.popToTop())
-                navigation.navigate('Home')
+                navigation.reset({
+                  index: 0,
+                  routes: [{name: 'Home'}],
+                })
               }}
             />
           ),
-        }}
+        })}
         name="SetCategory"
         component={CategoriesListScreen}
       />
       <SellStack.Screen
-        options={{
+        options={({navigation}) => ({
           ...screenStyle,
           title: 'AddDetails',
           headerLeft: () => (
@@ -107,12 +109,14 @@ export const SellStackScreen = () => {
               color="white"
               title="Cancel"
               onPress={() => {
-                navigation.dispatch(StackActions.popToTop())
-                navigation.navigate('Home')
+                navigation.reset({
+                  index: 0,
+                  routes: [{name: 'Home'}],
+                })
               }}
             />
           ),
-        }}
+        })}
         name="AddDetails"
         component={AddDetailsScreen}
       />
