@@ -33,6 +33,14 @@ function* workerSignUp(action) {
       payload: {id: action.payload.id, userToken: resGet.accessToken},
     })
   } catch (err) {
+    if (err.message.includes('Network')) {
+      Alert.alert(
+        'Ooops!',
+        'Something with internet connection or server is unavailable',
+      )
+
+      return
+    }
     Alert.alert('Ooops!', 'Something went wrong')
   }
 }
@@ -58,7 +66,15 @@ function* workerSignIn(action) {
       payload: {userToken: resGet.accessToken},
     })
   } catch (err) {
-    yield put({type: 'SIGN_IN_FAILURE', payload: {err}})
+    yield put({ type: 'SIGN_IN_FAILURE', payload: { err } })
+    if (err.message.includes('Network')) {
+      Alert.alert(
+        'Ooops!',
+        'Something with internet connection or server is unavailable',
+      )
+
+      return
+    }
     Alert.alert('Ooops!', 'Incorrect email or password')
   }
   // console.log(resGet, 'token')

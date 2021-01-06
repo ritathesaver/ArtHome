@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {AppDispatch} from '../../App'
 import {getCategories} from '../../redux/actions/cateroriesActions'
 import {RootState} from '../../redux/rootReducer'
+import { CategoriesListItem } from './CategoriesListItem'
 
 interface ISetCategoryProps {
   route: any
@@ -32,32 +33,13 @@ export const CategoriesListScreen: FunctionComponent<ISetCategoryProps> = ({
         keyExtractor={(item, index) => index.toString()}
         data={categories}
         renderItem={({item}) => (
-          <>
-            <TouchableOpacity
-              style={{width: '100%'}}
-              onPress={() => {
-                navigation.navigate('AddDetails', {
+          <CategoriesListItem onPress={() =>
+                  navigation.navigate('AddDetails', {
                   categoryId: item.id,
                   title: item.title,
                   uri: route.params.uri,
                   price: route.params.price,
-                })
-              }}>
-              <View style={{backgroundColor: '#202122'}}>
-                <Text
-                  style={{fontSize: 20, paddingVertical: 15, color: '#f7f7f7'}}>
-                  {item.title}
-                </Text>
-              </View>
-            </TouchableOpacity>
-            <View
-              style={{
-                width: '100%',
-                borderBottomWidth: StyleSheet.hairlineWidth,
-                borderColor: '#f7f7f7',
-              }}
-            />
-          </>
+                }) } itemTitle={item.title} />
         )}
       />
     </View>

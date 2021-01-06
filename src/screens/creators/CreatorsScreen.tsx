@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {FunctionComponent, useEffect, useState} from 'react'
+import React, {FunctionComponent, useCallback, useEffect, useState} from 'react'
 import {
   FlatList,
   Image,
@@ -15,6 +15,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {getUsers} from '../../redux/actions/usersActions'
 import {AppDispatch} from '../../App'
 import {RootState} from '../../redux/rootReducer'
+import { CreatorItem } from './CreatorItem'
 
 export const CreatorsScreen: FunctionComponent = () => {
   const navigation = useNavigation()
@@ -37,6 +38,14 @@ export const CreatorsScreen: FunctionComponent = () => {
       .map((name) => name),
   )
 
+  const onPress = useCallback(
+    (user) => {
+      clearSearch()
+      navigation.navigate('Details', user)
+    },
+    [],
+  )
+
   return (
     <SafeAreaView style={styles.container}>
       <SearchBox setSearch={setSearch} search={search} />
@@ -45,21 +54,7 @@ export const CreatorsScreen: FunctionComponent = () => {
         keyExtractor={(item) => item.id}
         data={searchedUsers}
         renderItem={({item}) => (
-          <TouchableOpacity
-            onPress={() => {
-              clearSearch()
-              navigation.navigate('Details', item)
-            }}
-            style={{
-              flexDirection: 'column',
-              margin: 20,
-              width: 100,
-              height: 100,
-              alignItems: 'center',
-            }}>
-            <Image style={styles.image} source={{uri: item.avatarUri}} />
-            <Text style={styles.title}>{item.name}</Text>
-          </TouchableOpacity>
+          <CreatorItem itemId={item.id} onPress={() => onPress(item)} />
         )}
         numColumns={3}
       />

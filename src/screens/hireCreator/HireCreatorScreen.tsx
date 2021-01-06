@@ -1,13 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {FunctionComponent, useEffect, useState} from 'react'
 import {
-  Dimensions,
   FlatList,
-  Image,
   SafeAreaView,
-  Text,
-  TouchableOpacity,
-  View,
 } from 'react-native'
 import {styles} from './styles'
 
@@ -18,6 +13,8 @@ import {useDispatch, useSelector} from 'react-redux'
 import {AppDispatch} from '../../App'
 import {getUsers} from '../../redux/actions/usersActions'
 import {RootState} from '../../redux/rootReducer'
+import { HireCreatorItem } from './HireCreatorItem'
+import { useCallback } from 'react'
 
 export const HireCreatorScreen: FunctionComponent = () => {
   const navigation = useNavigation()
@@ -27,6 +24,14 @@ export const HireCreatorScreen: FunctionComponent = () => {
   const clearSearch = () => {
     setSearch('')
   }
+
+  const onPress = useCallback(
+    (user) => {
+      clearSearch()
+      navigation.navigate('CreatorPage', user)
+    },
+    [],
+  )
 
   useEffect(() => {
     dispatch(getUsers())
@@ -48,32 +53,7 @@ export const HireCreatorScreen: FunctionComponent = () => {
         data={searchedUsers}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({item}) => (
-          <View
-            style={{
-              ...styles.wrapper,
-              width: Dimensions.get('window').width,
-            }}>
-            <View style={styles.infoWrapper}>
-              <View style={styles.imageContainer}>
-                <Image style={styles.image} source={{uri: item.avatarUri}} />
-              </View>
-              <View style={{flexDirection: 'column', marginLeft: 5}}>
-                <Text style={styles.title}>{item.name}</Text>
-                <Text style={styles.title}>
-                  {item.specialization.map((spec) => spec + ' ')}
-                </Text>
-              </View>
-            </View>
-            <TouchableOpacity
-              onPress={() => {
-                clearSearch()
-                navigation.navigate('CreatorPage', item)
-              }}>
-              <View style={{height: '100%', justifyContent: 'center'}}>
-                <NextIcon />
-              </View>
-            </TouchableOpacity>
-          </View>
+          <HireCreatorItem itemId={item.id} onPress={() => onPress(item)} />
         )}
       />
     </SafeAreaView>

@@ -12,20 +12,18 @@ import {
 import SearchBox from '../../components/SearchBox/SearchBox'
 import {detailStyles} from './styles'
 import LikeActiveSvg from '../../assets/icons/heart (2).svg'
-import FastImage from 'react-native-fast-image'
 import {useNavigation} from '@react-navigation/native'
 import {useDispatch, useSelector} from 'react-redux'
 import {AppDispatch} from '../../App'
 import {getPicturesByCategory} from '../../redux/actions/picturesActions'
 import {RootState} from '../../redux/rootReducer'
-import {getUsers} from '../../redux/actions/usersActions'
 import LikeSvg from '../../assets/icons/like (1).svg'
 import {deleteLike, getLikes, putLike} from '../../redux/actions/likesActions'
+import { ArtworksItem } from './ArtworksItem'
 
 interface IDetailsProps {
   route: any
 }
-const columnWidth: number = Dimensions.get('window').width * 0.9
 
 export const ArtworksDetails: FunctionComponent<IDetailsProps> = ({route}) => {
   const navigation = useNavigation()
@@ -36,10 +34,6 @@ export const ArtworksDetails: FunctionComponent<IDetailsProps> = ({route}) => {
   const clearSearch = () => {
     setSearch('')
   }
-
-  useEffect(() => {
-    dispatch(getUsers())
-  }, [dispatch])
 
   useEffect(() => {
     dispatch(getLikes())
@@ -58,8 +52,12 @@ export const ArtworksDetails: FunctionComponent<IDetailsProps> = ({route}) => {
     ),
   )
 
-  const users = useSelector((state: RootState) =>
-    state.users.users.map((user) => user),
+  const onPress = useCallback(
+    (itemId) => {
+      clearSearch()
+      navigation.navigate('Cart', {id: itemId})
+    },
+    [],
   )
 
   const likes = useSelector((state: RootState) => state.likes.likes)
@@ -107,55 +105,7 @@ export const ArtworksDetails: FunctionComponent<IDetailsProps> = ({route}) => {
         <FlatList
           data={pictures}
           renderItem={({item}) => (
-            <TouchableOpacity
-              onPress={() => {
-                clearSearch()
-                navigation.navigate('Cart', {id: item.id})
-              }}>
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: 'column',
-                  padding: 5,
-                  width: columnWidth,
-                  alignItems: 'center',
-                }}>
-                <FastImage
-                  style={{
-                    width: columnWidth,
-                    height: columnWidth,
-                    margin: 1,
-                  }}
-                  source={{uri: item.uri}}>
-                  {getLikeComponent(item.id)}
-                </FastImage>
-                <View
-                  style={{
-                    flex: 1,
-                  }}>
-                  <Text
-                    numberOfLines={1}
-                    style={{
-                      color: '#f7f7f7',
-                      marginBottom: 2,
-                      paddingHorizontal: 16,
-                      textAlign: 'center',
-                    }}>
-                    {item.title}
-                  </Text>
-                  <Text
-                    numberOfLines={1}
-                    style={{
-                      color: '#f7f7f7',
-                      marginBottom: 2,
-                      paddingHorizontal: 16,
-                      textAlign: 'center',
-                    }}>
-                    by @{users.find((user) => user.id === item.creatorId)?.name}
-                  </Text>
-                </View>
-              </View>
-            </TouchableOpacity>
+            <ArtworksItem onPress={() => onPress(item.id)} itemId={item.id} getLikeComponent={getLikeComponent} />
           )}
         />
       )}
