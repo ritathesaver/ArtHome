@@ -7,11 +7,11 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 Icon.loadFont()
 
 interface ISearchProps {
-	setSearch: (value: string) => void
-	search: string
+  setSearch: (value: string) => void
+  search: string
 }
 
-const SearchBox: FunctionComponent<ISearchProps> = ({ setSearch, search }) => {
+const SearchBox: FunctionComponent<ISearchProps> = ({setSearch, search}) => {
   return (
     <View style={styles.container}>
       <View style={styles.searchBox}>

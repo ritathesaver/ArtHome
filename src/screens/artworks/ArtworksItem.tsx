@@ -5,19 +5,18 @@ import FastImage from 'react-native-fast-image'
 import {TouchableOpacity} from 'react-native-gesture-handler'
 import {useDispatch, useSelector} from 'react-redux'
 import {AppDispatch} from '../../App'
+import {GetLike} from '../../components/GetLike/GetLike'
 import {getUsers} from '../../redux/actions/usersActions'
 import {RootState} from '../../redux/rootReducer'
 
 interface IArtworksItemProps {
   onPress: any
   itemId: string
-  getLikeComponent: any
 }
 
 export const ArtworksItem: FunctionComponent<IArtworksItemProps> = ({
   onPress,
   itemId,
-  getLikeComponent,
 }) => {
   const columnWidth: number = Dimensions.get('window').width * 0.9
   const dispatch: AppDispatch = useDispatch()
@@ -35,15 +34,15 @@ export const ArtworksItem: FunctionComponent<IArtworksItemProps> = ({
   )
 
   return (
-    <TouchableOpacity onPress={onPress}>
-      <View
-        style={{
-          flex: 1,
-          flexDirection: 'column',
-          padding: 5,
-          width: columnWidth,
-          alignItems: 'center',
-        }}>
+    <View
+      style={{
+        flex: 1,
+        flexDirection: 'column',
+        padding: 5,
+        width: columnWidth,
+        alignItems: 'center',
+      }}>
+      <TouchableOpacity onPress={onPress}>
         <FastImage
           style={{
             width: columnWidth,
@@ -51,35 +50,34 @@ export const ArtworksItem: FunctionComponent<IArtworksItemProps> = ({
             margin: 1,
           }}
           source={{uri: picture?.uri}}>
-          {getLikeComponent()}
+          <GetLike itemId={itemId} />
         </FastImage>
-        <View
+      </TouchableOpacity>
+      <View
+        style={{
+          flex: 1,
+        }}>
+        <Text
+          numberOfLines={1}
           style={{
-            flex: 1,
+            color: '#f7f7f7',
+            marginBottom: 2,
+            paddingHorizontal: 16,
+            textAlign: 'center',
           }}>
-          <Text
-            numberOfLines={1}
-            style={{
-              color: '#f7f7f7',
-              marginBottom: 2,
-              paddingHorizontal: 16,
-              textAlign: 'center',
-            }}>
-            {picture?.title}
-          </Text>
-          <Text
-            numberOfLines={1}
-            style={{
-              color: '#f7f7f7',
-              marginBottom: 2,
-              paddingHorizontal: 16,
-              textAlign: 'center',
-            }}>
-            by @
-            {users.find((user: any) => user.id === picture?.creatorId)?.name}
-          </Text>
-        </View>
+          {picture?.title}
+        </Text>
+        <Text
+          numberOfLines={1}
+          style={{
+            color: '#f7f7f7',
+            marginBottom: 2,
+            paddingHorizontal: 16,
+            textAlign: 'center',
+          }}>
+          by @{users.find((user: any) => user.id === picture?.creatorId)?.name}
+        </Text>
       </View>
-    </TouchableOpacity>
+    </View>
   )
 }

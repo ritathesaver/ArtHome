@@ -12,17 +12,16 @@ import Modal from 'react-native-modal'
 import {detailStyles} from './styles'
 import {Dimensions} from 'react-native'
 import FastImage from 'react-native-fast-image'
-import LikeActiveSvg from '../../assets/icons/heart (2).svg'
-import LikeSvg from '../../assets/icons/like (1).svg'
 import {IPictures} from '../../redux/reducers/picturesReducer'
 import {useDispatch, useSelector} from 'react-redux'
 import {AppDispatch} from '../../App'
-import {deleteLike, getLikes, putLike} from '../../redux/actions/likesActions'
+import {getLikes} from '../../redux/actions/likesActions'
 import {RootState} from '../../redux/rootReducer'
 import {Text} from 'react-native'
 import {getUserById} from '../../redux/actions/usersActions'
 import {useNavigation} from '@react-navigation/native'
 import MoreIcon from '../../assets/icons/next copy 2.svg'
+import {GetLike} from '../GetLike/GetLike'
 
 interface IDetailsProps {
   picturesArray: IPictures[]
@@ -40,8 +39,6 @@ const columnWidth: number = Dimensions.get('window').width / 2
 
 export const Gallery: FunctionComponent<IDetailsProps> = (picturesArray) => {
   const dispatch: AppDispatch = useDispatch()
-  const authId = useSelector((state: RootState) => state.auth.id)
-  const likes = useSelector((state: RootState) => state.likes.likes)
   const [loading, setLoading] = useState(true)
   const [showModal, setShowModal] = useState(false)
   const navigation = useNavigation()
@@ -54,25 +51,7 @@ export const Gallery: FunctionComponent<IDetailsProps> = (picturesArray) => {
 
   const getCreator = useCallback((id) => dispatch(getUserById(id)), [dispatch])
 
-  const users = useSelector(
-    (state: RootState) => state.users.users,
-  )
-
-  const onLike = useCallback(
-    (id) => {
-      dispatch(putLike(id, authId))
-    },
-    [dispatch, authId],
-  )
-
-  const onDislike = useCallback(
-    (likeId) => {
-      console.log('deleteLike', likeId)
-      dispatch(deleteLike(likeId))
-    },
-    [dispatch],
-  )
-
+  const users = useSelector((state: RootState) => state.users.users)
   const [columns, setColumns] = useState<Array<Array<IImageWithSize>>>([[], []])
   useEffect(() => {
     // eslint-disable-next-line prettier/prettier
@@ -113,23 +92,6 @@ export const Gallery: FunctionComponent<IDetailsProps> = (picturesArray) => {
     })()
   }, [picturesArray])
 
-  const getLikeComponent = (itemId: string) => {
-    const like = likes.find(
-      (l) => l.creatorId === authId && l.pictureId === itemId,
-    )
-    return like ? (
-      <TouchableOpacity onPress={() => onDislike(like.id)}>
-        <LikeActiveSvg style={{position: 'absolute', top: 10, right: 10}} />
-      </TouchableOpacity>
-    ) : (
-      <TouchableOpacity
-        style={{position: 'absolute', top: 10, right: 10}}
-        onPress={() => onLike(itemId)}>
-        <LikeSvg />
-      </TouchableOpacity>
-    )
-  }
-
   const imagesColumns = columns.map((column, index) => (
     <View key={index} style={{width: '49%'}}>
       {column.map((item: IImageWithSize) => {
@@ -156,7 +118,7 @@ export const Gallery: FunctionComponent<IDetailsProps> = (picturesArray) => {
                 source={{
                   uri: `${item.uri}`,
                 }}>
-                {getLikeComponent(item.id)}
+                <GetLike itemId={item.id} />
               </FastImage>
             </TouchableOpacity>
             <Modal
@@ -189,7 +151,7 @@ export const Gallery: FunctionComponent<IDetailsProps> = (picturesArray) => {
                       justifyContent: 'space-between',
                     }}>
                     <Text style={{color: 'white', padding: 5}}>
-                      by @{users.find(u => u.id === item.creatorId)?.name}
+                      by @{users.find((u) => u.id === item.creatorId)?.name}
                     </Text>
                     <TouchableOpacity
                       onPress={() => {

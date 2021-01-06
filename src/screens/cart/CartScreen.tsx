@@ -12,13 +12,13 @@ import {
 
 import FastImage from 'react-native-fast-image'
 import {styles} from './styles'
-import LikeActiveSvg from '../../assets/icons/heart (2).svg'
 import {getUserById} from '../../redux/actions/usersActions'
 import {useDispatch, useSelector} from 'react-redux'
 import {AppDispatch} from '../../App'
 import {RootState} from '../../redux/rootReducer'
 import {useState} from 'react'
 import {IPictures} from '../../redux/reducers/picturesReducer'
+import {GetLike} from '../../components/GetLike/GetLike'
 
 interface ICartProps {
   route: any
@@ -67,7 +67,7 @@ export const CartScreen: FunctionComponent<ICartProps> = ({route}) => {
             height: Dimensions.get('window').width * size.ratio * 0.85,
           }}
           source={{uri: picture.uri}}>
-          <LikeActiveSvg style={{position: 'absolute', top: 10, right: 10}} />
+          <GetLike itemId={picture.id} />
         </FastImage>
         <View
           style={{
