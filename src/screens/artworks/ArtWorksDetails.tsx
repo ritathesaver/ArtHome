@@ -2,12 +2,9 @@
 import React, {FunctionComponent, useCallback, useEffect, useState} from 'react'
 import {
   ActivityIndicator,
-  Dimensions,
   FlatList,
   SafeAreaView,
-  Text,
   TouchableOpacity,
-  View,
 } from 'react-native'
 import SearchBox from '../../components/SearchBox/SearchBox'
 import {detailStyles} from './styles'
@@ -19,7 +16,7 @@ import {getPicturesByCategory} from '../../redux/actions/picturesActions'
 import {RootState} from '../../redux/rootReducer'
 import LikeSvg from '../../assets/icons/like (1).svg'
 import {deleteLike, getLikes, putLike} from '../../redux/actions/likesActions'
-import { ArtworksItem } from './ArtworksItem'
+import {ArtworksItem} from './ArtworksItem'
 
 interface IDetailsProps {
   route: any
@@ -46,9 +43,10 @@ export const ArtworksDetails: FunctionComponent<IDetailsProps> = ({route}) => {
   const loading = useSelector((state: RootState) => state.pictures.loading)
 
   const pictures = useSelector((state: RootState) =>
-    state.pictures.pictures.filter((pic) =>
-      pic.title.toLowerCase().includes(search.toLowerCase())
-      && pic.categoryId ===route.params.id,
+    state.pictures.pictures.filter(
+      (pic) =>
+        pic.title.toLowerCase().includes(search.toLowerCase()) &&
+        pic.categoryId === route.params.id,
     ),
   )
 
@@ -57,7 +55,7 @@ export const ArtworksDetails: FunctionComponent<IDetailsProps> = ({route}) => {
       clearSearch()
       navigation.navigate('Cart', {id: itemId})
     },
-    [],
+    [navigation],
   )
 
   const likes = useSelector((state: RootState) => state.likes.likes)
@@ -105,7 +103,11 @@ export const ArtworksDetails: FunctionComponent<IDetailsProps> = ({route}) => {
         <FlatList
           data={pictures}
           renderItem={({item}) => (
-            <ArtworksItem onPress={() => onPress(item.id)} itemId={item.id} getLikeComponent={getLikeComponent} />
+            <ArtworksItem
+              onPress={() => onPress(item.id)}
+              itemId={item.id}
+              getLikeComponent={getLikeComponent}
+            />
           )}
         />
       )}

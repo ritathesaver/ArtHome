@@ -1,20 +1,15 @@
-/* eslint-disable react-native/no-inline-styles */
 import React, {FunctionComponent, useEffect, useState} from 'react'
-import {
-  FlatList,
-  SafeAreaView,
-} from 'react-native'
+import {FlatList, SafeAreaView} from 'react-native'
 import {styles} from './styles'
 
 import {useNavigation} from '@react-navigation/native'
 import SearchBox from '../../components/SearchBox/SearchBox'
-import NextIcon from '../../assets/icons/next.svg'
 import {useDispatch, useSelector} from 'react-redux'
 import {AppDispatch} from '../../App'
 import {getUsers} from '../../redux/actions/usersActions'
 import {RootState} from '../../redux/rootReducer'
-import { HireCreatorItem } from './HireCreatorItem'
-import { useCallback } from 'react'
+import {HireCreatorItem} from './HireCreatorItem'
+import {useCallback} from 'react'
 
 export const HireCreatorScreen: FunctionComponent = () => {
   const navigation = useNavigation()
@@ -30,7 +25,7 @@ export const HireCreatorScreen: FunctionComponent = () => {
       clearSearch()
       navigation.navigate('CreatorPage', user)
     },
-    [],
+    [navigation],
   )
 
   useEffect(() => {
