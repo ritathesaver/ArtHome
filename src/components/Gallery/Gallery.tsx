@@ -93,10 +93,10 @@ export const Gallery: FunctionComponent<IDetailsProps> = (picturesArray) => {
   }, [picturesArray])
 
   const imagesColumns = columns.map((column, index) => (
-    <View key={index} style={{width: '49%'}}>
+    <View key={index.toString()} style={{width: '49%'}}>
       {column.map((item: IImageWithSize) => {
         return (
-          <>
+          <View key={item.id}>
             <TouchableOpacity
               onPress={() => {
                 setShowModal(true)
@@ -110,7 +110,6 @@ export const Gallery: FunctionComponent<IDetailsProps> = (picturesArray) => {
                 onLoadEnd={() => {
                   setLoading(false)
                 }}
-                key={item.id}
                 style={{
                   width: columnWidth,
                   height: item.ratio * columnWidth,
@@ -168,7 +167,7 @@ export const Gallery: FunctionComponent<IDetailsProps> = (picturesArray) => {
                 </FastImage>
               </View>
             </Modal>
-          </>
+          </View>
         )
       })}
     </View>
@@ -189,7 +188,7 @@ export const Gallery: FunctionComponent<IDetailsProps> = (picturesArray) => {
         animating={loading}
       />
       <FlatList
-        keyExtractor={(index) => index.toString()}
+        keyExtractor={(item, index) => item.key?.toString() || index.toString()}
         data={imagesColumns}
         renderItem={({item}) => (
           <View

@@ -19,6 +19,7 @@ import {RootState} from '../../redux/rootReducer'
 import {useState} from 'react'
 import {IPictures} from '../../redux/reducers/picturesReducer'
 import {GetLike} from '../../components/GetLike/GetLike'
+import {ActivityIndicator} from 'react-native'
 
 interface ICartProps {
   route: any
@@ -26,6 +27,7 @@ interface ICartProps {
 
 export const CartScreen: FunctionComponent<ICartProps> = ({route}) => {
   // console.log(route.params)
+  const [loading, setLoading] = useState(true)
   const dispatch: AppDispatch = useDispatch()
   const picture: IPictures | undefined = useSelector(
     (state: RootState) =>
@@ -61,7 +63,25 @@ export const CartScreen: FunctionComponent<ICartProps> = ({route}) => {
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.wrapper}>
+        <ActivityIndicator
+          style={{
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            bottom: 0,
+            top: 0,
+          }}
+          size="large"
+          color="#af6b58"
+          animating={loading}
+        />
         <FastImage
+          onLoadStart={() => {
+            setLoading(true)
+          }}
+          onLoadEnd={() => {
+            setLoading(false)
+          }}
           style={{
             width: Dimensions.get('window').width * 0.85,
             height: Dimensions.get('window').width * size.ratio * 0.85,
