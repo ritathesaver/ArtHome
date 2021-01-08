@@ -49,10 +49,10 @@ export const ArtworksItem: FunctionComponent<IArtworksItemProps> = ({
             height: columnWidth,
             margin: 1,
           }}
-          source={{uri: picture?.uri}}>
-          <GetLike itemId={itemId} />
-        </FastImage>
+          source={{uri: picture?.uri}}
+        />
       </TouchableOpacity>
+      <GetLike itemId={itemId} />
       <View
         style={{
           flex: 1,

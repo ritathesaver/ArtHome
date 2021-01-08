@@ -1,17 +1,13 @@
-/* eslint-disable react-native/no-inline-styles */
 import {useNavigation} from '@react-navigation/native'
 import React, {FunctionComponent, useCallback, useEffect, useState} from 'react'
-import {
-  FlatList,
-  SafeAreaView,
-} from 'react-native'
+import {FlatList, SafeAreaView} from 'react-native'
 import SearchBox from '../../components/SearchBox/SearchBox'
 import {styles} from './styles'
 import {useDispatch, useSelector} from 'react-redux'
 import {RootState} from '../../redux/rootReducer'
 import {getCategories} from '../../redux/actions/cateroriesActions'
 import {AppDispatch} from '../../App'
-import { CategoryItem } from './CategoryItem'
+import {CategoryItem} from './CategoryItem'
 
 export const ArtworksScreen: FunctionComponent = () => {
   const navigation = useNavigation()
@@ -27,7 +23,7 @@ export const ArtworksScreen: FunctionComponent = () => {
       clearSearch()
       navigation.navigate('ArtworksDetails', {id: itemId})
     },
-    [],
+    [navigation],
   )
 
   useEffect(() => {
@@ -47,9 +43,8 @@ export const ArtworksScreen: FunctionComponent = () => {
       <SearchBox setSearch={setSearch} search={search} />
       <FlatList
         data={searchedCategories}
-        renderItem={({ item }) => (
-          <CategoryItem itemId={item.id} onPress={() => onPress(item.id)}/>
-          
+        renderItem={({item}) => (
+          <CategoryItem itemId={item.id} onPress={() => onPress(item.id)} />
         )}
         numColumns={2}
       />

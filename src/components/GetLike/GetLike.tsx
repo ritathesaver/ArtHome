@@ -40,13 +40,15 @@ export const GetLike: FunctionComponent<IGetLikeProps> = ({itemId}) => {
   )
 
   return like ? (
-    <TouchableOpacity onPress={() => onDislike(like.id)}>
-      <LikeActiveSvg style={{position: 'absolute', top: 10, right: 10}} />
+    <TouchableOpacity
+      style={{position: 'absolute', top: 10, right: 10}}
+      onPress={() => onDislike(like.id)}>
+      <LikeActiveSvg />
     </TouchableOpacity>
   ) : (
     <TouchableOpacity
-      style={{position: 'absolute', top: 10, right: 10}}
-      onPress={() => onLike(itemId)}>
+      onPress={() => onLike(itemId)}
+      style={{position: 'absolute', top: 10, right: 10}}>
       <LikeSvg />
     </TouchableOpacity>
   )
