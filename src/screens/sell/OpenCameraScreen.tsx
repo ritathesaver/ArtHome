@@ -43,6 +43,8 @@ export const OpenCameraScreen: FunctionComponent = () => {
         skipBackup: true,
         base64: true,
       },
+      maxWidth: 1200,
+      maxHeight: 1200,
     }
     ImagePicker.launchImageLibrary(options, (response) => {
       //console.log('Response = ', response);
@@ -50,7 +52,7 @@ export const OpenCameraScreen: FunctionComponent = () => {
       if (response.didCancel) {
         // console.log('User cancelled image picker')
       } else if (response.error) {
-        // console.log('ImagePicker Error: ', response.error)
+        console.log('ImagePicker Error: ', response.error)
       } else {
         //setFileData(response.uri)
         setIsLoading(true)
@@ -88,7 +90,7 @@ export const OpenCameraScreen: FunctionComponent = () => {
 
   const takePicture = async () => {
     if (camera) {
-      const options = {quality: 0.8, base64: true}
+      const options = {base64: true, width: 1200, height: 1200}
 
       try {
         const data = await camera.takePictureAsync(options)
@@ -120,6 +122,7 @@ export const OpenCameraScreen: FunctionComponent = () => {
           )
           return result
         })
+        console.log(result, 'size')
         setSize(result)
         navigation.setParams({
           uri: fileData,
