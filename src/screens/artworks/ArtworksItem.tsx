@@ -1,12 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {FunctionComponent, useEffect} from 'react'
+import React, {FunctionComponent} from 'react'
 import {View, Text, Dimensions} from 'react-native'
 import FastImage from 'react-native-fast-image'
 import {TouchableOpacity} from 'react-native-gesture-handler'
-import {useDispatch, useSelector} from 'react-redux'
-import {AppDispatch} from '../../App'
+import {useSelector} from 'react-redux'
 import {GetLike} from '../../components/GetLike/GetLike'
-import {getUsers} from '../../redux/actions/usersActions'
 import {RootState} from '../../redux/rootReducer'
 
 interface IArtworksItemProps {
@@ -19,11 +17,6 @@ export const ArtworksItem: FunctionComponent<IArtworksItemProps> = ({
   itemId,
 }) => {
   const columnWidth: number = Dimensions.get('window').width * 0.9
-  const dispatch: AppDispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(getUsers())
-  }, [dispatch])
 
   const users = useSelector((state: RootState) =>
     state.users.users.map((user) => user),

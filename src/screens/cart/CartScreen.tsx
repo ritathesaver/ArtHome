@@ -56,13 +56,13 @@ export const CartScreen: FunctionComponent<ICartProps> = ({route}) => {
     //setSize(result)
   }, [picture.uri])
 
-  console.log(size, 'size')
+  //console.log(size, 'size')
+
+  console.log(loading)
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.wrapper}>
+      {loading && (
         <ActivityIndicator
           style={{
             position: 'absolute',
@@ -75,10 +75,11 @@ export const CartScreen: FunctionComponent<ICartProps> = ({route}) => {
           color="#af6b58"
           animating={loading}
         />
+      )}
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.wrapper}>
         <FastImage
-          onLoadStart={() => {
-            setLoading(true)
-          }}
           onLoadEnd={() => {
             setLoading(false)
           }}
@@ -96,7 +97,7 @@ export const CartScreen: FunctionComponent<ICartProps> = ({route}) => {
             width: '100%',
             marginTop: 10,
           }}>
-          <Text style={{color: '#f7f7f7'}}>by {userName}</Text>
+          <Text style={{color: '#f7f7f7'}}> by {userName}</Text>
           <View style={{alignItems: 'flex-end'}}>
             <Text style={{color: '#f7f7f7'}}>
               Size - {size.width} x {size.height}

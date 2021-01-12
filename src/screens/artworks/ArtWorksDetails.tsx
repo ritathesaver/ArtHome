@@ -8,6 +8,8 @@ import {AppDispatch} from '../../App'
 import {getPicturesByCategory} from '../../redux/actions/picturesActions'
 import {ArtworksItem} from './ArtworksItem'
 import {RootState} from '../../redux/rootReducer'
+import {getLikes} from '../../redux/actions/likesActions'
+import {getUsers} from '../../redux/actions/usersActions'
 
 interface IDetailsProps {
   route: any
@@ -21,6 +23,14 @@ export const ArtworksDetails: FunctionComponent<IDetailsProps> = ({route}) => {
   const clearSearch = () => {
     setSearch('')
   }
+
+  useEffect(() => {
+    dispatch(getLikes())
+  }, [dispatch])
+
+  useEffect(() => {
+    dispatch(getUsers())
+  }, [dispatch])
 
   useEffect(() => {
     dispatch(getPicturesByCategory(route.params.id))
