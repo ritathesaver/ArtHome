@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {FunctionComponent, useEffect} from 'react'
+import React, {FunctionComponent, useCallback, useEffect} from 'react'
 import {
   Dimensions,
   Image,
@@ -20,6 +20,7 @@ import {useState} from 'react'
 import {IPictures} from '../../redux/reducers/picturesReducer'
 import {GetLike} from '../../components/GetLike/GetLike'
 import {ActivityIndicator} from 'react-native'
+import {deleteLike, putLike} from '../../redux/actions/likesActions'
 
 interface ICartProps {
   route: any
@@ -32,6 +33,18 @@ export const CartScreen: FunctionComponent<ICartProps> = ({route}) => {
   const picture: IPictures | undefined = useSelector(
     (state: RootState) =>
       state.pictures.pictures.filter((pic) => pic.id === route.params.id)[0],
+  )
+
+  const authId = useSelector((state: RootState) => state.auth.id)
+
+  const onPressLike = useCallback(
+    (pictureId: string, like: {id: string}) => {
+      console.log(pictureId, 'item')
+      like
+        ? dispatch(deleteLike(like.id))
+        : dispatch(putLike(pictureId, authId))
+    },
+    [authId, dispatch],
   )
 
   useEffect(() => {
@@ -88,7 +101,7 @@ export const CartScreen: FunctionComponent<ICartProps> = ({route}) => {
             height: Dimensions.get('window').width * size.ratio * 0.85,
           }}
           source={{uri: picture.uri}}>
-          <GetLike itemId={picture.id} />
+          <GetLike onPress={onPressLike} itemId={picture.id} />
         </FastImage>
         <View
           style={{
