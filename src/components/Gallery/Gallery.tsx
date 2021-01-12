@@ -15,7 +15,7 @@ import FastImage from 'react-native-fast-image'
 import {IPictures} from '../../redux/reducers/picturesReducer'
 import {useDispatch, useSelector} from 'react-redux'
 import {AppDispatch} from '../../App'
-import {getLikes} from '../../redux/actions/likesActions'
+import {deleteLike, getLikes, putLike} from '../../redux/actions/likesActions'
 import {RootState} from '../../redux/rootReducer'
 import {Text} from 'react-native'
 import {getUserById} from '../../redux/actions/usersActions'
@@ -42,12 +42,23 @@ export const Gallery: FunctionComponent<IDetailsProps> = (picturesArray) => {
   const [loading, setLoading] = useState(true)
   const [showModal, setShowModal] = useState(false)
   const navigation = useNavigation()
+  const authId = useSelector((state: RootState) => state.auth.id)
 
   const [currentItem, setCurrentItem] = useState<IImageWithSize | undefined>()
 
   useEffect(() => {
     dispatch(getLikes())
   }, [dispatch])
+
+  const onPress = useCallback(
+    (pictureId: string, like: {id: string}) => {
+      console.log(pictureId, 'item')
+      like
+        ? dispatch(deleteLike(like.id))
+        : dispatch(putLike(pictureId, authId))
+    },
+    [authId, dispatch],
+  )
 
   const getCreator = useCallback((id) => dispatch(getUserById(id)), [dispatch])
 
@@ -117,7 +128,7 @@ export const Gallery: FunctionComponent<IDetailsProps> = (picturesArray) => {
                 source={{
                   uri: `${item.uri}`,
                 }}>
-                <GetLike itemId={item.id} />
+                <GetLike onPress={onPress} itemId={item.id} />
               </FastImage>
             </TouchableOpacity>
             <Modal

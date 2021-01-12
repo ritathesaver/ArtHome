@@ -1,55 +1,36 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {FunctionComponent, useCallback, useEffect} from 'react'
+import React, {FunctionComponent, useCallback} from 'react'
 import {TouchableOpacity} from 'react-native'
-import {getLikes, putLike, deleteLike} from '../../redux/actions/likesActions'
-import {useDispatch, useSelector} from 'react-redux'
-import {RootState} from '../../redux/rootReducer'
-import {AppDispatch} from '../../App'
+import {useSelector} from 'react-redux'
 import LikeActiveSvg from '../../assets/icons/heart (2).svg'
 import LikeSvg from '../../assets/icons/like (1).svg'
+import {RootState} from '../../redux/rootReducer'
 
 interface IGetLikeProps {
+  onPress: any
   itemId: string
 }
 
-export const GetLike: FunctionComponent<IGetLikeProps> = ({itemId}) => {
-  const authId = useSelector((state: RootState) => state.auth.id)
-  const dispatch: AppDispatch = useDispatch()
+export const GetLike: FunctionComponent<IGetLikeProps> = ({
+  itemId,
+  onPress,
+}) => {
   const likes = useSelector((state: RootState) => state.likes.likes)
+  const authId = useSelector((state: RootState) => state.auth.id)
+
   const like = likes.find(
     (l) => l.creatorId === authId && l.pictureId === itemId,
   )
 
-  useEffect(() => {
-    dispatch(getLikes())
-  }, [dispatch])
+  const onLikePress = useCallback(() => {
+    onPress(itemId, like)
+  }, [itemId, like, onPress])
 
-  const onLike = useCallback(
-    (id) => {
-      dispatch(putLike(id, authId))
-    },
-    [dispatch, authId],
-  )
-
-  const onDislike = useCallback(
-    (likeId) => {
-      console.log('deleteLike', likeId)
-      dispatch(deleteLike(likeId))
-    },
-    [dispatch],
-  )
-
-  return like ? (
+  return (
     <TouchableOpacity
-      style={{position: 'absolute', top: 10, right: 10}}
-      onPress={() => onDislike(like.id)}>
-      <LikeActiveSvg />
-    </TouchableOpacity>
-  ) : (
-    <TouchableOpacity
-      onPress={() => onLike(itemId)}
+      onPress={onLikePress}
       style={{position: 'absolute', top: 10, right: 10}}>
-      <LikeSvg />
+      {like ? <LikeActiveSvg /> : <LikeSvg />}
     </TouchableOpacity>
   )
 }
