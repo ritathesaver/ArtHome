@@ -1,33 +1,31 @@
-import { StyleSheet } from 'react-native'
+import {StyleSheet} from 'react-native'
 
 export const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#DBDED1',
-    padding: 15
-  },
-  title: {
-    marginTop: 40,
-    textAlign: 'center',
-    marginBottom: 10,
-    color: 'black'
+    backgroundColor: '#161718',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
   },
   searchBox: {
     flexDirection: 'row',
-    alignItems: 'center'
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    borderWidth: 0.5,
+    borderColor: '#ccc',
+    height: 45,
+    borderRadius: 8,
+    padding: 10,
   },
   inputForm: {
-		flex: 1,
-		borderRadius: 25,
-		borderWidth: 1,
-		borderColor: '#ccc',
-		color: '#000',
-		backgroundColor: '#fff',
-		padding: 15,
-    width: '80%'
-	},
-	searchIcon: {
-		padding: 10
-	}
+    flex: 1,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    color: '#000',
+    backgroundColor: '#fff',
+    padding: 15,
+    width: '80%',
+  },
 })

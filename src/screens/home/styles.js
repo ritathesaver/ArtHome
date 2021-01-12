@@ -1,55 +1,57 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native'
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    marginTop: 15,
-  
+    backgroundColor: '#202122',
   },
-   box: {
+  searchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: '#161718',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+  },
+  searchBox: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    borderWidth: 0.5,
+    borderColor: '#ccc',
+    height: 45,
+    borderRadius: 8,
+    padding: 10,
+  },
+  box: {
     width: 180,
     height: 200,
-    
   },
   overlayBoxWhite: {
-     ...StyleSheet.absoluteFillObject,
-            opacity: 0.5
+    ...StyleSheet.absoluteFillObject,
+    opacity: 0.6,
   },
-   overlayBoxBlack: {
-     ...StyleSheet.absoluteFillObject,
-            backgroundColor: 'black',
-            opacity: 0.5
-   },
+
   image: {
     width: '100%',
     height: '100%',
-    overflow: "hidden",
-    alignItems: "center"
+    overflow: 'hidden',
+    alignItems: 'center',
   },
   wrapper: {
     marginVertical: 10,
     alignItems: 'center',
-    width: 200
+    width: 200,
   },
   title: {
     position: 'absolute',
-    color: "white",
-    textAlign: "center",
+    top: 75,
+    color: 'white',
+    textAlign: 'center',
     fontSize: 20,
     margin: 20,
-    textDecorationLine: "underline",
-    textDecorationStyle: "solid",
-    fontWeight: '600'
+    fontWeight: '600',
   },
-  titleDark: {
-    position: 'absolute',
-    color: "black",
-    textAlign: "center",
-    fontSize: 20,
-    margin: 20,
-    textDecorationLine: "underline",
-    textDecorationStyle: "solid",
-    fontWeight: '600'
-  }
 })
