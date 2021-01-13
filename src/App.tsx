@@ -27,7 +27,7 @@ import AsyncStorage from '@react-native-community/async-storage'
 import {restoreToken} from './redux/actions/authActions'
 import {ActivityIndicator, View} from 'react-native'
 import {SavedStackScreen} from './navigators/SavedNavigator'
-import {CartList} from './screens/cart/CarList'
+import {CartList} from './screens/cart/CartList'
 
 Icon.loadFont()
 

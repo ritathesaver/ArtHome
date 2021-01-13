@@ -31,8 +31,6 @@ export const CartList: FunctionComponent = () => {
     state.orders.orders.filter((order) => order.creatorId === authId),
   )
 
-  console.log(orders)
-
   const onDownload = (imageUrl: string) => {
     let PictureDir = fs.dirs.PictureDir
     let options = {

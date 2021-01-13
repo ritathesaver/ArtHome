@@ -1,6 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {FunctionComponent, useCallback, useEffect} from 'react'
+import React, {FunctionComponent, useCallback, useEffect, useRef} from 'react'
 import {
+  Animated,
   Dimensions,
   Image,
   SafeAreaView,
@@ -22,6 +23,7 @@ import {GetLike} from '../../components/GetLike/GetLike'
 import {ActivityIndicator} from 'react-native'
 import {deleteLike, putLike} from '../../redux/actions/likesActions'
 import {putOrder} from '../../redux/actions/ordersActions'
+import AddCartAction from '../../assets/icons/addingCart.svg'
 
 interface ICartProps {
   route: any
@@ -79,7 +81,24 @@ export const CartScreen: FunctionComponent<ICartProps> = ({route}) => {
 
   //console.log(size, 'size')
 
-  console.log(loading)
+  const fadeAnim = useRef(new Animated.Value(0)).current
+
+  const fadeIn = () => {
+    // Will change fadeAnim value to 1 in 5 seconds
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 100,
+      useNativeDriver: true,
+    }).start()
+
+    setTimeout(() => {
+      Animated.timing(fadeAnim, {
+        toValue: 0,
+        duration: 3000,
+        useNativeDriver: true,
+      }).start()
+    }, 500)
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -132,9 +151,22 @@ export const CartScreen: FunctionComponent<ICartProps> = ({route}) => {
         </View>
         <TouchableOpacity
           style={styles.submitButton}
-          onPress={() => addToCart(picture.uri, picture.price)}>
+          onPress={() => {
+            addToCart(picture.uri, picture.price)
+            fadeIn()
+          }}>
           <Text style={styles.submitButtonText}>Add to cart</Text>
         </TouchableOpacity>
+        <Animated.View
+          style={{
+            alignItems: 'center',
+            opacity: fadeAnim, // Bind opacity to animated value
+          }}>
+          <Text style={{fontSize: 17, marginVertical: 10, color: '#f7f7f7'}}>
+            Added to cart!
+          </Text>
+          <AddCartAction />
+        </Animated.View>
       </ScrollView>
     </SafeAreaView>
   )
