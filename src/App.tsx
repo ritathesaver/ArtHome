@@ -25,9 +25,9 @@ import {ProfileScreen} from './screens/profile/ProfileScreen'
 import {RootState} from './redux/rootReducer'
 import AsyncStorage from '@react-native-community/async-storage'
 import {restoreToken} from './redux/actions/authActions'
-import {CartDetails} from './screens/cart/ComingSoon'
 import {ActivityIndicator, View} from 'react-native'
 import {SavedStackScreen} from './navigators/SavedNavigator'
+import {CartList} from './screens/cart/CarList'
 
 Icon.loadFont()
 
@@ -111,7 +111,7 @@ const App: FunctionComponent = () => {
           />
           <Tab.Screen
             name="CartList"
-            component={CartDetails}
+            component={CartList}
             options={{
               tabBarLabel: 'Cart',
               tabBarIcon: ({focused}) =>

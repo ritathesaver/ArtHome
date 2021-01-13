@@ -21,6 +21,7 @@ import {IPictures} from '../../redux/reducers/picturesReducer'
 import {GetLike} from '../../components/GetLike/GetLike'
 import {ActivityIndicator} from 'react-native'
 import {deleteLike, putLike} from '../../redux/actions/likesActions'
+import {putOrder} from '../../redux/actions/ordersActions'
 
 interface ICartProps {
   route: any
@@ -43,6 +44,13 @@ export const CartScreen: FunctionComponent<ICartProps> = ({route}) => {
       like
         ? dispatch(deleteLike(like.id))
         : dispatch(putLike(pictureId, authId))
+    },
+    [authId, dispatch],
+  )
+
+  const addToCart = useCallback(
+    (pictureUri: string, picturePrice: string) => {
+      dispatch(putOrder(pictureUri, picturePrice, authId))
     },
     [authId, dispatch],
   )
@@ -124,8 +132,8 @@ export const CartScreen: FunctionComponent<ICartProps> = ({route}) => {
         </View>
         <TouchableOpacity
           style={styles.submitButton}
-          onPress={() => console.log('rr')}>
-          <Text style={styles.submitButtonText}>Buy</Text>
+          onPress={() => addToCart(picture.uri, picture.price)}>
+          <Text style={styles.submitButtonText}>Add to cart</Text>
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
