@@ -9,7 +9,12 @@ import {
   watchGetPicturesByCategory,
 } from './pictureSagas'
 import {watchAddLike, watchDeleteLike, watchGetLikes} from './likesSagas'
-import { watchAddOrder, watchDeleteOrder, watchGetOrders } from './orderSagas'
+import {
+  watchAddOrder,
+  watchDeleteOrder,
+  watchEditOrder,
+  watchGetOrders,
+} from './orderSagas'
 
 export function* rootSaga() {
   yield all([
@@ -29,6 +34,7 @@ export function* rootSaga() {
     watchEdit(),
     watchAddOrder(),
     watchGetOrders(),
-    watchDeleteOrder()
+    watchDeleteOrder(),
+    watchEditOrder(),
   ])
 }

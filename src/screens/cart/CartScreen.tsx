@@ -31,7 +31,7 @@ interface ICartProps {
 
 export const CartScreen: FunctionComponent<ICartProps> = ({route}) => {
   // console.log(route.params)
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const dispatch: AppDispatch = useDispatch()
   const picture: IPictures | undefined = useSelector(
     (state: RootState) =>
@@ -99,27 +99,27 @@ export const CartScreen: FunctionComponent<ICartProps> = ({route}) => {
       }).start()
     }, 500)
   }
-
   return (
     <SafeAreaView style={styles.container}>
-      {loading && (
-        <ActivityIndicator
-          style={{
-            position: 'absolute',
-            left: 0,
-            right: 0,
-            bottom: 0,
-            top: 0,
-          }}
-          size="large"
-          color="#af6b58"
-          animating={loading}
-        />
-      )}
+      <ActivityIndicator
+        style={{
+          position: 'absolute',
+          left: 0,
+          right: 0,
+          bottom: 0,
+          top: 0,
+        }}
+        size="large"
+        color="#af6b58"
+        animating={loading}
+      />
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.wrapper}>
         <FastImage
+          onLoadStart={() => {
+            setLoading(true)
+          }}
           onLoadEnd={() => {
             setLoading(false)
           }}
@@ -160,10 +160,11 @@ export const CartScreen: FunctionComponent<ICartProps> = ({route}) => {
         <Animated.View
           style={{
             alignItems: 'center',
-            opacity: fadeAnim, // Bind opacity to animated value
+            opacity: fadeAnim,
+            marginBottom: 30, // Bind opacity to animated value
           }}>
           <Text style={{fontSize: 17, marginVertical: 10, color: '#f7f7f7'}}>
-            Added to cart!
+            ADDED TO CART SUCCESSFULLY
           </Text>
           <AddCartAction />
         </Animated.View>

@@ -22,7 +22,6 @@ async function editData(body) {
     ...body.body,
     ...body.data,
   })
-  console.log(data)
   return data
 }
 

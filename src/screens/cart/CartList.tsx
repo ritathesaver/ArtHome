@@ -11,12 +11,17 @@ import {
 import FastImage from 'react-native-fast-image'
 import {useDispatch, useSelector} from 'react-redux'
 import {AppDispatch} from '../../App'
-import {deleteOrder, getOrders} from '../../redux/actions/ordersActions'
+import {
+  deleteOrder,
+  editOrder,
+  getOrders,
+} from '../../redux/actions/ordersActions'
 import {RootState} from '../../redux/rootReducer'
 import DeleteIcon from '../../assets/icons/minus.svg'
 import RNFetchBlob from 'rn-fetch-blob'
 import {Alert} from 'react-native'
 import CameraRoll from '@react-native-community/cameraroll'
+import {useCallback} from 'react'
 
 export const CartList: FunctionComponent = () => {
   const dispatch: AppDispatch = useDispatch()
@@ -53,6 +58,20 @@ export const CartList: FunctionComponent = () => {
         Alert.alert('Congrats!', 'Image successfully downloaded ')
       })
   }
+
+  const onDelete = useCallback(
+    (itemId) => {
+      dispatch(deleteOrder(itemId))
+    },
+    [dispatch],
+  )
+
+  const onUpdateStatus = useCallback(
+    (item) => {
+      dispatch(editOrder(item, true))
+    },
+    [dispatch],
+  )
 
   return (
     <SafeAreaView
@@ -126,7 +145,7 @@ export const CartList: FunctionComponent = () => {
                     borderRadius: 8,
                     backgroundColor: '#af6b58',
                   }}
-                  onPress={() => console.log('paid')}>
+                  onPress={() => onUpdateStatus(item)}>
                   <Text
                     style={{
                       color: 'white',
@@ -144,7 +163,7 @@ export const CartList: FunctionComponent = () => {
                 justifyContent: 'center',
                 alignItems: 'flex-end',
               }}
-              onPress={() => dispatch(deleteOrder(item.id))}>
+              onPress={() => onDelete(item.id)}>
               <DeleteIcon />
             </TouchableOpacity>
           </View>

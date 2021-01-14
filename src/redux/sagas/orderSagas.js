@@ -21,6 +21,15 @@ async function deleteData(body) {
   return data
 }
 
+async function editData(body) {
+  console.log(body.status)
+  const {data} = await api.put(`orders/${body.body.id}`, {
+    ...body.body,
+    status: body.status,
+  })
+  return data
+}
+
 function* workerGetOrders() {
   try {
     const resGet = yield call(getData)
@@ -59,6 +68,16 @@ function* workerDeleteOrder(action) {
   }
 }
 
+function* workerEditOrder(action) {
+  try {
+    const resGet = yield call(editData, action.payload)
+
+    yield put({type: 'EDIT_ORDER_SUCCESS', payload: resGet})
+  } catch (err) {
+    Alert.alert('Ooops!', 'Something went wrong')
+  }
+}
+
 export function* watchGetOrders() {
   yield takeLatest('GET_ORDERS', workerGetOrders)
 }
@@ -69,4 +88,6 @@ export function* watchAddOrder() {
 export function* watchDeleteOrder() {
   yield takeLatest('DELETE_ORDER', workerDeleteOrder)
 }
-
+export function* watchEditOrder() {
+  yield takeLatest('UPDATE_ORDER', workerEditOrder)
+}
