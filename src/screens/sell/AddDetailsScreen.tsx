@@ -2,7 +2,7 @@
 import {useNavigation} from '@react-navigation/native'
 import React, {FunctionComponent, useCallback} from 'react'
 import {useState} from 'react'
-import {View, Text, ImageBackground, KeyboardAvoidingView} from 'react-native'
+import {View, Text, ImageBackground, KeyboardAvoidingView, Alert} from 'react-native'
 import {
   ScrollView,
   TextInput,
@@ -56,7 +56,7 @@ export const AddDetailsScreen: FunctionComponent<IAddDetailsProps> = ({
         routes: [{name: 'Home'}],
       })
     } else {
-      return <Text>All fields are required</Text>
+      Alert.alert('Please, add title and description')
     }
   }, [
     authId,
@@ -76,17 +76,17 @@ export const AddDetailsScreen: FunctionComponent<IAddDetailsProps> = ({
       behavior="padding">
       <ScrollView style={{flex: 1, backgroundColor: '#202122'}}>
         <ImageBackground
-          blurRadius={50}
+          blurRadius={20}
           style={{
             width: '100%',
-            height: 200,
+            height: 180,
             alignItems: 'center',
             justifyContent: 'center',
             marginBottom: 20,
           }}
           source={{uri: route.params.uri}}>
           <Text
-            style={{color: 'white', fontSize: 30, backgroundColor: 'black'}}>
+            style={{color: 'white', fontSize: 28, backgroundColor: 'black'}}>
             Things buyers want to know
           </Text>
         </ImageBackground>
@@ -108,8 +108,10 @@ export const AddDetailsScreen: FunctionComponent<IAddDetailsProps> = ({
             marginHorizontal: 15,
             flexDirection: 'row',
             justifyContent: 'space-between',
+            alignItems: 'center',
+            paddingHorizontal: 10
           }}>
-          <Text style={{fontSize: 20, margin: 15}}>Category</Text>
+          <Text style={{fontSize: 17}}>Category</Text>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <RNPickerSelect
               placeholder={{
@@ -120,14 +122,13 @@ export const AddDetailsScreen: FunctionComponent<IAddDetailsProps> = ({
                 inputIOS: {
                   color: 'black',
                   margin: 15,
-                  fontSize: 20,
-                  paddingRight: 15,
+                  fontSize: 17,
                 },
 
                 placeholder: {color: 'gray'},
                 iconContainer: {
-                  top: 15,
-                  right: 0,
+                  top: 16,
+                  right: -6,
                 },
               }}
               onValueChange={setCategoryTitle}
@@ -156,9 +157,11 @@ export const AddDetailsScreen: FunctionComponent<IAddDetailsProps> = ({
             backgroundColor: 'white',
             borderRadius: 8,
             marginBottom: 40,
-            marginHorizontal: 15,
+            marginHorizontal: 13,
+            paddingHorizontal: 10,
+            paddingVertical: 15, 
           }}>
-          <Text style={{fontSize: 20, margin: 15}}>
+          <Text style={{fontSize: 17}}>
             ${route.params.price}
           </Text>
         </View>
@@ -170,24 +173,27 @@ export const AddDetailsScreen: FunctionComponent<IAddDetailsProps> = ({
             marginHorizontal: 15,
             marginBottom: 5,
           }}>
-          TITLE
+          TITLE *
         </Text>
         <View
           style={{
             backgroundColor: 'white',
             borderRadius: 8,
             marginBottom: 40,
-            marginHorizontal: 15,
+            marginHorizontal: 13,
+            paddingVertical: 13, 
+            paddingHorizontal: 10
           }}>
           <TextInput
             onChangeText={(text) => setTitleValue(text)}
             value={titleValue}
             placeholder="Additional informamtion"
-            style={{fontSize: 17, margin: 15}}
+            style={{fontSize: 17}}
             maxLength={17}
             multiline
             numberOfLines={2}
           />
+          
         </View>
         <Text
           style={{
@@ -196,20 +202,22 @@ export const AddDetailsScreen: FunctionComponent<IAddDetailsProps> = ({
             marginHorizontal: 15,
             marginBottom: 5,
           }}>
-          DESCRIPTION
+          DESCRIPTION *
         </Text>
         <View
           style={{
             backgroundColor: 'white',
             borderRadius: 8,
             marginBottom: 40,
-            marginHorizontal: 15,
+            marginHorizontal: 13,
+            paddingVertical: 13, 
+            paddingHorizontal: 10
           }}>
           <TextInput
             onChangeText={(text) => setDescriptionValue(text)}
             value={descriptionValue}
             placeholder="Additional informamtion"
-            style={{fontSize: 17, margin: 15}}
+            style={{ fontSize: 17 }}
             maxLength={50}
             multiline
             numberOfLines={3}
@@ -229,17 +237,20 @@ export const AddDetailsScreen: FunctionComponent<IAddDetailsProps> = ({
             backgroundColor: 'white',
             borderRadius: 8,
             marginBottom: 40,
-            marginHorizontal: 15,
+            marginHorizontal: 13,
             flexDirection: 'row',
             justifyContent: 'space-between',
+            alignItems: 'center',
+            paddingVertical: 15, 
+            paddingHorizontal: 5
           }}>
-          <Text style={{fontSize: 20, margin: 15}}> {route.params.res}</Text>
+          <Text style={{fontSize: 17}}> {route.params.res}</Text>
           <TouchableOpacity
             style={{flexDirection: 'row', alignItems: 'center'}}
             onPress={() => {
               navigation.navigate('Map')
             }}>
-            <Text style={{fontSize: 20, margin: 15, color: 'gray'}}>
+            <Text style={{fontSize: 17, color: 'gray'}}>
               Change
             </Text>
             <NextIcon />

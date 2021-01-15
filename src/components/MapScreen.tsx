@@ -26,7 +26,8 @@ const Map: FunctionComponent = () => {
     Geolocation.requestAuthorization()
     Geolocation.getCurrentPosition(
       (position) => {
-        const {latitude, longitude} = position.coords
+        const { latitude, longitude } = position.coords
+        console.log(latitude, longitude)
         setLocation({
           latitude,
           longitude,
@@ -35,21 +36,23 @@ const Map: FunctionComponent = () => {
       (error) => {
         console.log(error.code, error.message)
       },
-      {enableHighAccuracy: true, timeout: 15000},
+      {enableHighAccuracy: true, timeout: 2000},
     )
-    // console.log('START', location)
+    console.log('START', location)
   }, [])
 
   useEffect(() => {
     // eslint-disable-next-line no-extra-semi
-    ;(async () => {
-      const data = await Geocoder.from(location)
+    ; (async () => {
+      if (location) {
+        const data = await Geocoder.from(location)
 
-      const addressComponent = data.results[2].formatted_address
+        const addressComponent = data.results[3].formatted_address
 
-      // console.log(addressComponent, 'rr')
+        // console.log(addressComponent, 'rr')
 
-      setRes(addressComponent)
+        setRes(addressComponent)
+      }
     })()
   }, [location])
 

@@ -73,12 +73,12 @@ export const OpenCameraScreen: FunctionComponent = () => {
       type: 'image/jpeg;base64',
       name: Date.now() + '.jpg',
     })
-    data.append('upload_preset', 'dwucj2mkl')
-    data.append('cloud_name', 'dwucj2mkl')
+    data.append('upload_preset', 'rzdv03b3')
+    data.append('cloud_name', 'dnjmif1av')
     // console.log(data)
 
     const res = await axios({
-      url: 'https://api.cloudinary.com/v1_1/dwucj2mkl/image/upload',
+      url: 'https://api.cloudinary.com/v1_1/dnjmif1av/image/upload',
       method: 'POST',
       data: data,
     })
