@@ -19,6 +19,7 @@ import {signOut} from '../../redux/actions/authActions'
 import {AppDispatch} from '../../App'
 import {editUser, getUsers} from '../../redux/actions/usersActions'
 import AddSvg from '../../assets/icons/add.svg'
+import { useNavigation } from '@react-navigation/native'
 
 export const ProfileScreen: FunctionComponent = () => {
   const dispatch: AppDispatch = useDispatch()
@@ -42,6 +43,7 @@ export const ProfileScreen: FunctionComponent = () => {
   const [about, setAbout] = useState(currentUser.about)
   const [address, setAddress] = useState(currentUser.address)
   const [phone, setPhone] = useState(currentUser.phone)
+  const navigation = useNavigation()
 
   const launchImageLibrary = () => {
     let options = {
@@ -305,11 +307,11 @@ export const ProfileScreen: FunctionComponent = () => {
             </View>
           )}
 
-          <View style={pageStyles.aboutWrapper} />
+          <View style={pageStyles.aboutWrapper}>
           <TouchableOpacity
             style={{
-              marginBottom: 20,
-              width: '45%',
+              marginBottom: 18,
+              width: '35%',
               padding: 12,
               borderRadius: 8,
               backgroundColor: '#f7f7f7',
@@ -325,6 +327,27 @@ export const ProfileScreen: FunctionComponent = () => {
               Logout
             </Text>
           </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              marginBottom: 18,
+              width: '35%',
+              padding: 12,
+              borderRadius: 8,
+              backgroundColor: '#af6b58',
+              alignSelf: 'center',
+            }}
+            onPress={() => navigation.navigate('Orders')}>
+            <Text
+              style={{
+                color: '#f7f7f7',
+                textAlign: 'center',
+                fontSize: 17,
+              }}>
+                My orders
+            </Text>
+            
+            </TouchableOpacity>
+            </View>
         </SafeAreaView>
       </ScrollView>
     </KeyboardAvoidingView>

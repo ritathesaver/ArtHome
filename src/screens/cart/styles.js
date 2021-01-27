@@ -29,7 +29,7 @@ export const styles = StyleSheet.create({
   },
   submitButton: {
     width: '50%',
-    marginVertical: 40,
+    marginVertical: 25,
     padding: 14,
     borderRadius: 8,
     backgroundColor: '#af6b58',

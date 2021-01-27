@@ -97,7 +97,7 @@ export const OpenCameraScreen: FunctionComponent = () => {
         Alert.alert('Success', JSON.stringify(data))
         cloudinaryUpload(data.uri)
       } catch (err) {
-        // console.log(err.message)
+        console.log(err.message)
       }
     }
   }

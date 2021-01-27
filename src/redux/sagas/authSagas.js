@@ -75,6 +75,7 @@ function* workerSignIn(action) {
 
       return
     }
+    console.log(err.message)
     Alert.alert('Ooops!', 'Incorrect email or password')
   }
   // console.log(resGet, 'token')

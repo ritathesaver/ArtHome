@@ -19,9 +19,10 @@ export const styles = StyleSheet.create({
   title: {
     color: 'white',
     textAlign: 'center',
-    fontSize: 20,
-    marginVertical: 10,
+    fontSize: 18,
+    marginVertical: 5,
     fontWeight: '600',
+    alignSelf: 'center',
   },
 })
 

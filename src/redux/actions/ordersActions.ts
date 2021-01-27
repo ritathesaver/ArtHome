@@ -7,7 +7,7 @@ export const getOrders = createCustomAction('GET_ORDERS')
 export const putOrder = createCustomAction(
   'PUT_ORDER',
   (pictureUri: string, picturePrice: string, creatorId: string) => ({
-    payload: {pictureUri, picturePrice, creatorId, id: uuidv4(), status: false},
+    payload: {pictureUri, picturePrice, creatorId, id: uuidv4(), onPaid: false},
   }),
 )
 
@@ -17,7 +17,7 @@ export const deleteOrder = createCustomAction('DELETE_ORDER', (id: string) => ({
 
 export const editOrder = createCustomAction(
   'UPDATE_ORDER',
-  (body: Object, status: boolean) => ({
-    payload: {body, status},
+  (body: Object, onPaid: boolean) => ({
+    payload: {body, onPaid},
   }),
 )

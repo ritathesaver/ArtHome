@@ -28,7 +28,7 @@ export const CategoryItem: FunctionComponent<IArtworksItemProps> = ({
         flexDirection: 'column',
         marginVertical: 15,
         marginHorizontal: 5,
-        width: Dimensions.get('window').width / 2,
+        width: Dimensions.get('window').width / 2 - 10,
         height: 140,
       }}
       onPress={onPress}>
@@ -36,7 +36,7 @@ export const CategoryItem: FunctionComponent<IArtworksItemProps> = ({
       <View
         style={{
           backgroundColor: category?.overlayColor,
-          height: 45,
+          height: 35,
         }}>
         <Text
           style={{

@@ -22,8 +22,9 @@ import {IPictures} from '../../redux/reducers/picturesReducer'
 import {GetLike} from '../../components/GetLike/GetLike'
 import {ActivityIndicator} from 'react-native'
 import {deleteLike, putLike} from '../../redux/actions/likesActions'
-import {putOrder} from '../../redux/actions/ordersActions'
+import {getOrders, putOrder} from '../../redux/actions/ordersActions'
 import AddCartAction from '../../assets/icons/addingCart.svg'
+import { useNavigation } from '@react-navigation/native'
 
 interface ICartProps {
   route: any
@@ -38,7 +39,21 @@ export const CartScreen: FunctionComponent<ICartProps> = ({route}) => {
       state.pictures.pictures.filter((pic) => pic.id === route.params.id)[0],
   )
 
+  useEffect(() => {
+    dispatch(getOrders())
+  }, [dispatch])
+
+  const navigation = useNavigation()
+
   const authId = useSelector((state: RootState) => state.auth.id)
+
+  const orderPic = useSelector((state: RootState) =>
+    state.orders.orders.find((order) => order.creatorId === authId && order.pictureUri === picture.uri&& order.onPaid===true),
+  )
+
+  console.log(orderPic, 'orderPic')
+
+
 
   const onPressLike = useCallback(
     (pictureId: string, like: {id: string}) => {
@@ -149,14 +164,24 @@ export const CartScreen: FunctionComponent<ICartProps> = ({route}) => {
         <View>
           <Text style={styles.description}>{picture.description}</Text>
         </View>
-        <TouchableOpacity
-          style={styles.submitButton}
-          onPress={() => {
-            addToCart(picture.uri, picture.price)
-            fadeIn()
-          }}>
-          <Text style={styles.submitButtonText}>Add to cart</Text>
-        </TouchableOpacity>
+        {orderPic ? 
+          (<TouchableOpacity
+            style={styles.submitButton}
+            onPress={() => {
+              navigation.navigate('Profile', { screen: 'Orders' })
+            }}>
+            <Text style={styles.submitButtonText}>See in orders</Text>
+          </TouchableOpacity>) :
+        
+          (<TouchableOpacity
+            style={styles.submitButton}
+            onPress={() => {
+              addToCart(picture.uri, picture.price)
+              fadeIn()
+            }}>
+            <Text style={styles.submitButtonText}>Add to cart</Text>
+          </TouchableOpacity>
+          )}
         <Animated.View
           style={{
             alignItems: 'center',

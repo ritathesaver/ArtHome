@@ -28,6 +28,7 @@ import {restoreToken} from './redux/actions/authActions'
 import {ActivityIndicator, View} from 'react-native'
 import {SavedStackScreen} from './navigators/SavedNavigator'
 import {CartList} from './screens/cart/CartList'
+import { ProfileStackScreen } from './navigators/ProfileNavigator'
 
 Icon.loadFont()
 
@@ -139,7 +140,7 @@ const App: FunctionComponent = () => {
           />
           <Tab.Screen
             name="Profile"
-            component={ProfileScreen}
+            component={ProfileStackScreen}
             options={{
               tabBarLabel: 'Profile',
               tabBarIcon: ({focused}) =>

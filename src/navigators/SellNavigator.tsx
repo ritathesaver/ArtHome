@@ -2,7 +2,7 @@ import React from 'react'
 import {createStackNavigator} from '@react-navigation/stack'
 import {OpenCameraScreen} from '../screens/sell/OpenCameraScreen'
 import {SetPriceScreen} from '../screens/sell/SetPriceScreen'
-import {Alert, Button} from 'react-native'
+import {Alert, Button, Text, TouchableOpacity} from 'react-native'
 import {CategoriesListScreen} from '../screens/sell/CaterogiesListScreen'
 import {AddDetailsScreen} from '../screens/sell/AddDetailsScreen'
 import MapScreen from '../components/MapScreen'
@@ -10,9 +10,10 @@ import MapScreen from '../components/MapScreen'
 const screenStyle = {
   headerStyle: {
     backgroundColor: '#161718',
-    height: 100,
+    height: 80,
   },
   headerTintColor: 'white',
+  headerTitleAlign: 'center',
 }
 
 const SellStack = createStackNavigator()
@@ -25,29 +26,28 @@ export const SellStackScreen = () => {
           ...screenStyle,
           title: 'Upload Image',
           headerRight: () => (
-            <Button
-              color="white"
-              title="Done"
+            <TouchableOpacity
               onPress={() => {
                 if (!route.params) {
                   Alert.alert('Please, select picture')
                   return
                 }
                 navigation.navigate('SetPrice', route.params)
-              }}
-            />
+              }}>
+              <Text style={{color: '#f7f7f7', fontSize:18, marginHorizontal: 10}}>Done</Text>
+              </TouchableOpacity>
           ),
           headerLeft: () => (
-            <Button
-              color="white"
-              title="Cancel"
+             <TouchableOpacity
               onPress={() => {
                 navigation.reset({
                   index: 0,
                   routes: [{name: 'Home'}],
                 })
               }}
-            />
+            >
+              <Text style={{ color: '#f7f7f7', fontSize: 18, marginHorizontal: 10 }}>Cancel</Text>
+              </TouchableOpacity>
           ),
         })}
         name="OpenCamera"

@@ -15,10 +15,11 @@ import {TrendingScreen} from '../screens/galleries/TrendingScreen'
 const screenStyle = {
   headerStyle: {
     backgroundColor: '#161718',
-    height: 80,
+    height: 70,
     shadowColor: 'transparent',
   },
   headerTintColor: 'white',
+  headerTitleAlign: 'center',
 }
 
 const HomeStack = createStackNavigator()

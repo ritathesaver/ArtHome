@@ -1,5 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {FunctionComponent} from 'react'
+import { Dimensions } from 'react-native'
 import {Image, Text, TouchableOpacity} from 'react-native'
 import {useSelector} from 'react-redux'
 import {RootState} from '../../redux/rootReducer'
@@ -18,14 +19,15 @@ export const CreatorItem: FunctionComponent<ICreatorItemProps> = ({
     state.users.users.find((u) => u.id === itemId),
   )
 
+
   return (
     <TouchableOpacity
       onPress={onPress}
       style={{
         flexDirection: 'column',
         margin: 20,
-        width: 100,
-        height: 100,
+        width:  Dimensions.get('window').width/3-40,
+        height: Dimensions.get('window').width/3-40,
         alignItems: 'center',
       }}>
       <Image style={styles.image} source={{uri: user?.avatarUri}} />

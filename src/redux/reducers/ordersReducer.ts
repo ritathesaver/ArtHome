@@ -5,7 +5,7 @@ export interface IOrder {
   pictureUri: string
   picturePrice: string
   creatorId: string
-  status: boolean
+  onPaid: boolean
 }
 
 export interface IOrdersState {

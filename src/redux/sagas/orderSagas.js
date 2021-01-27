@@ -22,10 +22,9 @@ async function deleteData(body) {
 }
 
 async function editData(body) {
-  console.log(body.status)
   const {data} = await api.put(`orders/${body.body.id}`, {
     ...body.body,
-    status: body.status,
+    onPaid: body.onPaid,
   })
   return data
 }
@@ -50,7 +49,7 @@ function* workerAddOrder(action) {
         pictureUri: action.payload.pictureUri,
         picturePrice: action.payload.picturePrice,
         creatorId: action.payload.creatorId,
-        status: action.payload.status,
+        onPaid: action.payload.onPaid,
       },
     })
   } catch (err) {

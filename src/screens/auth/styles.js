@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
 
   formContainer: {
     width: '100%',
-    marginVertical: 30,
+    marginVertical: 60,
     alignItems: 'center',
   },
   inputWrapper: {
@@ -31,7 +31,7 @@ export const styles = StyleSheet.create({
   },
   submitButton: {
     width: '75%',
-    marginVertical: 40,
+    marginVertical: 30,
     padding: 14,
     borderRadius: 8,
     backgroundColor: '#fbf7f0',

@@ -71,7 +71,9 @@ export const pageStyles = StyleSheet.create({
   },
   aboutWrapper: {
     flex: 1,
-    margin: 10,
+    marginTop: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-evenly'
   },
   title: {
     fontSize: 20,

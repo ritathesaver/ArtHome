@@ -33,6 +33,7 @@ export const LoginScreen: FunctionComponent = () => {
     },
     onSubmit: async () => {
       console.log('signIn')
+      console.log(formik.values.email, formik.values.password)
       dispatch(signIn(formik.values.email, formik.values.password))
     },
     validationSchema: SigninSchema,

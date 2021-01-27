@@ -18,15 +18,13 @@ import {
 } from '../../redux/actions/ordersActions'
 import {RootState} from '../../redux/rootReducer'
 import DeleteIcon from '../../assets/icons/minus.svg'
-import RNFetchBlob from 'rn-fetch-blob'
-import {Alert} from 'react-native'
-import CameraRoll from '@react-native-community/cameraroll'
 import {useCallback} from 'react'
+import { useNavigation } from '@react-navigation/native'
 
 export const CartList: FunctionComponent = () => {
   const dispatch: AppDispatch = useDispatch()
-  const {config, fs} = RNFetchBlob
   const authId = useSelector((state: RootState) => state.auth.id)
+  const navigation = useNavigation()
 
   useEffect(() => {
     dispatch(getOrders())
@@ -36,28 +34,7 @@ export const CartList: FunctionComponent = () => {
     state.orders.orders.filter((order) => order.creatorId === authId),
   )
 
-  const onDownload = (imageUrl: string) => {
-    let PictureDir = fs.dirs.PictureDir
-    let options = {
-      fileCache: true,
-      appendExt: 'jpg',
-      addAndroidDownloads: {
-        //Related to the Android only
-        useDownloadManager: true,
-        notification: true,
-        path: PictureDir + '/image_' + Date.now() + '.jpg',
-        description: 'Image',
-      },
-    }
-    config(options)
-      .fetch('GET', imageUrl)
-      .then((res) => {
-        CameraRoll.save(res.data)
-        //Showing alert after successful downloading
-        console.log('res -> ', JSON.stringify(res))
-        Alert.alert('Congrats!', 'Image successfully downloaded ')
-      })
-  }
+ 
 
   const onDelete = useCallback(
     (itemId) => {
@@ -107,7 +84,6 @@ export const CartList: FunctionComponent = () => {
                 flexDirection: 'column',
                 marginLeft: 15,
                 justifyContent: 'center',
-                alignItems: 'center',
               }}>
               <Text
                 style={{
@@ -117,7 +93,7 @@ export const CartList: FunctionComponent = () => {
                 }}>
                 Price: {`$${item.picturePrice}`}
               </Text>
-              {item.status ? (
+              {item.onPaid ? (
                 <TouchableOpacity
                   style={{
                     width: '100%',
@@ -126,14 +102,14 @@ export const CartList: FunctionComponent = () => {
                     borderRadius: 8,
                     backgroundColor: '#af6b58',
                   }}
-                  onPress={() => onDownload(item.pictureUri)}>
+                  onPress={() => navigation.navigate('Orders')}>
                   <Text
                     style={{
                       color: 'white',
                       textAlign: 'center',
                       fontSize: 13,
                     }}>
-                    DOWNLOAD
+                    SEE IN ORDERS
                   </Text>
                 </TouchableOpacity>
               ) : (
